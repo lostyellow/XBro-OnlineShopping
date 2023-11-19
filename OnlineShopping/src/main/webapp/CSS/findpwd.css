@@ -1,0 +1,102 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(5px);
+}
+
+.main-content{
+    position: fixed;
+    width: 550px;
+    height: 350px;
+    margin: 0 auto;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(222, 229, 230);
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.tdLeft{
+    padding-left: 50px;
+    height: 65px;
+    text-align: right;
+}
+
+.tdRight{
+    padding-left: 50px;
+}
+
+.main-content table{
+    margin-top: 20px;
+}
+
+tr td input{
+    width: 251px;
+    height: 45px;
+    border: 1px solid #A6A6A6;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.login-button {
+    width: 110px;
+    padding: 10px 20px; 
+    font-size: 18px; 
+    border-radius: 5px; 
+    position: absolute;
+    margin-top: 20px;
+    left: 40%;
+    background-color: #3498db; 
+    color: #fff;
+    border: none; 
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #2580b3; 
+}
+
+.divtop{
+    height: 30px;
+    width: 100%;
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.divcenter{
+    float: left;
+    
+}
+
+.divcenter table{
+    margin-top: 40px;
+}
+
+.divbottom{
+    font-size: 15px;
+    margin: 15px;
+    margin-top: 44px;
+    float: right;
+}
+
+.divbottom a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+.divbottom a:hover {
+    color: #336d94;
+}
+

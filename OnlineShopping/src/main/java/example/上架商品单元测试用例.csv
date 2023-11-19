@@ -1,0 +1,4 @@
+product_name,product_description,product_image,batch_number,expiration_date,prescription_required,product_price,expected
+abc,abc,/OnlineShopping/src/main/webapp/img/yp.png,123456,2025-10-30,true,55.0,success
+bcd,abc,/OnlineShopping/src/main/webapp/img/yp.png,123456,2025-09-30,true,55.0,success
+cde,abc,/OnlineShopping/src/main/webapp/img/yp.png,123456,2025-10-30,false,55.0,success

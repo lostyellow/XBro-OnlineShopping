@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/login.css">
+</head>
+<body>
+    <!-- 图片的src需要修改 -->
+    <img src="../img/bg2.jpg">
+    <div class="main-content">
+        <!-- 需要添加登录跳转的url -->
+        <form action="#">
+            <div class="divtop">
+                <p><h2>登录</h2></p>
+            </div>
+            <div class="divcenter">
+                <!-- table中的内容是获取数据 -->
+                <table>
+                    <tr>
+                        <td class="tdLeft"><label for="UserName">用户名</label></td>
+                        <td class="tdRight"><input type="text" name="UserName" id="UserName" placeholder="请输入用户名"></td>
+                    </tr>
+                    <tr>
+                        <td class="tdLeft"><label for="Password">密码</label></td>
+                        <td class="tdRight"><input type="password" name="Password" id="Password" placeholder="请输入密码"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="登录" class="login-button">
+            </div>
+            <div class="divbottom">
+                <!-- a中的url需要添加 -->
+                <p id="p3">还没有账号？<a href="#">立即注册</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

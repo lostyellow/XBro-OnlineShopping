@@ -1,0 +1,105 @@
+.main{
+    background-color: white;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1040px;
+    width: 1503px;
+    position:relative ;
+    border: 1px rgb(224, 224, 224) solid;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.head{
+    border: 1px rgb(224, 224, 224) solid;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 1503px;
+    background-color: white;
+}
+.header{
+    top: 0;
+    left: 0;
+    margin-left: 1100px;
+    line-height: 40px;
+    height: 40px;
+    text-align: left;
+    margin-bottom: 5px;
+    width: 400px;
+}
+.header a{
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.navbar{
+    position: absolute;
+    left: 0;
+    top:0;
+    height: 150px;
+    width: 1502px;
+    background-color: white;
+}
+.navbar img{
+    margin-top: 25px;
+    margin-left: 300px;
+    height: 100px;
+    width: 100px;
+}
+.menu{
+    position: absolute;
+    left: 0;
+    top: 145px;
+    height: 800px;
+    width: 200px;
+    background-color: white;
+}
+.content{
+    position: absolute;
+    left: 249px;
+    top: 145px;
+    border: 1px rgb(224, 224, 224) solid;
+    height: 800px;
+    width: 1000px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    grid-template-rows: 50px 50px 50px;
+    text-align: center;
+}
+.sidebar{
+    position: absolute;
+    left: 1298px;
+    top: 145px;
+    height: 800px;
+    width: 200px;
+    background-color: white;
+}
+.footer{
+    position: absolute;
+    left: 0;
+    top: 980px;
+    height: 25px;
+    width: 1503px;
+    clear:both;
+    margin-top: 20px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.footer a{
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.content img{
+    margin-left: 50px;
+    height: 150px;
+    width: 150px;
+}
