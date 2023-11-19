@@ -45,10 +45,11 @@
                             <%
                               UserDao ud = new UserDaoImpl();
                               int product_id=d.getProduct_id();
-                              String status=d.getStatus();
-                              int trans_id=ud.findTrans_ID(product_id, status);
+                              String status = d.getStatus();
+                              String time = d.getTime();
+                              int trans_id=ud.findTrans_ID(product_id, time);
                             %>
-                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>">查看详情</a></p>
+                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>">查看详情</a></p>
                 			<%
                 		}
                 	%>

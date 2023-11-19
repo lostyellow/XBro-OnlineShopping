@@ -10,7 +10,6 @@ import bean.Buyer;
 import bean.Deal;
 import bean.DealList;
 import bean.Details;
-import bean.DetailsList;
 import bean.Goods;
 import bean.GoodsList;
 import bean.User;
@@ -252,16 +251,17 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public int findTrans_ID(int product_id, String status) {
+	public int findTrans_ID(int product_id, String time) {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL);
 			
 			String sql = "select transaction_id from transactions "
-					+"where product_id = ? and transaction_status = 'ing'";
+					+"where product_id = ? and transaction_time = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, product_id);
+			ps.setString(2, time);
 			ResultSet rs = ps.executeQuery();
 			
 			int trans_id = 0;
@@ -389,7 +389,7 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 	@Override
-	public DetailsList findDetails(int transaction_id) {
+	public Details findDetails(int transaction_id) {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
@@ -400,9 +400,9 @@ public class UserDaoImpl implements UserDao{
 			ps.setInt(1, transaction_id);
 			ResultSet rs = ps.executeQuery();
 			
-			DetailsList detailsList = new DetailsList();
-			while(rs.next()) {
-				Details details = new Details();
+			Details details = null;
+			if(rs.next()) {
+				details = new Details();
 				details.setAppointment_time(rs.getString("appointment_time"));
 				details.setAddress(rs.getString("address"));
 				details.setBuyer_name(rs.getString("buyer_name"));
@@ -410,18 +410,18 @@ public class UserDaoImpl implements UserDao{
 				details.setBuyer_identification(rs.getString("buyer_identification"));
 				details.setBuyer_phone_number(rs.getString("buyer_phone_number"));
 				details.setText(rs.getString("notes"));
-				detailsList.add(details);
+				
 			}
 			
 			ps.close();
 			conn.close();
 			
-			return detailsList;
+			return details;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new DetailsList();
 		}
+		return null;
 	}
 
 	@Override

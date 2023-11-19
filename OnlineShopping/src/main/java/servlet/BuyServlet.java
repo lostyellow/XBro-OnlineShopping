@@ -28,7 +28,7 @@ public class BuyServlet extends HttpServlet {
     		
 			Deal deal = new Deal();
 			deal.setProduct_id(g.getId());
-			deal.setStatus("ing");
+			deal.setStatus("wait");
 			deal.setTime(time);
 			deal.setAmount(g.getPrice());
 			

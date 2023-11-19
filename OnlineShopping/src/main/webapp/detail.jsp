@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="bean.Details"%>
-<%@page import="bean.DetailsList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link type="text/css" rel="stylesheet" href="detail.css">
+<link type="text/css" rel="stylesheet" href="./CSS/detail.css">
 </head>
 <body>
     <div class="head">
@@ -38,18 +37,26 @@
                 <h2>交易信息</h2>
                 <%
                		int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
-                       UserDao ud = new UserDaoImpl();
-                       DetailsList detailsList = ud.findDetails(transaction_id); 
-                       session.setAttribute("detailsList", detailsList);
-               		for(Details d:detailsList.getDetails()){
+                    UserDao ud = new UserDaoImpl();
+                    Details d = ud.findDetails(transaction_id); 
+                    //session.setAttribute("details", d);
                 %>
                 <p><strong>交易时间：</strong><%=d.getAppointment_time()%></p>
                 <p><strong>地址：</strong><%=d.getAddress()%></p>
                 <p><strong>交易人：</strong><%=d.getBuyer_name()+d.getBuyer_gender()%></p>
-                <p><strong>身份证号码：</strong><%=d.getBuyer_phone_number()%></p>
+                <p><strong>身份证号码：</strong><%=d.getBuyer_identification()%></p>
                 <p><strong>手机号：</strong><%=d.getBuyer_phone_number()%></p>
                 <p><strong>备注：</strong><%=d.getText()%></p>
-                <%} %>
+                <%
+                	String status = String.valueOf(request.getParameter("status"));
+                	System.out.println(status);
+                	if(status.equals("wait")){
+                		%><input type="submit" value="同意" formaction="AgreeServlet?transaction_id=<%=transaction_id %>" ><%
+                	}else if(status.equals("ing")){
+                		%><input type="submit" value="交易成功" formaction="SuccessServlet?transaction_id=<%=transaction_id %>" ><%
+                		%><input type="submit" value="交易失败" formaction="FailedServlet?transaction_id=<%=transaction_id %>" ><%
+                	}
+                %>
             </div>
             <div class="sidebar"></div>
             <div class="footer">
