@@ -20,7 +20,7 @@
           <a href="back_stage.jsp">进入后台</a>
           <%if(request.getSession().getAttribute("curUser")==null){ %>
           <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%}%><% else{ %>
-          <a href="QuitServlet">退出登录</a><%} %></a>
+          <a href="QuitServlet">退出登录</a><%} %>
         </div>
     </div>   
     <div class="main">
