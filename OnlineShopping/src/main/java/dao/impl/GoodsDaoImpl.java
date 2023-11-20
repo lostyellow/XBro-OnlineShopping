@@ -93,4 +93,29 @@ public class GoodsDaoImpl implements GoodsDao {
 		}
 		return null;
 	}
+
+	@Override
+	public void takeOffGood(int product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "update drugs "
+			+ "set is_frozen = ? "
+			+ "where product_id = ?";
+		
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ps.setInt(2, product_id);
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 }
