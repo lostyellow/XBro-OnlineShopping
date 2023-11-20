@@ -482,7 +482,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public int closedeal(int transaction_id) {
+	public void closedeal(int transaction_id) {
 		try {
 			Class.forName(DRIVER);
 			
@@ -497,29 +497,13 @@ public class UserDaoImpl implements UserDao{
 			ps.setInt(2, transaction_id);
 			ps.executeUpdate();
 			
-			sql = "select product_id "
-			+ "from transactions "
-			+ "where transaction_id = ?";
-		
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, transaction_id);
-			ResultSet rs = ps.executeQuery();
-			
-			int product_id = 0;
-			if(rs.next()) {
-				product_id = rs.getInt(1);
-			}
-			
 			ps.close();
 			conn.close();
-			rs.close();
 			
-			return product_id;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return 0;
 	}
 
 	@Override
