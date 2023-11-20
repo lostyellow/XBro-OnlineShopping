@@ -26,4 +26,6 @@ public interface GoodsDao {
 
 	//把商品冻结状态取消
 	public void takeOffGood(int product_id);
+	
+	public GoodsList findUnfrozenGoods();
 }

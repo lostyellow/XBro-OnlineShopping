@@ -314,9 +314,9 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "update transactions"
-					+ "set transaction_status = ?,"
-					+ "where transaction_id = ?";
+			String sql = "update transactions "
+					+ "set transaction_status = ? "
+					+ "where transaction_id = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, status);
 			ps.setInt(2, trans_id);
@@ -523,28 +523,24 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public void listingGood(int transaction_id) {
+	public void frozenGood(int product_id) {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			
-			String sql = "update transactions "
-					+ "set transaction_status = ? "
-					+ "where transaction_id = ?";
-				
+			String sql = "update drugs set is_frozen = ? where product_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "wait");
-			ps.setInt(2, transaction_id);
+			ps.setBoolean(1, true);
+			ps.setInt(2, product_id);
 			ps.executeUpdate();
 			
 			ps.close();
 			conn.close();
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
 	}
 }

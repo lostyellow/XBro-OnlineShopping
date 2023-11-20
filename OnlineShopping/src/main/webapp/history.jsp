@@ -1,3 +1,5 @@
+<%@page import="dao.impl.GoodsDaoImpl"%>
+<%@page import="dao.GoodsDao"%>
 <%@page import="bean.GoodsList"%>
 <%@page import="bean.Goods"%>
 <%@page import="java.util.List"%>
@@ -36,8 +38,9 @@
                 <p>商品是否为处方药</p>
                 <p>商品价格</p>
                 <p>详情</p>
-	            <%
-	            	GoodsList goodsList = (GoodsList) request.getSession().getAttribute("goodsList");
+	            <%	
+	            	GoodsDao gd = new GoodsDaoImpl();
+	            	GoodsList goodsList = gd.findAllGoods();
 	            	List<Goods> gl = goodsList.getGoodsList();
 	            	for(Goods g:gl){
 	            		%>

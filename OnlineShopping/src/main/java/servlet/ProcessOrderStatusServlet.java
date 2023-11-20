@@ -29,14 +29,14 @@ public class ProcessOrderStatusServlet extends HttpServlet {
 		GoodsDao gd = new GoodsDaoImpl();
 		gd.takeOffGood(product_id);
 		request.getSession().removeAttribute("goods");
-		response.sendRedirect("detail.jsp");
+		response.sendRedirect("record.jsp");
 	}
     
     protected void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
     	UserDao ud = new UserDaoImpl();
-    	ud.listingGood(transaction_id);
-		response.sendRedirect("detail.jsp");
+    	ud.updateTrans(transaction_id, "wait");
+		response.sendRedirect("record.jsp");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

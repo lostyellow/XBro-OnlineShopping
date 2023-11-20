@@ -49,7 +49,7 @@
                               String time = d.getTime();
                               int trans_id=ud.findTrans_ID(product_id, time);
                             %>
-                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>">查看详情</a></p>
+                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>&product_id=<%=product_id %>">查看详情</a></p>
                 			<%
                 		}
                 	%>
