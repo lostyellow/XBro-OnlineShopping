@@ -46,8 +46,11 @@
                 	if(status.equals("wait")){
                 		%><input type="submit" value="同意" formaction="AgreeServlet?transaction_id=<%=transaction_id %>" ><%
                 	}else if(status.equals("ing")){
-                		%><input type="submit" value="交易成功" formaction="SuccessServlet?transaction_id=<%=transaction_id %>" ><%
-                		%><input type="submit" value="交易失败" formaction="FailedServlet?transaction_id=<%=transaction_id %>" ><%
+                		%><input type="submit" value="交易成功" formaction="ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=success" ><%
+                		%><input type="submit" value="交易失败" formaction="ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=fail" ><%
+                	}else if(status.equals("end")){
+                		%><button disabled="disabled">交易成功</button>
+                		<% 
                 	}
                 %>
             </div>
