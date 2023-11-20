@@ -507,6 +507,48 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
+	public int unfreezeGood(int transaction_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			
+			String sql = "update transactions "
+					+ "set transaction_status = ? "
+					+ "where transaction_id = ?";
+				
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "wait");
+			ps.setInt(2, transaction_id);
+			ps.executeUpdate();
+			
+			sql = "select product_id "
+					+ "from transactions "
+					+ "where transaction_id = ?";
+				
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, transaction_id);
+			ResultSet rs = ps.executeQuery();
+					
+			int product_id = 0;
+			if(rs.next()) {
+				product_id = rs.getInt(1);
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return product_id;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
 	public void frozenGood(int product_id) {
 		// TODO Auto-generated method stub
 		try {
