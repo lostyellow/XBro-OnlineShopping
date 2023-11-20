@@ -46,7 +46,7 @@ public class BuyServlet extends HttpServlet {
     		UserDao ud = new UserDaoImpl();
     		Goods g = (Goods)request.getSession().getAttribute("goods");
     		
-    		Integer id = ud.findTrans_ID(g.getId(), "ing");
+    		Integer id = ud.findTrans_ID(g.getId(), "wait");
 			String realname = request.getParameter("realname");
 			String address = request.getParameter("address");
 			String dealtime = request.getParameter("date");
