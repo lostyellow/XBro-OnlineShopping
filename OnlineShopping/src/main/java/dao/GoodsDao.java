@@ -23,4 +23,7 @@ public interface GoodsDao {
 	 * 用于进入特定商品页面后显示详细信息
 	 * **/
 	public Goods findGoods(int product_id);
+
+	//把商品冻结状态取消
+	public void takeOffGood(int product_id);
 }
