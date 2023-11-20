@@ -28,4 +28,6 @@ public void updateTrans(int trans_id,String status);//更新订单状态,没有�
 public DealList findAllDeal();//寻找所有订单
 public Details findDetails(int transaction_id);//寻找所有详细信息
 public void submitdeal(Buyer buyer);//上传买家提交订单信息
+public int closedeal(int transaction_id);//把订单的状态变成end并且把product_id返回
+public void listingGood(int transaction_id);//把订单的状态变回wait
 }
