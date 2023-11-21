@@ -41,7 +41,7 @@ public class AgreeServlet extends HttpServlet {
 			UserDao ud = new UserDaoImpl();
 			ud.updateTrans(transaction_id, "ing");
 			ud.frozenGood(product_id);
-			response.sendRedirect("record.jsp");
+			response.sendRedirect("back_stage.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

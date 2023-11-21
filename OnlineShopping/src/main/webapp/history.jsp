@@ -43,6 +43,7 @@
 	            	GoodsList goodsList = gd.findAllGoods();
 	            	List<Goods> gl = goodsList.getGoodsList();
 	            	for(Goods g:gl){
+	            		int product_id = g.getId();
 	            		%>
 	            		<p><%=g.getItemName() %></p>
 	            		<p><%=g.getItemDescription() %></p>
@@ -50,7 +51,7 @@
 	            		<p><%=g.getDate() %></p>
 	            		<p><%=g.getIsPres() %></p>
 	            		<p><%=g.getPrice() %></p>
-	            		<p><a href="ShowDealList">查看订单</a></p>
+	            		<p><a href="ShowDealList?product_id=<%=product_id %>">查看订单</a></p>
 	            		<%
 	            	}
 	             %>

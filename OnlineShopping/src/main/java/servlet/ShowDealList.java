@@ -24,7 +24,8 @@ public class ShowDealList extends HttpServlet{
 			
 			UserDao ud = new UserDaoImpl();
 			DealList dl = new DealList();
-			dl = ud.findAllDeal();
+			int product_id = Integer.parseInt(request.getParameter("product_id"));
+			dl = ud.findDealsByProduct_id(product_id);
 			request.getSession().setAttribute("dealList",dl);
 		    response.sendRedirect("record.jsp");
 		} catch (IOException e) {

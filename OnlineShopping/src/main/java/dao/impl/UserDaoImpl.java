@@ -482,7 +482,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public void closedeal(int transaction_id) {
+	public void closedeal(int product_id) {
 		try {
 			Class.forName(DRIVER);
 			
@@ -490,11 +490,11 @@ public class UserDaoImpl implements UserDao{
 			
 			String sql = "update transactions "
 					+ "set transaction_status = ? "
-					+ "where transaction_id = ?";
+					+ "where product_id = ?";
 				
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "end");
-			ps.setInt(2, transaction_id);
+			ps.setInt(2, product_id);
 			ps.executeUpdate();
 			
 			ps.close();
@@ -568,5 +568,65 @@ public class UserDaoImpl implements UserDao{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public DealList findDealsByProduct_id(int product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select product_id,transaction_time,transaction_status,transaction_amount from transactions where product_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, product_id);
+			ResultSet rs = ps.executeQuery();
+			
+			DealList dealList = new DealList();
+			while(rs.next()) {
+				Deal deal = new Deal();
+				deal.setProduct_id(rs.getInt("product_id"));
+				deal.setTime(rs.getString("transaction_time"));
+				deal.setStatus(rs.getString("transaction_status"));
+				deal.setAmount(rs.getFloat("transaction_amount"));
+				dealList.add(deal);
+			}
+			
+			ps.close();
+			conn.close();
+			
+			return dealList;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean IsExistIngDeal(int product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from transactions where transaction_status = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "ing");
+			ResultSet rs = ps.executeQuery();
+			
+			Boolean exist = false;
+			if(rs.next()) {
+				exist = true;
+			}
+			
+			ps.close();
+			conn.close();
+			
+			return exist;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

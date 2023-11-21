@@ -45,9 +45,13 @@
                 	String status = String.valueOf(request.getParameter("status"));
                 	System.out.println(status);
                 	if(status.equals("wait")){
-                		%><input type="button" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
+                		if(ud.IsExistIngDeal(product_id)){
+                			%><input type="button" disabled="disabled" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
+                		}else{
+                			%><input type="button" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
+                		}
                 	}else if(status.equals("ing")){
-                		%><input type="button" value="交易成功" onclick="window.location.href='ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=success'" ><%
+                		%><input type="button" value="交易成功" onclick="window.location.href='ProcessOrderStatusServlet?product_id=<%=product_id %>&method=success'" ><%
                 		%><input type="button" value="交易失败" onclick="window.location.href='ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=fail'" ><%
                 	}else if(status.equals("end")){
                 		%><button disabled="disabled">交易结束</button>
