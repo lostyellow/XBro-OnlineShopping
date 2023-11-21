@@ -32,7 +32,7 @@ public class ProcessOrderStatusServlet extends HttpServlet {
     protected void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
     	UserDao ud = new UserDaoImpl();
-    	int product_id = ud.listingGood(transaction_id);
+    	int product_id = ud.unfreezeGood(transaction_id);
     	GoodsDao gd = new GoodsDaoImpl();
 		gd.takeOnGood(product_id);
 		response.sendRedirect("record.jsp");
