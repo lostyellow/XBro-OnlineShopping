@@ -180,8 +180,8 @@ public class UserDaoImpl implements UserDao{
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "insert into drugs"
 					+ "(seller_id,product_name,product_description,product_image,product_price,"
-					+ "batch_number,expiration_date,prescription_required,is_frozen) "
-					+ "values(?,?,?,?,?,?,?,?,?)";
+					+ "batch_number,expiration_date,prescription_required,is_frozen,inventory) "
+					+ "values(?,?,?,?,?,?,?,?,?,1)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, seller_id);
 			ps.setString(2, good.getItemName());
@@ -482,7 +482,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public void closedeal(int product_id) {
+	public void closedeal(int product_id, int transaction_id) {
 		try {
 			Class.forName(DRIVER);
 			
@@ -495,6 +495,12 @@ public class UserDaoImpl implements UserDao{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "end");
 			ps.setInt(2, product_id);
+			ps.executeUpdate();
+			
+			sql = "update transactions set transaction_status = ? where transaction_id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "success");
+			ps.setInt(2, transaction_id);
 			ps.executeUpdate();
 			
 			ps.close();

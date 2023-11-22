@@ -16,7 +16,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 			Connection conn = DriverManager.getConnection(URL);
 			Statement stmt = conn.createStatement();
 			String sql = "create table if not exists drugs" + 
-						"(product_id integer primary key autoincrement, " + // 录入记录的时候主键录入null，自动变成比最大整数大1的数
+						"(product_id integer primary key autoincrement, " +
 						"seller_id integer not null, " +
 						"product_name text not null, " +
 						"product_description text, " +
@@ -26,6 +26,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 						"expiration_date text default null, " +
 						"prescription_required boolean default null, " +
 						"is_frozen boolean default null, " +
+						"inventory integer default 0, " +
 						"foreign key(seller_id) references users(user_id));";
 //						+ "insert into drugs values(1, 1, 'Dname', 'description', null, 12.3)";
 			sql += "create table if not exists users" +

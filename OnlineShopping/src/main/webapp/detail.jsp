@@ -37,7 +37,7 @@
                 %>
                 <p><strong>交易时间：</strong><%=d.getAppointment_time()%></p>
                 <p><strong>地址：</strong><%=d.getAddress()%></p>
-                <p><strong>交易人：</strong><%=d.getBuyer_name()+d.getBuyer_gender()%></p>
+                <p><strong>交易人：</strong><%=d.getBuyer_name()+ " " +d.getBuyer_gender()%></p>
                 <p><strong>身份证号码：</strong><%=d.getBuyer_identification()%></p>
                 <p><strong>手机号：</strong><%=d.getBuyer_phone_number()%></p>
                 <p><strong>备注：</strong><%=d.getText()%></p>
@@ -50,7 +50,7 @@
                 			%><input type="button" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
                 		}
                 	}else if(status.equals("ing")){
-                		%><input type="button" value="交易成功" onclick="window.location.href='ProcessOrderStatusServlet?product_id=<%=product_id %>&method=success'" ><%
+                		%><input type="button" value="交易成功" onclick="window.location.href='ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>&method=success'" ><%
                 		%><input type="button" value="交易失败" onclick="window.location.href='ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=fail'" ><%
                 	}else if(status.equals("end")){
                 		%><button disabled="disabled">交易结束</button>

@@ -47,7 +47,7 @@ public class ShowGoodsList extends HttpServlet {
 		try {
 			GoodsDao gd = new GoodsDaoImpl();
 			GoodsList gl = new GoodsList();
-			gl = gd.findUnfrozenGoods();
+			gl = gd.findForSaleGoods();
 			request.getSession().setAttribute("goodsList", gl);
 			response.sendRedirect("main.jsp");
 		} catch (IOException e) {

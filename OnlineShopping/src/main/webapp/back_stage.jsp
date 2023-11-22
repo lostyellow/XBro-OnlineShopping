@@ -75,7 +75,7 @@
 	                 <p>商品价格:<input type="text" name="price"></p>
 	                 <%
 	                 	GoodsDao gd = new GoodsDaoImpl();
-	                 	if(gd.findAllGoods().getLength() == 0){
+	                 	if(!gd.anyForSale()){
 	                 %>
 	                 <input type="submit" value="上架">
 	                 <%

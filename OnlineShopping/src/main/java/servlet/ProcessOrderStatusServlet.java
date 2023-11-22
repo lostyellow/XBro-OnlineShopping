@@ -24,8 +24,11 @@ public class ProcessOrderStatusServlet extends HttpServlet {
     
     protected void success(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
+		int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
 		UserDao ud = new UserDaoImpl();
-		ud.closedeal(product_id);
+		GoodsDao gd = new GoodsDaoImpl();
+		ud.closedeal(product_id, transaction_id);
+		gd.sell(product_id);
 		response.sendRedirect("back_stage.jsp");
 	}
     

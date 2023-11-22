@@ -120,13 +120,13 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 
 	@Override
-	public GoodsList findUnfrozenGoods() {
+	public GoodsList findForSaleGoods() {
 		// TODO Auto-generated method stub
 		try {
-Class.forName(DRIVER);
+			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select * from drugs where is_frozen = ?";
+			String sql = "select * from drugs where is_frozen = ? and inventory <> 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, false);
 			ResultSet rs = ps.executeQuery();
@@ -181,6 +181,57 @@ Class.forName(DRIVER);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void sell(int product_id) {
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "update drugs "
+			+ "set inventory = 0 "
+			+ "where product_id = ?";
+		
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, product_id);
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	// 仅基线使用
+	@Override
+	public boolean anyForSale() {
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from drugs where inventory <> 0";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			boolean res;
+			if(rs.next()) res = true;
+			else res = false;
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return res;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Goods;
 import bean.GoodsList;
 import bean.User;
+import dao.GoodsDao;
 import dao.UserDao;
+import dao.impl.GoodsDaoImpl;
 import dao.impl.UserDaoImpl;
 
 /**
@@ -45,7 +47,8 @@ public class DeleteGoodServlet extends HttpServlet {
 			
 			int seller_id = ud.findSeller_ID(user);
 			
-			GoodsList gl = (GoodsList)request.getSession().getAttribute("goodsList");
+			GoodsDao gd = new GoodsDaoImpl();
+			GoodsList gl = gd.findForSaleGoods();
 			Goods old_good = gl.getGoodsList().get(0);
 			int product_id = ud.findProduct_ID(seller_id, old_good);
 			ud.deleteGoods(product_id);
