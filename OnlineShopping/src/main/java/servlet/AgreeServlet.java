@@ -7,23 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DatabaseDao;
-import dao.GoodsDao;
-import dao.impl.DatabaseDaoImpl;
-import dao.impl.GoodsDaoImpl;
-import bean.GoodsList;
+import dao.UserDao;
+import dao.impl.UserDaoImpl;
 
 /**
- * Servlet implementation class ShowGoodsList
+ * Servlet implementation class AgreeServlet
  */
-@WebServlet("/ShowGoodsList")
-public class ShowGoodsList extends HttpServlet {
+@WebServlet("/AgreeServlet")
+public class AgreeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowGoodsList() {
+    public AgreeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +30,23 @@ public class ShowGoodsList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		WebInit();
-		show(request, response);
+		agree(request,response);
 	}
-	
-	private void WebInit() {
-		DatabaseDao DBdao = new DatabaseDaoImpl();
-		DBdao.createDB();
-	}
-	
-	private void show(HttpServletRequest request, HttpServletResponse response) {
+
+	private void agree(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
 		try {
-			GoodsDao gd = new GoodsDaoImpl();
-			GoodsList gl = new GoodsList();
-			gl = gd.findUnfrozenGoods();
-			request.getSession().setAttribute("goodsList", gl);
-			response.sendRedirect("main.jsp");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			int product_id = Integer.parseInt(request.getParameter("product_id"));
+			int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
+			UserDao ud = new UserDaoImpl();
+			ud.updateTrans(transaction_id, "ing");
+			ud.frozenGood(product_id);
+			response.sendRedirect("back_stage.jsp");
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**
@@ -61,8 +54,6 @@ public class ShowGoodsList extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
 		doGet(request, response);
 	}
 

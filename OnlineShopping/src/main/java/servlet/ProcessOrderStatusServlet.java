@@ -23,20 +23,19 @@ public class ProcessOrderStatusServlet extends HttpServlet {
     }
     
     protected void success(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
+		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		UserDao ud = new UserDaoImpl();
-		int product_id = ud.closedeal(transaction_id);
-		GoodsDao gd = new GoodsDaoImpl();
-		gd.takeOffGood(product_id);
-		request.getSession().removeAttribute("goods");
-		response.sendRedirect("detail.jsp");
+		ud.closedeal(product_id);
+		response.sendRedirect("back_stage.jsp");
 	}
     
     protected void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
     	UserDao ud = new UserDaoImpl();
-    	ud.listingGood(transaction_id);
-		response.sendRedirect("detail.jsp");
+    	int product_id = ud.unfreezeGood(transaction_id);
+    	GoodsDao gd = new GoodsDaoImpl();
+		gd.takeOnGood(product_id);
+		response.sendRedirect("back_stage.jsp");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

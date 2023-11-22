@@ -118,4 +118,69 @@ public class GoodsDaoImpl implements GoodsDao {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public GoodsList findUnfrozenGoods() {
+		// TODO Auto-generated method stub
+		try {
+Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from drugs where is_frozen = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ResultSet rs = ps.executeQuery();
+			
+			GoodsList goodsList = new GoodsList();
+			while(rs.next()) {
+				Goods goods = new Goods();
+				goods.setId(rs.getInt("product_id"));
+				goods.setSellerId(rs.getInt("seller_id"));
+				goods.setItemName(rs.getString("product_name"));
+				goods.setItemDescription(rs.getString("product_description"));
+				goods.setImgURL(rs.getString("product_image"));
+				goods.setPrice(rs.getFloat("product_price"));
+				goods.setNumber(rs.getString("batch_number"));
+				goods.setDate(rs.getString("expiration_date"));
+				goods.setIsPres(rs.getBoolean("prescription_required"));
+				goods.setIsFrozen(rs.getBoolean("is_frozen"));
+				goodsList.add(goods);
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return goodsList;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void takeOnGood(int product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "update drugs "
+			+ "set is_frozen = ? "
+			+ "where product_id = ?";
+		
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ps.setInt(2, product_id);
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 }

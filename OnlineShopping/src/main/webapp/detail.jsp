@@ -29,6 +29,7 @@
             <div class="content">
                 <h2>交易信息</h2>
                 <%
+                	int product_id = Integer.parseInt(request.getParameter("product_id"));
                		int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
                     UserDao ud = new UserDaoImpl();
                     Details d = ud.findDetails(transaction_id); 
@@ -43,12 +44,16 @@
                 <%
                 	String status = String.valueOf(request.getParameter("status"));
                 	if(status.equals("wait")){
-                		%><input type="submit" value="同意" formaction="AgreeServlet?transaction_id=<%=transaction_id %>" ><%
+                		if(ud.IsExistIngDeal(product_id)){
+                			%><input type="button" disabled="disabled" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
+                		}else{
+                			%><input type="button" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
+                		}
                 	}else if(status.equals("ing")){
-                		%><input type="submit" value="交易成功" formaction="ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=success" ><%
-                		%><input type="submit" value="交易失败" formaction="ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=fail" ><%
+                		%><input type="button" value="交易成功" onclick="window.location.href='ProcessOrderStatusServlet?product_id=<%=product_id %>&method=success'" ><%
+                		%><input type="button" value="交易失败" onclick="window.location.href='ProcessOrderStatusServlet?transaction_id=<%=transaction_id %>&method=fail'" ><%
                 	}else if(status.equals("end")){
-                		%><button disabled="disabled">交易成功</button>
+                		%><button disabled="disabled">交易结束</button>
                 		<% 
                 	}
                 %>

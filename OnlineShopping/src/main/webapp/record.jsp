@@ -35,6 +35,7 @@
                 <p>交易金额</p>
                 <p>详情</p>
                 	<%
+                		UserDao ud = new UserDaoImpl();
                 		DealList dl = (DealList)session.getAttribute("dealList");
                 		for(Deal d:dl.getDeals()){
                 			%>
@@ -43,13 +44,12 @@
                             <p><%=d.getStatus()%></p>
                             <p><%=d.getAmount()%></p>
                             <%
-                              UserDao ud = new UserDaoImpl();
                               int product_id=d.getProduct_id();
                               String status = d.getStatus();
                               String time = d.getTime();
                               int trans_id=ud.findTrans_ID(product_id, time);
                             %>
-                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>">查看详情</a></p>
+                            <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>&product_id=<%=product_id %>">查看详情</a></p>
                 			<%
                 		}
                 	%>

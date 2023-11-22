@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GoodsDao;
 import dao.UserDao;
+import dao.impl.GoodsDaoImpl;
 import dao.impl.UserDaoImpl;
 import bean.Goods;
+import bean.GoodsList;
 import bean.User;
 
 /**
@@ -79,6 +82,12 @@ public class UpdateGoodServlet extends HttpServlet {
 			 * 需要旧的商品信息，从获取功能得到封装old_good
 			 * **/
 			//product_id = ud.findProduct_ID(seller_id, old_good);
+			
+			// 以下是基线内获取单个商品的id，若有多个商品则获取的是第一个
+			GoodsDao gd = new GoodsDaoImpl();
+			GoodsList gl = gd.findAllGoods();
+			product_id = gl.getGoodsList().get(0).getId();
+			
 			ud.updateGoods(good, product_id);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
