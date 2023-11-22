@@ -13,4 +13,8 @@ public class GoodsList {
 	public List<Goods> getGoodsList() {
 		return this.goodsList;
 	}
+	
+	public int getLength() {
+		return this.goodsList.size();
+	}
 }

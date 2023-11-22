@@ -42,7 +42,6 @@
                 <p><strong>备注：</strong><%=d.getText()%></p>
                 <%
                 	String status = String.valueOf(request.getParameter("status"));
-                	System.out.println(status);
                 	if(status.equals("wait")){
                 		%><input type="submit" value="同意" formaction="AgreeServlet?transaction_id=<%=transaction_id %>" ><%
                 	}else if(status.equals("ing")){

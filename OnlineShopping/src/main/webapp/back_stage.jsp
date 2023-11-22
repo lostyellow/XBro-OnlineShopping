@@ -1,3 +1,5 @@
+<%@page import="dao.impl.GoodsDaoImpl"%>
+<%@page import="dao.GoodsDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.UserDao"%>
@@ -71,7 +73,16 @@
 	                 <p>商品有效期:<input type="date" name="date" ></p>
 	                 <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
 	                 <p>商品价格:<input type="text" name="price"></p>
+	                 <%
+	                 	GoodsDao gd = new GoodsDaoImpl();
+	                 	if(gd.findAllGoods().getLength() == 0){
+	                 %>
 	                 <input type="submit" value="上架">
+	                 <%
+	                 	}else{
+	                 %>
+	                 <input type="submit" value="已发布商品" disabled>
+	                 <%} %>
 	             </div>
 	            </form>
 	        </div>

@@ -74,7 +74,7 @@ public class UpdateGoodServlet extends HttpServlet {
 			good.setIsPres(isPres);
 			good.setIsFrozen(isFrozen);
 			
-			int product_id = 2;
+			int product_id = 1;
 			/*
 			 * 需要旧的商品信息，从获取功能得到封装old_good
 			 * **/

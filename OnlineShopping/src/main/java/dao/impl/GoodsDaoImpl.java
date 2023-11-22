@@ -69,7 +69,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 			Goods goods = new Goods();
 			if(rs.next()) {
-				goods = new Goods();
+//				goods = new Goods();
 				goods.setId(rs.getInt("product_id"));
 				goods.setSellerId(rs.getInt("seller_id"));
 				goods.setItemName(rs.getString("product_name"));
