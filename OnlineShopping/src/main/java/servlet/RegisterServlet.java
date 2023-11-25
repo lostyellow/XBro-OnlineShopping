@@ -37,29 +37,37 @@ public class RegisterServlet extends HttpServlet {
 	private void register(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			String username = request.getParameter("UserName");
-			String password = request.getParameter("Password");
-			String name = request.getParameter("Name");
-			String id_card = request.getParameter("Id");
-			String sex = request.getParameter("sex");
-			String tele = request.getParameter("tel");
-			String e_mail = request.getParameter("email");
-			String birth = request.getParameter("birthday");
-			
-			User user = new User();
-			user.setUserName(username);
-			user.setPassword(password);
-			user.setName(name);
-			user.setId_card(id_card);
-			user.setSex(sex);
-			user.setTele(tele);
-			user.setE_mail(e_mail);
-			user.setBirth(birth);
-			
 			UserDao ud = new UserDaoImpl();
 			
-			ud.register(user);
-			response.sendRedirect("login.jsp");
+			String oou = ud.onlyOneUser();
+			if(oou.equals("")) {
+				String username = request.getParameter("UserName");
+				String password = request.getParameter("Password");
+				String name = request.getParameter("Name");
+				String id_card = request.getParameter("Id");
+				String sex = request.getParameter("sex");
+				String tele = request.getParameter("tel");
+				String e_mail = request.getParameter("email");
+				String birth = request.getParameter("birthday");
+				
+				User user = new User();
+				user.setUserName(username);
+				user.setPassword(password);
+				user.setName(name);
+				user.setId_card(id_card);
+				user.setSex(sex);
+				user.setTele(tele);
+				user.setE_mail(e_mail);
+				user.setBirth(birth);
+				
+				ud.register(user);
+				response.sendRedirect("login.jsp");
+			}else {
+				String pbm = "hasOneUser";
+				request.setAttribute("pbm", pbm);
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
