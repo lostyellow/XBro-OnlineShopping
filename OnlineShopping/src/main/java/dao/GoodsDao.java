@@ -36,7 +36,15 @@ public interface GoodsDao {
 	 * 	商品图片 (主页面商品图片)
 	 * 用于在主页面显示商品列表
 	 * **/
+	
 	public GoodsList findForSaleGoods();
+	
+	/*
+	 * findOnSaleGood()
+	 * 无输入参数
+	 * 返回值为在售的商品列表类, 设置商品的所有信息
+	 * **/
+	public GoodsList findOnSaleGood();
 	
 	/*
 	 * anyForSale()
