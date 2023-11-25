@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,9 @@
                     <tr>
                         <td class="tdLeft"><label for="UserName">用户名</label></td>
                         <td class="tdRight"><input type="text" name="UserName" id="UserName" placeholder="请输入用户名"></td>
+                        <c:if test="${not empty requestScope.pbm }">
+	                        <td class="tdRight"><p style="color:red;">用户注册数量已上限</p></td>
+                        </c:if>
                     </tr>
                     <tr>
                         <td class="tdLeft"><label for="Password">密码</label></td>
