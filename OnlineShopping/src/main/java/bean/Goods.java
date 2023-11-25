@@ -75,6 +75,12 @@ public class Goods {
 	public void setIsFrozen(Boolean isFrozen) {
 		this.isFrozen = isFrozen;
 	}
+	@Override
+	public String toString() {
+		return "Goods [id=" + id + ", sellerId=" + sellerId + ", itemName=" + itemName + ", itemDescription="
+				+ itemDescription + ", imgURL=" + imgURL + ", price=" + price + ", number=" + number + ", date=" + date
+				+ ", isPres=" + isPres + ", isFrozen=" + isFrozen + "]";
+	}
 	
 	
 }

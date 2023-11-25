@@ -1,3 +1,4 @@
+<%@page import="bean.GoodsList"%>
 <%@page import="dao.impl.GoodsDaoImpl"%>
 <%@page import="dao.GoodsDao"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,6 +22,7 @@
 	<%
 		Goods good = new Goods();
 		UserDao ud = new UserDaoImpl();
+		GoodsDao gd = new GoodsDaoImpl();
 		List<Goods> goods = new ArrayList<Goods>();
 		if(session.getAttribute("loginStatus") == null || session.getAttribute("loginStatus").equals("failed")){
 			response.sendRedirect("login.jsp");
@@ -48,20 +50,42 @@
 		<a href="history.jsp">查看历史商品</a>
 	        </div>
 	        <div class="yp">
-		        <form action="UpdateGoodServlet" method="post">
+	        <%if(gd.anyForSale()){%>
+	        <%
+		        GoodsList gl = gd.findForSaleGoods();
+		        List<Goods> goodList = gl.getGoodsList();
+		        Goods g = goodList.get(0);
+	         %>
+	        	<form action="UpdateGoodServlet" method="post">
 		        	<img src="./img/yp.png">
 		            <div class="discribe">
-		                <p>商品名称:<input type="text" name="name" ></p>
-		                <p>商品描述:<input type="text" name="detail" ></p>
-		                <p>商品生产批次:<input type="text" name="batch" ></p>
-		                <p>商品有效期:<input type="date" name="date" ></p>
-		                <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
-		                <p>商品价格:<input type="text" name="price"></p>
-		                <p>商品是否被冻结：<input type="radio" name="option4" value="yes">是<input type="radio" name="option4" value="no">否</p>
+		                <p>商品名称:<input type="text" name="name" value=<%=g.getItemName() %>></p>
+		                <p>商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>></p>
+		                <p>商品生产批次:<input type="text" name="batch" value=<%=g.getNumber() %>></p>
+		                <p>商品有效期:<input type="date" name="date" value=<%=g.getDate() %>></p>
+		                <p>商品是否为处方药：
+		                <%if(g.getIsPres()){ %>
+		                <input type="radio" name="option3" value="yes" checked>是
+		                <input type="radio" name="option3" value="no">否
+		                <%}else{ %>
+		                <input type="radio" name="option3" value="yes" >是
+		                <input type="radio" name="option3" value="no" checked>否
+		                <%} %>
+		                </p>
+		                <p>商品价格:<input type="text" name="price" value=<%=g.getPrice() %>></p>
+		                <p>商品是否被冻结：
+		                <%if(g.getIsFrozen()){ %>
+		                <input type="radio" name="option4" value="yes" checked>是
+		                <input type="radio" name="option4" value="no">否
+		                <%}else{ %>
+		                <input type="radio" name="option4" value="yes" >是
+		                <input type="radio" name="option4" value="no" checked>否
+		                <%} %>
+		                </p>
 		                <input type="submit" value="修改"><input type="submit" formaction="DeleteGoodServlet" value="下架">
 		            </div>
 		        </form>
-		        
+	        <%}else{ %>
 	            <form action="AddGoodServlet" method="post">
 	             <div class="tianjia">
 	                 <a href="#">+添加图片</a>
@@ -74,7 +98,6 @@
 	                 <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
 	                 <p>商品价格:<input type="text" name="price"></p>
 	                 <%
-	                 	GoodsDao gd = new GoodsDaoImpl();
 	                 	if(!gd.anyForSale()){
 	                 %>
 	                 <input type="submit" value="上架">
@@ -85,6 +108,7 @@
 	                 <%} %>
 	             </div>
 	            </form>
+	            <%} %>
 	        </div>
 	    </div>
 	    <div class="sidebar"></div>

@@ -83,10 +83,18 @@ public class CsvTestData {
 			CSVReader csvreader = new CSVReader(isr);
 			
 			String[] nextLine;
-			csvreader.readNext();
+			String[] header = csvreader.readNext();
+			int columnIndex = -1;
+			
+			for(int i = 0;i<header.length;i++) {
+				if (header[i].equals("expected")) {
+		            columnIndex = i;
+		            break;
+		        }
+			}
 			
 			while(null!=(nextLine = csvreader.readNext())) {
-				String expected = nextLine[7];
+				String expected = nextLine[columnIndex];
 				
 				expectedList.add(expected);
 			}

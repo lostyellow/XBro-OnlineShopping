@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sqlite-jdbc-3.43.2.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-log4j12-1.7.21.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-api-2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/22675/Desktop/XBro-OnlineShopping-main/OnlineShopping/src/main/webapp/WEB-INF/lib/seleniumjars/selenium-server-standalone-3.8.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -48,7 +48,7 @@ public class AddGoodServlet extends HttpServlet {
 			
 			String itemName = request.getParameter("name");
 			String itemDescription = request.getParameter("detail");
-			String imgURL = "/OnlineShopping/src/main/webapp/img/yp.png";
+			String imgURL = "./img/yp.png";
 			Float price = Float.parseFloat(request.getParameter("price"));
 			String number = request.getParameter("batch");//生产批次号
 			String date = request.getParameter("date");//有效期
