@@ -38,7 +38,10 @@ public class DatabaseDaoImpl implements DatabaseDao {
 					"sex text not null, " +
 					"tele text not null, " +
 					"e_mail text not null, " +
+					"user_group text not null, " +
 					"birth text not null);";
+			sql += "creat table if not exists user_group,"+
+					"(user_group text primary key)";
 			sql += "create table if not exists order_details" +
 					"(transaction_id integer primary key autoincrement, " +
 					"appointment_time text default null, " +
@@ -52,6 +55,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 			sql += "create table if not exists transactions" +
 					"(transaction_id integer primary key autoincrement, " +
 					"product_id integer not null, " +
+					"buyer_id integer not null, " +
 					"transaction_status text not null, " +
 					"transaction_time text not null, " +
 					"transaction_amount real not null, " +
