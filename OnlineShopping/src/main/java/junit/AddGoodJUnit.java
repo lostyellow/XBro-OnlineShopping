@@ -1,6 +1,6 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class AddGoodJUnit {
 	@Before
 	public void dataRead() {
 		CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
-		
+
 		goodList.addAll(td.addGoodReader());
 		expectedList.addAll(td.expectedReader());
 	}

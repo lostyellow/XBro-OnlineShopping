@@ -1,11 +1,19 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspFactory;
+import javax.servlet.jsp.PageContext;
+
+import com.jspsmart.upload.SmartUpload;
+import com.jspsmart.upload.File;
+import com.jspsmart.upload.Request;
 
 import dao.GoodDao;
 import dao.UserDao;
@@ -13,6 +21,8 @@ import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
 import bean.Good;
 import bean.User;
+import dao.UserDao;
+import dao.impl.UserDaoImpl;
 
 /**
  * Servlet implementation class AddGoodServlet
@@ -20,7 +30,7 @@ import bean.User;
 @WebServlet("/AddGoodServlet")
 public class AddGoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,6 +42,7 @@ public class AddGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		addGood(request,response);
@@ -45,6 +56,16 @@ public class AddGoodServlet extends HttpServlet {
 			UserDao ud = new UserDaoImpl();
 			GoodDao gd = new GoodDaoImpl();
 			
+			JspFactory factory = JspFactory.getDefaultFactory();
+			PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
+			su.initialize(pageContext);
+			su.upload();
+			File file = su.getFiles().getFile(0);
+			String fileName = file.getFileName();
+			String url = "./img/customs/" + fileName;
+			file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
+			Request suRequest = su.getRequest();
+
 			int seller_id = ud.findSeller_ID(user);
 			
 			Good good = new Good();
@@ -57,12 +78,12 @@ public class AddGoodServlet extends HttpServlet {
 			String date = request.getParameter("date");//有效期
 			Boolean isPres;
 			Boolean isFrozen = false;
-			if(request.getParameter("option3").equals("yes")) {
+			if(suRequest.getParameter("option3").equals("yes")) {
 				isPres = true;
 			}else {
 				isPres = false;
 			}
-			
+
 			good.setItemName(itemName);
 			good.setItemDescription(itemDescription);
 			good.setImgURL(imgURL);
@@ -83,6 +104,7 @@ public class AddGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

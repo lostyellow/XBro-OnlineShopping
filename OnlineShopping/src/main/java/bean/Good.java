@@ -13,8 +13,8 @@ public class Good {
 	private String date;//有效期
 	private Boolean isPres;//是否为处方药
 	private Boolean isFrozen;//是否被冻结
-	
-	
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +81,6 @@ public class Good {
 				+ itemDescription + ", imgURL=" + imgURL + ", price=" + price + ", number=" + number + ", date=" + date
 				+ ", isPres=" + isPres + ", isFrozen=" + isFrozen + "]";
 	}
-	
-	
+
+
 }

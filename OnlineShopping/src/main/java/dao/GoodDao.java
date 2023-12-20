@@ -1,8 +1,7 @@
 package dao;
 
-import java.util.List;
-
-import bean.*;
+import bean.Good;
+import bean.GoodList;
 
 public interface GoodDao {
 	/*
@@ -26,7 +25,7 @@ public interface GoodDao {
 
 	//把商品冻结状态取消
 	public void takeOffGood(int product_id);
-	
+
 	/*
 	 * findForSaleGoods()
 	 * 无输入参数
@@ -56,7 +55,7 @@ public interface GoodDao {
 	public boolean anyForSale();
 
 	public void takeOnGood(int product_id);
-	
+
 	/*
 	 * sell()
 	 * 输入参数为 商品id

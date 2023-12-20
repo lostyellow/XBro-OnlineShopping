@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,16 +21,16 @@ import bean.Good;
 @WebServlet("/BuyServlet")
 public class BuyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     public BuyServlet() {
         super();
     }
-    
+
     protected void CreatDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
     		Good g = (Good)request.getSession().getAttribute("goods");
 			String time = request.getParameter("date");
-    		
+
 			Deal deal = new Deal();
 			deal.setProduct_id(g.getId());
 			deal.setStatus("wait");
@@ -45,7 +46,7 @@ public class BuyServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-    
+
     protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
     		UserDao ud = new UserDaoImpl();
@@ -61,7 +62,7 @@ public class BuyServlet extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String gender = request.getParameter("option");
 			String remark =request.getParameter("remark");
-		
+
 			Buyer buyer = new Buyer();
 			buyer.setId(id);
 			buyer.setBuyer_name(realname);
@@ -80,6 +81,7 @@ public class BuyServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("GBK");
 		response.setCharacterEncoding("GBK");
@@ -90,6 +92,7 @@ public class BuyServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

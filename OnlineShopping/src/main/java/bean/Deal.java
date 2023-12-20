@@ -37,6 +37,6 @@ public class Deal {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
 }
