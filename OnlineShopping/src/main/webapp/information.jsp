@@ -1,4 +1,4 @@
-<%@page import="bean.Goods"%>
+<%@page import="bean.Good"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 
 <body>
     <%
-    	Goods g = (Goods)session.getAttribute("goods");
+    	Good g = (Good)session.getAttribute("goods");
     %>
     <div class="head">
         <div class="header">

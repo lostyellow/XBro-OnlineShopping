@@ -1,10 +1,10 @@
-<%@page import="bean.GoodsList"%>
-<%@page import="dao.impl.GoodsDaoImpl"%>
-<%@page import="dao.GoodsDao"%>
+<%@page import="bean.GoodList"%>
+<%@page import="dao.impl.GoodDaoImpl"%>
+<%@page import="dao.GoodDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.UserDao"%>
-<%@page import="bean.Goods"%>
+<%@page import="bean.Good"%>
 <%@page import="dao.impl.UserDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,10 +20,10 @@
 <body>
 
 	<%
-		Goods good = new Goods();
+		Good good = new Good();
 		UserDao ud = new UserDaoImpl();
-		GoodsDao gd = new GoodsDaoImpl();
-		List<Goods> goods = new ArrayList<Goods>();
+		GoodDao gd = new GoodDaoImpl();
+		List<Good> goods = new ArrayList<Good>();
 		if(session.getAttribute("loginStatus") == null || session.getAttribute("loginStatus").equals("failed")){
 			response.sendRedirect("login.jsp");
 		}
@@ -34,9 +34,17 @@
           <a href="ShowGoodsList">首页</a>
           <a href="back_stage.jsp">进入后台</a>
 	  <a href="change_password.jsp">修改密码</a>	
-          <%if(request.getSession().getAttribute("curUser")==null){ %>
-          <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%}%><% else{ %>
-          <a href="QuitServlet">退出登录</a><%} %>
+          <%
+	          	if(request.getSession().getAttribute("curUser")==null){
+	          %>
+          <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%
+          	}
+          %><%
+          	else{
+          %>
+          <a href="QuitServlet">退出登录</a><%
+          	}
+          %>
         </div>
     </div>   
     <div class="main">
@@ -50,12 +58,14 @@
 		<a href="history.jsp">查看历史商品</a>
 	        </div>
 	        <div class="yp">
-	        <%if(gd.anyForSale()){%>
 	        <%
-		        GoodsList gl = gd.findOnSaleGood();
-		        List<Goods> goodList = gl.getGoodsList();
-		        Goods g = goodList.get(0);
-	         %>
+	        	if(gd.anyForSale()){
+	        %>
+	        <%
+	        	GoodList gl = gd.findOnSaleGood();
+	        	        		        List<Good> goodList = gl.getGoodsList();
+	        	        		        Good g = goodList.get(0);
+	        %>
 	        	<form action="UpdateGoodServlet" method="post">
 		        	<img src="./img/yp.png">
 		            <div class="discribe">

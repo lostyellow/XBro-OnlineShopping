@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.DealList;
+import dao.TransactionDao;
 import dao.UserDao;
+import dao.impl.TransactionDaoImpl;
 import dao.impl.UserDaoImpl;
 @WebServlet("/ShowDealList")
 public class ShowDealList extends HttpServlet{
@@ -23,9 +25,10 @@ public class ShowDealList extends HttpServlet{
 		try {
 			
 			UserDao ud = new UserDaoImpl();
+			TransactionDao td = new TransactionDaoImpl();
 			DealList dl = new DealList();
 			int product_id = Integer.parseInt(request.getParameter("product_id"));
-			dl = ud.findDealsByProduct_id(product_id);
+			dl = td.findDealsByProduct_id(product_id);
 			request.getSession().setAttribute("dealList",dl);
 		    response.sendRedirect("record.jsp");
 		} catch (IOException e) {

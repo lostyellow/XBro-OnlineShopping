@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GoodDao;
 import dao.UserDao;
+import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
-import bean.Goods;
+import bean.Good;
 import bean.User;
 
 /**
@@ -41,10 +43,11 @@ public class AddGoodServlet extends HttpServlet {
 			User user = new User();
 			user = (User)request.getSession().getAttribute("curUser");
 			UserDao ud = new UserDaoImpl();
+			GoodDao gd = new GoodDaoImpl();
 			
 			int seller_id = ud.findSeller_ID(user);
 			
-			Goods good = new Goods();
+			Good good = new Good();
 			
 			String itemName = request.getParameter("name");
 			String itemDescription = request.getParameter("detail");
@@ -69,7 +72,7 @@ public class AddGoodServlet extends HttpServlet {
 			good.setIsPres(isPres);
 			good.setIsFrozen(isFrozen);
 			
-			ud.addGoods(seller_id, good);
+			gd.addGoods(seller_id, good);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception

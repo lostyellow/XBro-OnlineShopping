@@ -3,7 +3,7 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Users {
+public class UserList {
 	static List<User> users = new ArrayList<User>();
 	
 	public static void add(User u) {

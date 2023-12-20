@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
-import bean.Goods;
+import bean.Good;
 import bean.User;
 
 public class CsvTestData {
@@ -65,21 +65,21 @@ public class CsvTestData {
 		return ul;
 	} 
 	
-	public List<Goods> addGoodReader(){
-		List<Goods> goodList = new ArrayList<Goods>();
+	public List<Good> addGoodReader(){
+		List<Good> goodList = new ArrayList<Good>();
 		
 		try {
 			FileInputStream fis = new FileInputStream(fileName);
 			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
 			CSVReader csvreader = new CSVReader(isr);
 			
-			Goods g = null;
+			Good g = null;
 			String[] nextLine;
 			
 			csvreader.readNext();
 			
 			while(null != (nextLine = csvreader.readNext())) {
-				g = new Goods();
+				g = new Good();
 				String itemName = nextLine[0];
 				String itemDescription = nextLine[1];
 				String imgURL = nextLine[2];
@@ -150,7 +150,7 @@ public class CsvTestData {
 	}
 	
 	public static void main(String[] args) {
-		List<Goods> goodList = new ArrayList<Goods>();
+		List<Good> goodList = new ArrayList<Good>();
 		List<String> expectedList = new ArrayList<String>();
 		
 		CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
@@ -158,7 +158,7 @@ public class CsvTestData {
 		goodList.addAll(td.addGoodReader());
 		expectedList.addAll(td.expectedReader());
 		
-		for (Goods good : goodList) {
+		for (Good good : goodList) {
 			System.out.println(good.toString());
 		}
 		for (String string : expectedList) {

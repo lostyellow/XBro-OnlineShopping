@@ -4,7 +4,7 @@ import java.util.List;
 
 import bean.*;
 
-public interface GoodsDao {
+public interface GoodDao {
 	/*
 	 * findAllGoods()
 	 * 无输入参数
@@ -14,7 +14,7 @@ public interface GoodsDao {
 	 * 	商品图片 (主页面商品图片)
 	 * 用于显示历史商品
 	 * **/
-	public GoodsList findAllGoods();
+	public GoodList findAllGoods();
 	
 	/*
 	 * findGoods()
@@ -22,7 +22,7 @@ public interface GoodsDao {
 	 * 返回值为商品对象
 	 * 用于进入特定商品页面后显示详细信息
 	 * **/
-	public Goods findGoods(int product_id);
+	public Good findGoods(int product_id);
 
 	//把商品冻结状态取消
 	public void takeOffGood(int product_id);
@@ -37,14 +37,14 @@ public interface GoodsDao {
 	 * 用于在主页面显示商品列表
 	 * **/
 	
-	public GoodsList findForSaleGoods();
+	public GoodList findForSaleGoods();
 	
 	/*
 	 * findOnSaleGood()
 	 * 无输入参数
 	 * 返回值为在售的商品列表类, 设置商品的所有信息
 	 * **/
-	public GoodsList findOnSaleGood();
+	public GoodList findOnSaleGood();
 	
 	/*
 	 * anyForSale()
@@ -64,4 +64,17 @@ public interface GoodsDao {
 	 * 用于将对应商品库存-1
 	 * **/
 	public void sell(int product_id);
+
+	/*
+	 * 对drugs表的操作
+	 * */
+	public int findProduct_ID(int seller_id,Good good);//查询商品ID
+
+	public void addGoods(int seller_id,Good good);//上架商品
+
+	public void updateGoods(Good good,int product_id);//修改商品,请封装修改的信息
+
+	public void deleteGoods(int product_id);//下架商品，通过ID定位
+
+	public void frozenGood(int product_id);
 }

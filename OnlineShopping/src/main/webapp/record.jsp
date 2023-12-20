@@ -1,3 +1,5 @@
+<%@page import="dao.impl.TransactionDaoImpl"%>
+<%@page import="dao.TransactionDao"%>
 <%@page import="dao.impl.UserDaoImpl"%>
 <%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -36,6 +38,7 @@
                 <p>详情</p>
                 	<%
                 		UserDao ud = new UserDaoImpl();
+                		TransactionDao td = new TransactionDaoImpl();
                 		DealList dl = (DealList)session.getAttribute("dealList");
                 		for(Deal d:dl.getDeals()){
                 			%>
@@ -47,7 +50,7 @@
                               int product_id=d.getProduct_id();
                               String status = d.getStatus();
                               String time = d.getTime();
-                              int trans_id=ud.findTrans_ID(product_id, time);
+                              int trans_id=td.findTrans_ID(product_id, time);
                             %>
                             <p><a href="detail.jsp?transaction_id=<%=trans_id%>&status=<%=status%>&product_id=<%=product_id %>">查看详情</a></p>
                 			<%
