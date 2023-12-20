@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.GoodDao;
 import bean.Good;
@@ -33,7 +35,7 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setSellerId(rs.getInt("seller_id"));
 				goods.setItemName(rs.getString("product_name"));
 				goods.setItemDescription(rs.getString("product_description"));
-				goods.setImgURL(rs.getString("product_image"));
+				// goods.setImgURL(rs.getString("product_image"));
 				goods.setPrice(rs.getFloat("product_price"));
 				goods.setNumber(rs.getString("batch_number"));
 				goods.setDate(rs.getString("expiration_date"));
@@ -73,7 +75,7 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setSellerId(rs.getInt("seller_id"));
 				goods.setItemName(rs.getString("product_name"));
 				goods.setItemDescription(rs.getString("product_description"));
-				goods.setImgURL(rs.getString("product_image"));
+				// goods.setImgURL(rs.getString("product_image"));
 				goods.setPrice(rs.getFloat("product_price"));
 				goods.setNumber(rs.getString("batch_number"));
 				goods.setDate(rs.getString("expiration_date"));
@@ -137,7 +139,7 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setSellerId(rs.getInt("seller_id"));
 				goods.setItemName(rs.getString("product_name"));
 				goods.setItemDescription(rs.getString("product_description"));
-				goods.setImgURL(rs.getString("product_image"));
+				// goods.setImgURL(rs.getString("product_image"));
 				goods.setPrice(rs.getFloat("product_price"));
 				goods.setNumber(rs.getString("batch_number"));
 				goods.setDate(rs.getString("expiration_date"));
@@ -252,7 +254,7 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setSellerId(rs.getInt("seller_id"));
 				goods.setItemName(rs.getString("product_name"));
 				goods.setItemDescription(rs.getString("product_description"));
-				goods.setImgURL(rs.getString("product_image"));
+				// goods.setImgURL(rs.getString("product_image"));
 				goods.setPrice(rs.getFloat("product_price"));
 				goods.setNumber(rs.getString("batch_number"));
 				goods.setDate(rs.getString("expiration_date"));
@@ -310,19 +312,19 @@ public class GoodDaoImpl implements GoodDao {
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "insert into drugs"
-					+ "(seller_id,product_name,product_description,product_image,product_price,"
+					+ "(seller_id,product_name,product_description,product_price,"
 					+ "batch_number,expiration_date,prescription_required,is_frozen,inventory) "
-					+ "values(?,?,?,?,?,?,?,?,?,1)";
+					+ "values(?,?,?,?,?,?,?,?,1)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, seller_id);
 			ps.setString(2, good.getItemName());
 			ps.setString(3, good.getItemDescription());
-			ps.setString(4, good.getImgURL());
-			ps.setFloat(5, good.getPrice());
-			ps.setString(6, good.getNumber());
-			ps.setString(7, good.getDate());
-			ps.setBoolean(8, good.getIsPres());
-			ps.setBoolean(9, good.getIsFrozen());
+			// ps.setString(4, good.getImgURL());
+			ps.setFloat(4, good.getPrice());
+			ps.setString(5, good.getNumber());
+			ps.setString(6, good.getDate());
+			ps.setBoolean(7, good.getIsPres());
+			ps.setBoolean(8, good.getIsFrozen());
 			
 			ps.executeUpdate();
 			
@@ -341,17 +343,17 @@ public class GoodDaoImpl implements GoodDao {
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "update drugs set product_name=?,product_description=?,product_image=?,product_price=?, batch_number=?,expiration_date=?,prescription_required=?,is_frozen=? where product_id = ?";
+			String sql = "update drugs set product_name=?,product_description=?,product_price=?, batch_number=?,expiration_date=?,prescription_required=?,is_frozen=? where product_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, good.getItemName());
 			ps.setString(2, good.getItemDescription());
-			ps.setString(3, good.getImgURL());
-			ps.setFloat(4, good.getPrice());
-			ps.setString(5, good.getNumber());
-			ps.setString(6, good.getDate());
-			ps.setBoolean(7, good.getIsPres());
-			ps.setBoolean(8, good.getIsFrozen());
-			ps.setInt(9, product_id);
+			// ps.setString(3, good.getImgURL());
+			ps.setFloat(3, good.getPrice());
+			ps.setString(4, good.getNumber());
+			ps.setString(5, good.getDate());
+			ps.setBoolean(6, good.getIsPres());
+			ps.setBoolean(7, good.getIsFrozen());
+			ps.setInt(8, product_id);
 			ps.executeUpdate();
 			
 			ps.close();
@@ -386,7 +388,6 @@ public class GoodDaoImpl implements GoodDao {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "update drugs set is_frozen = ? where product_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -400,6 +401,68 @@ public class GoodDaoImpl implements GoodDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@Override
+	public void addGoodPicture(int product_id, String img_url) {
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "insert into pictures (img_url, product_id) values (?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, img_url);
+			ps.setInt(2, product_id);
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void deleteGoodPicture(int product_id, String img_url) {
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "delete from pictures where img_url=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, img_url);
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public List<String> findAllPictures(int product_id) {
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from pictures where product_id=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, product_id);
+			ResultSet rs = ps.executeQuery();
+			
+			List<String> pictures = new ArrayList<String>();
+			while(rs.next()) {
+				pictures.add(rs.getString("img_url"));
+			}
+
+			ps.close();
+			conn.close();
+			rs.close();
+
+			return pictures;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

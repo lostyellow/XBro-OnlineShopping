@@ -104,15 +104,7 @@
 	                 <p>商品有效期:<input type="date" name="date" ></p>
 	                 <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
 	                 <p>商品价格:<input type="text" name="price"></p>
-	                 <%
-	                 	if(/*!gd.anyForSale()*/true){
-	                 %>
 	                 <input type="submit" value="上架">
-	                 <%
-	                 	}else{
-	                 %>
-	                 <input type="submit" value="已发布商品" disabled>
-	                 <%} %>
 	             </div>
 	            </form>
 	            <%/*}*/ %>

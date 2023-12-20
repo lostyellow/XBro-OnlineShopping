@@ -89,7 +89,7 @@ public class UpdateGoodServlet extends HttpServlet {
 
 			good.setItemName(itemName);
 			good.setItemDescription(itemDescription);
-			good.setImgURL(imgURL);
+			// good.setImgURL(imgURL);
 			good.setPrice(price);
 			good.setNumber(number);
 			good.setDate(date);
@@ -108,6 +108,7 @@ public class UpdateGoodServlet extends HttpServlet {
 			product_id = gl.getGoodsList().get(0).getId();
 			
 			gd.updateGoods(good, product_id);
+			gd.addGoodPicture(product_id, imgURL);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception
