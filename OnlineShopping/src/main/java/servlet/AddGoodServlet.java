@@ -56,6 +56,7 @@ public class AddGoodServlet extends HttpServlet {
 			UserDao ud = new UserDaoImpl();
 			GoodDao gd = new GoodDaoImpl();
 			
+			SmartUpload su = new SmartUpload();
 			JspFactory factory = JspFactory.getDefaultFactory();
 			PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
 			su.initialize(pageContext);

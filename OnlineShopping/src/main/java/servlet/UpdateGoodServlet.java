@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 
+import com.jspsmart.upload.File;
+import com.jspsmart.upload.Request;
+import com.jspsmart.upload.SmartUpload;
+
 import dao.GoodDao;
 import dao.UserDao;
 import dao.impl.GoodDaoImpl;
