@@ -35,7 +35,7 @@
                 </div>
                 <div class="yp">
                     <div class="photo">
-                        <img src="./img/yp.png">
+                        <img src=<%=g.getImgURL() %>>
                     </div>
                     <div class="discribe">
                         <p>商品名称:<%=g.getItemName() %></p>

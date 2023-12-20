@@ -8,7 +8,7 @@ public class AddGoodTest {
 	public String AddGood(Goods good) {
 		try {
 			UserDao ud = new UserDaoImpl();
-			
+
 			int seller_id = 1;
 
 			ud.addGoods(seller_id, good);
@@ -18,5 +18,5 @@ public class AddGoodTest {
 			return "failed";
 		}
 	}
-	
+
 }

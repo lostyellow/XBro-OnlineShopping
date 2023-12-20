@@ -1,6 +1,12 @@
 package dao;
 
-import bean.*;
+import bean.Buyer;
+import bean.Deal;
+import bean.DealList;
+import bean.Details;
+import bean.Goods;
+import bean.User;
+import bean.Users;
 
 public interface UserDao{
 /*对Users表的操作*/
@@ -30,7 +36,7 @@ public DealList findAllDeal();//寻找所有订单
 public DealList findDealsByProduct_id(int product_id);//寻找某个商品的所有订单
 public Boolean IsExistIngDeal(int product_id);
 /*对order_details表的操作
- * 
+ *
  */
 public Details findDetails(int transaction_id);//寻找所有详细信息
 public void submitdeal(Buyer buyer);//上传买家提交订单信息

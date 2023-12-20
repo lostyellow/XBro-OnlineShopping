@@ -1,21 +1,24 @@
 package dao.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 import dao.DatabaseDao;
-import java.sql.*;
 
 public class DatabaseDaoImpl implements DatabaseDao {
 	public static final String DRIVER = "org.sqlite.JDBC";
 	public static final String URL = "jdbc:sqlite:xbro.db";
 	public static final String USER = "root";
 	public static final String PWD = "root";
-	
+
 	@Override
 	public void createDB() {
 		try {
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL);
 			Statement stmt = conn.createStatement();
-			String sql = "create table if not exists drugs" + 
+			String sql = "create table if not exists drugs" +
 						"(product_id integer primary key autoincrement, " +
 						"seller_id integer not null, " +
 						"product_name text not null, " +
@@ -40,8 +43,8 @@ public class DatabaseDaoImpl implements DatabaseDao {
 					"e_mail text not null, " +
 					"user_group text not null, " +
 					"birth text not null);";
-			sql += "creat table if not exists user_group,"+
-					"(user_group text primary key)";
+			sql += "create table if not exists user_group"+
+					"(user_group text primary key);";
 			sql += "create table if not exists order_details" +
 					"(transaction_id integer primary key autoincrement, " +
 					"appointment_time text default null, " +

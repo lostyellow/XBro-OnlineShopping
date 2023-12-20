@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Users {
-	static List<User> users = new ArrayList<User>();
-	
+	static List<User> users = new ArrayList<>();
+
 	public static void add(User u) {
 		users.add(u);
 	}

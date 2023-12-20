@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ import dao.impl.UserDaoImpl;
 @WebServlet("/DeleteGoodServlet")
 public class DeleteGoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,6 +34,7 @@ public class DeleteGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		deleteGood(request,response);
@@ -44,9 +46,9 @@ public class DeleteGoodServlet extends HttpServlet {
 			User user = new User();
 			user = (User)request.getSession().getAttribute("curUser");
 			UserDao ud = new UserDaoImpl();
-			
+
 			int seller_id = ud.findSeller_ID(user);
-			
+
 			GoodsDao gd = new GoodsDaoImpl();
 			GoodsList gl = gd.findForSaleGoods();
 			Goods old_good = gl.getGoodsList().get(0);
@@ -62,6 +64,7 @@ public class DeleteGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

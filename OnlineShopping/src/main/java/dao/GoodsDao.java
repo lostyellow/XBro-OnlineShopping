@@ -1,8 +1,7 @@
 package dao;
 
-import java.util.List;
-
-import bean.*;
+import bean.Goods;
+import bean.GoodsList;
 
 public interface GoodsDao {
 	/*
@@ -15,7 +14,7 @@ public interface GoodsDao {
 	 * 用于显示历史商品
 	 * **/
 	public GoodsList findAllGoods();
-	
+
 	/*
 	 * findGoods()
 	 * 输入参数为 商品id
@@ -26,7 +25,7 @@ public interface GoodsDao {
 
 	//把商品冻结状态取消
 	public void takeOffGood(int product_id);
-	
+
 	/*
 	 * findForSaleGoods()
 	 * 无输入参数
@@ -36,16 +35,16 @@ public interface GoodsDao {
 	 * 	商品图片 (主页面商品图片)
 	 * 用于在主页面显示商品列表
 	 * **/
-	
+
 	public GoodsList findForSaleGoods();
-	
+
 	/*
 	 * findOnSaleGood()
 	 * 无输入参数
 	 * 返回值为在售的商品列表类, 设置商品的所有信息
 	 * **/
 	public GoodsList findOnSaleGood();
-	
+
 	/*
 	 * anyForSale()
 	 * 无输入参数
@@ -56,7 +55,7 @@ public interface GoodsDao {
 	public boolean anyForSale();
 
 	public void takeOnGood(int product_id);
-	
+
 	/*
 	 * sell()
 	 * 输入参数为 商品id

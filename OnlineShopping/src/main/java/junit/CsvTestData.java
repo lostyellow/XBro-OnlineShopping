@@ -11,11 +11,11 @@ import bean.Goods;
 
 public class CsvTestData {
 	private String Filename;
-	
+
 	public CsvTestData(String filename) {
 		Filename = filename;// TODO Auto-generated constructor stub
 	}
-	
+
 	public String getFilename() {
 		return Filename;
 	}
@@ -23,20 +23,20 @@ public class CsvTestData {
 	public void setFilename(String filename) {
 		Filename = filename;
 	}
-	
+
 	public List<Goods> addGoodReader(){
-		List<Goods> goodList = new ArrayList<Goods>();
-		
+		List<Goods> goodList = new ArrayList<>();
+
 		try {
 			FileInputStream fis = new FileInputStream(Filename);
 			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
 			CSVReader csvreader = new CSVReader(isr);
-			
+
 			Goods g = null;
 			String[] nextLine;
-			
+
 			csvreader.readNext();
-			
+
 			while(null != (nextLine = csvreader.readNext())) {
 				g = new Goods();
 				String itemName = nextLine[0];
@@ -45,7 +45,7 @@ public class CsvTestData {
 				String number = nextLine[3];
 				String date = nextLine[4];
 				Boolean isPres;
-				
+
 				if(nextLine[5].equals("true")) {
 					isPres = true;
 				}else {
@@ -53,7 +53,7 @@ public class CsvTestData {
 				}
 				Float price = Float.parseFloat(nextLine[6]);
 				String expected = nextLine[7];
-				
+
 				g.setItemName(itemName);
 				g.setItemDescription(itemDescription);
 				g.setImgURL(imgURL);
@@ -62,7 +62,7 @@ public class CsvTestData {
 				g.setIsPres(isPres);
 				g.setIsFrozen(false);
 				g.setPrice(price);
-				
+
 				goodList.add(g);
 			}
 			isr.close();
@@ -73,50 +73,50 @@ public class CsvTestData {
 		}
 		return goodList;
 	}
-	
+
 	public List<String> expectedReader(){
-		List<String> expectedList = new ArrayList<String>();
-		
+		List<String> expectedList = new ArrayList<>();
+
 		try {
 			FileInputStream fis = new FileInputStream(Filename);
 			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
 			CSVReader csvreader = new CSVReader(isr);
-			
+
 			String[] nextLine;
 			String[] header = csvreader.readNext();
 			int columnIndex = -1;
-			
+
 			for(int i = 0;i<header.length;i++) {
 				if (header[i].equals("expected")) {
 		            columnIndex = i;
 		            break;
 		        }
 			}
-			
+
 			while(null!=(nextLine = csvreader.readNext())) {
 				String expected = nextLine[columnIndex];
-				
+
 				expectedList.add(expected);
 			}
 			isr.close();
 			fis.close();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return expectedList;
 	}
-	
+
 	public static void main(String[] args) {
-		List<Goods> goodList = new ArrayList<Goods>();
-		List<String> expectedList = new ArrayList<String>();
-		
+		List<Goods> goodList = new ArrayList<>();
+		List<String> expectedList = new ArrayList<>();
+
 		CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
-		
+
 		goodList.addAll(td.addGoodReader());
 		expectedList.addAll(td.expectedReader());
-		
+
 		for (Goods good : goodList) {
 			System.out.println(good.toString());
 		}

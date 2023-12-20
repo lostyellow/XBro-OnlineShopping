@@ -56,8 +56,8 @@
 		        List<Goods> goodList = gl.getGoodsList();
 		        Goods g = goodList.get(0);
 	         %>
-	        	<form action="UpdateGoodServlet" method="post">
-		        	<img src="./img/yp.png">
+	        	<form action="AddGoodServlet" method="post" enctype="multipart/form-data">
+					上传图片: <input type="file" name="picture" />
 		            <div class="discribe">
 		                <p>商品名称:<input type="text" name="name" value=<%=g.getItemName() %>></p>
 		                <p>商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>></p>
@@ -87,12 +87,8 @@
 		        </form>
 	        <%}else{ %>
 	        <div class="tianjia">
-                <form action="${pageContext.request.contextPath}/fileUpload" method="post" enctype="multipart/form-data">
-					上传图片: <input type="file" name="file" />
-					<input type="submit" value="上传" />
-				</form>
-             </div>
-	            <form action="AddGoodServlet" method="post">
+                <form action="AddGoodServlet" method="post" enctype="multipart/form-data">
+					上传图片: <input type="file" name="picture" />
 	             <div class="discribe2">
 	                 <p>商品名称:<input type="text" name="name" ></p>
 	                 <p>商品描述:<input type="text" name="detail" ></p>
