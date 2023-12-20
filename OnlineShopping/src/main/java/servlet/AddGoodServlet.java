@@ -15,7 +15,11 @@ import com.jspsmart.upload.SmartUpload;
 import com.jspsmart.upload.File;
 import com.jspsmart.upload.Request;
 
-import bean.Goods;
+import dao.GoodDao;
+import dao.UserDao;
+import dao.impl.GoodDaoImpl;
+import dao.impl.UserDaoImpl;
+import bean.Good;
 import bean.User;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
@@ -50,7 +54,7 @@ public class AddGoodServlet extends HttpServlet {
 			User user = new User();
 			user = (User)request.getSession().getAttribute("curUser");
 			UserDao ud = new UserDaoImpl();
-			SmartUpload su = new SmartUpload();
+			GoodDao gd = new GoodDaoImpl();
 			
 			JspFactory factory = JspFactory.getDefaultFactory();
 			PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
@@ -63,15 +67,15 @@ public class AddGoodServlet extends HttpServlet {
 			Request suRequest = su.getRequest();
 
 			int seller_id = ud.findSeller_ID(user);
-
-			Goods good = new Goods();
-
-			String itemName = suRequest.getParameter("name");
-			String itemDescription = suRequest.getParameter("detail");
-			String imgURL = url;
-			Float price = Float.parseFloat(suRequest.getParameter("price"));
-			String number = suRequest.getParameter("batch");//生产批次号
-			String date = suRequest.getParameter("date");//有效期
+			
+			Good good = new Good();
+			
+			String itemName = request.getParameter("name");
+			String itemDescription = request.getParameter("detail");
+			String imgURL = "./img/yp.png";
+			Float price = Float.parseFloat(request.getParameter("price"));
+			String number = request.getParameter("batch");//生产批次号
+			String date = request.getParameter("date");//有效期
 			Boolean isPres;
 			Boolean isFrozen = false;
 			if(suRequest.getParameter("option3").equals("yes")) {
@@ -88,8 +92,8 @@ public class AddGoodServlet extends HttpServlet {
 			good.setDate(date);
 			good.setIsPres(isPres);
 			good.setIsFrozen(isFrozen);
-
-			ud.addGoods(seller_id, good);
+			
+			gd.addGoods(seller_id, good);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -9,10 +9,10 @@ import bean.Buyer;
 import bean.Deal;
 import bean.DealList;
 import bean.Details;
-import bean.Goods;
+import bean.Good;
+import bean.GoodList;
 import bean.User;
-import bean.Users;
-import dao.UserDao;
+import bean.UserList;
 
 public class UserDaoImpl implements UserDao{
 	public static final String DRIVER = "org.sqlite.JDBC";
@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "insert into users(username,password,name,id_card,sex,tele,e_mail,birth) values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into users(username,password,name,id_card,sex,tele,e_mail,user_group,birth) values(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getPassword());
@@ -36,8 +36,14 @@ public class UserDaoImpl implements UserDao{
 			ps.setString(5, user.getSex());
 			ps.setString(6, user.getTele());
 			ps.setString(7, user.getE_mail());
+<<<<<<< HEAD
 			ps.setString(8, user.getBirth());
 
+=======
+			ps.setString(8, "seller");
+			ps.setString(9, user.getBirth());
+			
+>>>>>>> 87f00f3e45c9bab001967b076c96d04aa1923e54
 			ps.executeUpdate();
 
 			ps.close();
@@ -49,7 +55,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public Users findAll() {
+	public UserList findAll() {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
@@ -58,8 +64,13 @@ public class UserDaoImpl implements UserDao{
 			String sql = "select username,password from users";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+<<<<<<< HEAD
 
 			Users users = new Users();
+=======
+			
+			UserList users = new UserList();
+>>>>>>> 87f00f3e45c9bab001967b076c96d04aa1923e54
 			User user = null;
 
 			while(rs.next()) {
@@ -142,6 +153,7 @@ public class UserDaoImpl implements UserDao{
 		return 0;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public int findProduct_ID(int seller_id,Goods good) {
 		// TODO Auto-generated method stub
@@ -423,7 +435,10 @@ public class UserDaoImpl implements UserDao{
 		}
 		return null;
 	}
+=======
+>>>>>>> 87f00f3e45c9bab001967b076c96d04aa1923e54
 
+	
 	@Override
 	public void changePwd(int userId, String newPwd) {
 		// TODO Auto-generated method stub
@@ -481,6 +496,7 @@ public class UserDaoImpl implements UserDao{
 		return "";
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void closedeal(int product_id, int transaction_id) {
 		try {
@@ -636,6 +652,13 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
+=======
+
+
+
+
+	
+>>>>>>> 87f00f3e45c9bab001967b076c96d04aa1923e54
 	@Override
 	public String onlyOneUser() {
 		// TODO Auto-generated method stub

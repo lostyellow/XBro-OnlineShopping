@@ -3,14 +3,14 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsList {
-	List<Goods> goodsList = new ArrayList<>();
-
-	public void add(Goods g) {
+public class GoodList {
+	List<Good> goodsList = new ArrayList<Good>();
+	
+	public void add(Good g) {
 		this.goodsList.add(g);
 	}
-
-	public List<Goods> getGoodsList() {
+	
+	public List<Good> getGoodsList() {
 		return this.goodsList;
 	}
 

@@ -1,6 +1,8 @@
 package bean;
 
-public class Goods {
+import java.sql.Date;
+
+public class Good {
 	private Integer id;
 	private Integer sellerId;
 	private String itemName;

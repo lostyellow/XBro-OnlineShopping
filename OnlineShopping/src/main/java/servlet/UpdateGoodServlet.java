@@ -10,17 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 
-import com.jspsmart.upload.File;
-import com.jspsmart.upload.Request;
-import com.jspsmart.upload.SmartUpload;
-
-import bean.Goods;
-import bean.GoodsList;
-import bean.User;
-import dao.GoodsDao;
+import dao.GoodDao;
 import dao.UserDao;
-import dao.impl.GoodsDaoImpl;
+import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
+import bean.Good;
+import bean.GoodList;
+import bean.User;
 
 /**
  * Servlet implementation class UpdateGoodServlet
@@ -65,15 +61,15 @@ public class UpdateGoodServlet extends HttpServlet {
 			Request suRequest = su.getRequest();
 
 			int seller_id = ud.findSeller_ID(user);
-
-			Goods good = new Goods();
-
-			String itemName = suRequest.getParameter("name");
-			String itemDescription = suRequest.getParameter("detail");
-			String imgURL = url;
-			Float price = Float.parseFloat(suRequest.getParameter("price"));
-			String number = suRequest.getParameter("batch");//生产批次号
-			String date = suRequest.getParameter("date");//有效期
+			
+			Good good = new Good();
+			
+			String itemName = request.getParameter("name");
+			String itemDescription = request.getParameter("detail");
+			String imgURL = "/OnlineShopping/src/main/webapp/img/yp.jpg";
+			Float price = Float.parseFloat(request.getParameter("price"));
+			String number = request.getParameter("batch");//生产批次号
+			String date = request.getParameter("date");//有效期
 			Boolean isPres;
 			Boolean isFrozen;
 			if(suRequest.getParameter("option3").equals("yes")) {
@@ -103,11 +99,11 @@ public class UpdateGoodServlet extends HttpServlet {
 			//product_id = ud.findProduct_ID(seller_id, old_good);
 
 			// 以下是基线内获取单个商品的id，若有多个商品则获取的是第一个
-			GoodsDao gd = new GoodsDaoImpl();
-			GoodsList gl = gd.findAllGoods();
+			GoodDao gd = new GoodDaoImpl();
+			GoodList gl = gd.findAllGoods();
 			product_id = gl.getGoodsList().get(0).getId();
-
-			ud.updateGoods(good, product_id);
+			
+			gd.updateGoods(good, product_id);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception

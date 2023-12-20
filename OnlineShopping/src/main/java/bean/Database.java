@@ -17,6 +17,6 @@ public class Database {
 
 	public static void initUsers() {
 		User su = new User(UserName, Password);
-		Users.users.add(su);
+		UserList.users.add(su);
 	}
 }

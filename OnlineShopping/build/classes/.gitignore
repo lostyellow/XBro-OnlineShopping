@@ -1,2 +1,6 @@
-/servlet/
+/auto/
+/bean/
 /dao/
+/junit/
+/servlet/
+/test/

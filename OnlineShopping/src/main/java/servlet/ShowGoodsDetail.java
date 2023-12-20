@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.Goods;
-import dao.GoodsDao;
-import dao.impl.GoodsDaoImpl;
+import bean.Good;
+import bean.GoodList;
+import dao.GoodDao;
+import dao.impl.GoodDaoImpl;
 
 /**
  * Servlet implementation class ShowGoodsDetail
@@ -39,8 +40,8 @@ public class ShowGoodsDetail extends HttpServlet {
 
 	private void showDetail(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			GoodsDao gd = new GoodsDaoImpl();
-			Goods g = new Goods();
+			GoodDao gd = new GoodDaoImpl();
+			Good g = new Good();
 			String id = request.getParameter("id");
 			g = gd.findGoods(Integer.parseInt(id));
 			request.getSession().setAttribute("goods", g);
