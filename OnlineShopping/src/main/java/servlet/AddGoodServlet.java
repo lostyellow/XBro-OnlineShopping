@@ -71,12 +71,12 @@ public class AddGoodServlet extends HttpServlet {
 			
 			Good good = new Good();
 			
-			String itemName = request.getParameter("name");
-			String itemDescription = request.getParameter("detail");
-			String imgURL = "./img/yp.png";
-			Float price = Float.parseFloat(request.getParameter("price"));
-			String number = request.getParameter("batch");//生产批次号
-			String date = request.getParameter("date");//有效期
+			String itemName = suRequest.getParameter("name");
+			String itemDescription = suRequest.getParameter("detail");
+			String imgURL = url;
+			Float price = Float.parseFloat(suRequest.getParameter("price"));
+			String number = suRequest.getParameter("batch");//生产批次号
+			String date = suRequest.getParameter("date");//有效期
 			Boolean isPres;
 			Boolean isFrozen = false;
 			if(suRequest.getParameter("option3").equals("yes")) {

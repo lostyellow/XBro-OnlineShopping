@@ -64,7 +64,7 @@
 				List<Good> goodList = gl.getGoodsList();
 				Good g = goodList.get(0);
 	        %>
-				<form action="AddGoodServlet" method="post" enctype="multipart/form-data">
+				<form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
 					上传图片: <input type="file" name="picture" />
 		            <div class="discribe">
 		                <p>商品名称:<input type="text" name="name" value=<%=g.getItemName() %>></p>
@@ -93,7 +93,7 @@
 		                <input type="submit" value="修改"><input type="submit" formaction="DeleteGoodServlet" value="下架">
 		            </div>
 		        </form>
-	        <%}else{ %>
+	        <%}/*else{*/ %>
 	        <div class="tianjia">
                 <form action="AddGoodServlet" method="post" enctype="multipart/form-data">
 					上传图片: <input type="file" name="picture" />
@@ -105,7 +105,7 @@
 	                 <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
 	                 <p>商品价格:<input type="text" name="price"></p>
 	                 <%
-	                 	if(!gd.anyForSale()){
+	                 	if(/*!gd.anyForSale()*/true){
 	                 %>
 	                 <input type="submit" value="上架">
 	                 <%
@@ -115,7 +115,7 @@
 	                 <%} %>
 	             </div>
 	            </form>
-	            <%} %>
+	            <%/*}*/ %>
 	        </div>
 	    </div>
 	    <div class="sidebar"></div>
