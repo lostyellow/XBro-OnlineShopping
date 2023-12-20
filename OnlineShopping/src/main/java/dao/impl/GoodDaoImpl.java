@@ -191,7 +191,7 @@ public class GoodDaoImpl implements GoodDao {
 			
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "update drugs "
-			+ "set inventory = 0 "
+			+ "set inventory = inventory - 1 "
 			+ "where product_id = ?";
 		
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -227,6 +227,45 @@ public class GoodDaoImpl implements GoodDao {
 			rs.close();
 			
 			return res;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean isSoldOut(int product_id) {
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select inventory from drugs where product_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, product_id);
+			ResultSet rs = ps.executeQuery();
+			
+			boolean SoldOut;
+			int inventory = 1;
+			try {
+				rs.next();
+				inventory = rs.getInt("inventory");
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			if (inventory == 0) {
+				SoldOut = true;
+			}else {
+				SoldOut = false;
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return SoldOut;
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -32,6 +32,9 @@ public class ProcessOrderStatusServlet extends HttpServlet {
 		TransactionDao td = new TransactionDaoImpl();
 		td.closedeal(product_id, transaction_id);
 		gd.sell(product_id);
+		if(gd.isSoldOut(product_id)) {
+			gd.deleteGoods(product_id);
+		}
 		response.sendRedirect("back_stage.jsp");
 	}
     

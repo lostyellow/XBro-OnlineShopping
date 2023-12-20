@@ -54,6 +54,8 @@ public interface GoodDao {
 	 * 用于在基线判断是否允许上新商品（逻辑为inventory<>0）
 	 * **/
 	public boolean anyForSale();
+	
+	public boolean isSoldOut(int product_id);
 
 	public void takeOnGood(int product_id);
 	
