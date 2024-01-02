@@ -48,33 +48,6 @@ public class UserDaoImpl implements UserDao{
 			e.printStackTrace();
 		}
 	}
-	
-	public void userRegister(User user) {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-			
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "insert into users(username,password,name,id_card,sex,tele,user_group,address) values(?,?,?,?,?,?,?,?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getUserName());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setString(4, user.getId_card());
-			ps.setString(5, user.getSex());
-			ps.setString(6, user.getTele());
-			ps.setString(7, "user");
-			ps.setString(8, user.getAddress());
-			
-			ps.executeUpdate();
-			
-			ps.close();
-			conn.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public UserList findAll() {
@@ -241,9 +214,8 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select username from users where user_group = ?";
+			String sql = "select username from users";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "seller");
 			ResultSet rs = ps.executeQuery();
 			
 			String exist = "";

@@ -41,6 +41,7 @@ body img{
 }
 
 .main-content table{
+    position: fixed;
     margin-top: 20px;
 }
 
@@ -101,3 +102,38 @@ tr td input{
     color: #336d94;
 }
 
+.register{
+    width: 150px;
+    height: 70px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius:5px ;
+    font-size: 20px;
+    background-color: #87e8e0;
+    line-height: 70px;
+    text-align: center;
+    list-style: none;
+    color: #3498db;
+}
+
+.nav li:hover{
+    cursor: pointer;
+}
+
+.default{
+    background-color:#5696ff;
+    color:#fefeff;
+    cursor: pointer;
+}
+
+.regiseter a{
+    text-decoration: none;
+    color: #3498db;
+}
+
+#business-information{
+    display: block;
+}
+
+#user-information{
+    display: none;
+}

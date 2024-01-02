@@ -241,9 +241,8 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select username from users where user_group = ?";
+			String sql = "select username from users";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "seller");
 			ResultSet rs = ps.executeQuery();
 			
 			String exist = "";

@@ -36,8 +36,8 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String method = request.getParameter("method");
 		if ("business".equals(method)) {
-			System.out.println("-----------------111111");
 			businessRegister(request, response);
+			System.out.println("-----------------111111");
 		} else if ("user".equals(method)) {
 			userRegister(request, response);
 		}

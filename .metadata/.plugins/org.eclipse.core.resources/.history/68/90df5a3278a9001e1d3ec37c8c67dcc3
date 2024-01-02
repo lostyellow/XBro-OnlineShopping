@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "insert into users(username,password,name,id_card,sex,tele,user_group,address) values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into users(username,password,name,id_card,sex,tele,e_mail,user_group,birth) values(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getPassword());
@@ -63,8 +63,9 @@ public class UserDaoImpl implements UserDao{
 			ps.setString(4, user.getId_card());
 			ps.setString(5, user.getSex());
 			ps.setString(6, user.getTele());
-			ps.setString(7, "user");
-			ps.setString(8, user.getAddress());
+			ps.setString(7, user.getE_mail());
+			ps.setString(8, "seller");
+			ps.setString(9, user.getBirth());
 			
 			ps.executeUpdate();
 			
@@ -241,9 +242,8 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select username from users where user_group = ?";
+			String sql = "select username from users";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "seller");
 			ResultSet rs = ps.executeQuery();
 			
 			String exist = "";
