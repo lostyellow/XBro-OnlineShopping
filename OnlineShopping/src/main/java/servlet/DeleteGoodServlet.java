@@ -1,19 +1,18 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.Goods;
-import bean.GoodsList;
+import bean.Good;
+import bean.GoodList;
 import bean.User;
-import dao.GoodsDao;
+import dao.GoodDao;
 import dao.UserDao;
-import dao.impl.GoodsDaoImpl;
+import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
 
 /**
@@ -22,7 +21,7 @@ import dao.impl.UserDaoImpl;
 @WebServlet("/DeleteGoodServlet")
 public class DeleteGoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,7 +33,6 @@ public class DeleteGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		deleteGood(request,response);
@@ -46,14 +44,14 @@ public class DeleteGoodServlet extends HttpServlet {
 			User user = new User();
 			user = (User)request.getSession().getAttribute("curUser");
 			UserDao ud = new UserDaoImpl();
-
+			
 			int seller_id = ud.findSeller_ID(user);
-
-			GoodsDao gd = new GoodsDaoImpl();
-			GoodsList gl = gd.findForSaleGoods();
-			Goods old_good = gl.getGoodsList().get(0);
-			int product_id = ud.findProduct_ID(seller_id, old_good);
-			ud.deleteGoods(product_id);
+			
+			GoodDao gd = new GoodDaoImpl();
+			GoodList gl = gd.findForSaleGoods();
+			Good old_good = gl.getGoodsList().get(0);
+			int product_id = gd.findProduct_ID(seller_id, old_good);
+			gd.deleteGoods(product_id);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -64,7 +62,6 @@ public class DeleteGoodServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

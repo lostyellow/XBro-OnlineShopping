@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealList {
-	List<Deal> dealList = new ArrayList<>();
-
+	List<Deal> dealList = new ArrayList<Deal>();
+	
 	public void add(Deal d) {
 		this.dealList.add(d);
 	}

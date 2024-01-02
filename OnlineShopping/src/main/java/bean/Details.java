@@ -67,6 +67,6 @@ public class Details {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
+	
+	
 }

@@ -1,3 +1,9 @@
+<%@page import="dao.TransactionDao"%>
+<%@page import="dao.impl.TransactionDaoImpl"%>
+<%@page import="dao.impl.OrderDaoImpl"%>
+<%@page import="dao.OrderDao"%>
+<%@page import="dao.impl.GoodDaoImpl"%>
+<%@page import="dao.GoodDao"%>
 <%@page import="dao.impl.UserDaoImpl"%>
 <%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -32,7 +38,10 @@
                 	int product_id = Integer.parseInt(request.getParameter("product_id"));
                		int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
                     UserDao ud = new UserDaoImpl();
-                    Details d = ud.findDetails(transaction_id); 
+                    GoodDao gd = new GoodDaoImpl();
+                    TransactionDao td = new TransactionDaoImpl();
+                    OrderDao od = new OrderDaoImpl();
+                    Details d = od.findDetails(transaction_id); 
                     //session.setAttribute("details", d);
                 %>
                 <p><strong>交易时间：</strong><%=d.getAppointment_time()%></p>
@@ -44,7 +53,7 @@
                 <%
                 	String status = String.valueOf(request.getParameter("status"));
                 	if(status.equals("wait")){
-                		if(ud.IsExistIngDeal(product_id)){
+                		if(td.IsExistIngDeal(product_id)){
                 			%><input type="button" disabled="disabled" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%
                 		}else{
                 			%><input type="button" value="同意" onclick="window.location.href='AgreeServlet?transaction_id=<%=transaction_id %>&product_id=<%=product_id %>'" ><%

@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Objects;
+
 public class Buyer {
 	private int id;
 	private String appointment_time;
@@ -9,7 +11,7 @@ public class Buyer {
 	private String buyer_identification;
 	private String buyer_phone_number;
 	private String text;
-
+	
 	public Buyer() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,7 +22,7 @@ public class Buyer {
 				+ buyer_name + ", buyer_gender=" + buyer_gender + ", buyer_identification=" + buyer_identification
 				+ ", buyer_phone_number=" + buyer_phone_number + ", text=" + text + "]";
 	}
-
+	
 	public int getId() {
 		return id;
 	}

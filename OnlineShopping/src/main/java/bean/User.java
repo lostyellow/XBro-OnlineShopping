@@ -9,11 +9,11 @@ public class User {
 	private String Tele;
 	private String E_mail;
 	private String Birth;
-
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public User(String UserName, String Password) {
 		this.UserName = UserName;
 		this.Password = Password;
@@ -82,6 +82,6 @@ public class User {
 	public void setBirth(String birth) {
 		Birth = birth;
 	}
-
-
+	
+	
 }
