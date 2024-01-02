@@ -352,7 +352,7 @@ public class GoodDaoImpl implements GoodDao {
 			String sql = "insert into drugs"
 					+ "(seller_id,product_name,product_description,product_image,product_price,"
 					+ "batch_number,expiration_date,prescription_required,is_frozen,inventory) "
-					+ "values(?,?,?,?,?,?,?,?,?,1)";
+					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, seller_id);
 			ps.setString(2, good.getItemName());
@@ -363,6 +363,7 @@ public class GoodDaoImpl implements GoodDao {
 			ps.setString(7, good.getDate());
 			ps.setBoolean(8, good.getIsPres());
 			ps.setBoolean(9, good.getIsFrozen());
+			ps.setInt(10, good.getInventory());
 			
 			ps.executeUpdate();
 			

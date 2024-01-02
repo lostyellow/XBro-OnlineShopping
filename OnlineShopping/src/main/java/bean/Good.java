@@ -13,6 +13,7 @@ public class Good {
 	private String date;//有效期
 	private Boolean isPres;//是否为处方药
 	private Boolean isFrozen;//是否被冻结
+	private Integer inventory;
 	
 	
 	public Integer getId() {
@@ -75,12 +76,20 @@ public class Good {
 	public void setIsFrozen(Boolean isFrozen) {
 		this.isFrozen = isFrozen;
 	}
+	
+	public Integer getInventory() {
+		return inventory;
+	}
+	public void setInventory(Integer inventory) {
+		this.inventory = inventory;
+	}
 	@Override
 	public String toString() {
 		return "Goods [id=" + id + ", sellerId=" + sellerId + ", itemName=" + itemName + ", itemDescription="
 				+ itemDescription + ", imgURL=" + imgURL + ", price=" + price + ", number=" + number + ", date=" + date
 				+ ", isPres=" + isPres + ", isFrozen=" + isFrozen + "]";
 	}
+
 	
 	
 }

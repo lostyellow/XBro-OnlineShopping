@@ -104,12 +104,13 @@
              </div>
 	            <form action="AddGoodServlet" method="post">
 	             <div class="discribe2">
-	                 <p>商品名称:<input type="text" name="name" ></p>
-	                 <p>商品描述:<input type="text" name="detail" ></p>
-	                 <p>商品生产批次:<input type="text" name="batch" ></p>
-	                 <p>商品有效期:<input type="date" name="date" ></p>
+	                 <p>商品名称:<input type="text" name="name" required></p>
+	                 <p>商品描述:<input type="text" name="detail" required></p>
+	                 <p>商品生产批次:<input type="text" name="batch" required></p>
+	                 <p>商品有效期:<input type="date" name="date" required></p>
 	                 <p>商品是否为处方药：<input type="radio" name="option3" value="yes">是<input type="radio" name="option3" value="no">否</p>
-	                 <p>商品价格:<input type="text" name="price"></p>
+	                 <p>商品价格:<input type="text" name="price" required></p>
+	                 <p>商品数量:<input type="text" name="inventory" required></p>
 	                 <input type="submit" value="上架">
 	             </div>
 	            </form>
