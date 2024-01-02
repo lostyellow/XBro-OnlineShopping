@@ -1,14 +1,17 @@
 package dao.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 import dao.DatabaseDao;
-import java.sql.*;
 
 public class DatabaseDaoImpl implements DatabaseDao {
 	public static final String DRIVER = "org.sqlite.JDBC";
 	public static final String URL = "jdbc:sqlite:xbro.db";
 	public static final String USER = "root";
 	public static final String PWD = "root";
-	
+
 	@Override
 	public void createDB() {
 	    Connection conn = null;

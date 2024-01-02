@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import dao.GoodDao;
 import bean.Good;
@@ -15,13 +14,13 @@ public class GoodDaoImpl implements GoodDao {
 	public static final String URL = "jdbc:sqlite:xbro.db";
 	public static final String USER = "root";
 	public static final String PWD = "root";
-	
+
 	@Override
 	public GoodList findAllGoods() {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -42,11 +41,11 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setIsFrozen(rs.getBoolean("is_frozen"));
 				goodsList.add(goods);
 			}
-			
+
 			ps.close();
 			conn.close();
 			rs.close();
-			
+
 			return goodsList;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -54,13 +53,13 @@ public class GoodDaoImpl implements GoodDao {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public Good findGoods(int product_id) {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs where product_id=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -81,11 +80,11 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setIsPres(rs.getBoolean("prescription_required"));
 				goods.setIsFrozen(rs.getBoolean("is_frozen"));
 			}
-			
+
 			ps.close();
 			conn.close();
 			rs.close();
-			
+
 			return goods;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -99,20 +98,20 @@ public class GoodDaoImpl implements GoodDao {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "update drugs "
 			+ "set is_frozen = ? "
 			+ "where product_id = ?";
-		
+
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, false);
 			ps.setInt(2, product_id);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			conn.close();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -124,7 +123,7 @@ public class GoodDaoImpl implements GoodDao {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs where is_frozen = ? and inventory <> 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -146,11 +145,11 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setIsFrozen(rs.getBoolean("is_frozen"));
 				goodsList.add(goods);
 			}
-			
+
 			ps.close();
 			conn.close();
 			rs.close();
-			
+
 			return goodsList;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -164,109 +163,70 @@ public class GoodDaoImpl implements GoodDao {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "update drugs "
 			+ "set is_frozen = ? "
 			+ "where product_id = ?";
-		
+
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, false);
 			ps.setInt(2, product_id);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			conn.close();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void sell(int product_id) {
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "update drugs "
-			+ "set inventory = inventory - 1 "
+			+ "set inventory = 0 "
 			+ "where product_id = ?";
-		
+
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, product_id);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			conn.close();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	// 仅基线使用
 	@Override
 	public boolean anyForSale() {
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs where inventory <> 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+
 			boolean res;
 			if(rs.next()) res = true;
 			else res = false;
-			
+
 			ps.close();
 			conn.close();
 			rs.close();
-			
+
 			return res;
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean isSoldOut(int product_id) {
-		try {
-			Class.forName(DRIVER);
-			
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select inventory from drugs where product_id = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, product_id);
-			ResultSet rs = ps.executeQuery();
-			
-			boolean SoldOut;
-			int inventory = 1;
-			try {
-				rs.next();
-				inventory = rs.getInt("inventory");
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			if (inventory == 0) {
-				SoldOut = true;
-			}else {
-				SoldOut = false;
-			}
-			
-			ps.close();
-			conn.close();
-			rs.close();
-			
-			return SoldOut;
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -279,7 +239,7 @@ public class GoodDaoImpl implements GoodDao {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
-			
+
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs where inventory <> 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -300,11 +260,11 @@ public class GoodDaoImpl implements GoodDao {
 				goods.setIsFrozen(rs.getBoolean("is_frozen"));
 				goodsList.add(goods);
 			}
-			
+
 			ps.close();
 			conn.close();
 			rs.close();
-			
+
 			return goodsList;
 		} catch (Exception e) {
 			// TODO: handle exception

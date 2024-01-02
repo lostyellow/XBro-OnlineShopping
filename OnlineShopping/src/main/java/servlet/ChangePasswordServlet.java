@@ -1,13 +1,13 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.DealList;
 import bean.User;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
@@ -19,7 +19,7 @@ public class ChangePasswordServlet extends HttpServlet {
 	public ChangePasswordServlet() {
         super();
     }
-	
+
 	protected void verifyOldPwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		User curUser = (User)request.getSession().getAttribute("curUser");
 		String oldPwd = request.getParameter("OldPwd");
@@ -34,11 +34,11 @@ public class ChangePasswordServlet extends HttpServlet {
 					 pbm = "notSameNewPwd";
 				 }else { //都一样去更改密码
 					 UserDao ud = new UserDaoImpl();
-					 int userId = ud.findSeller_ID(curUser); 
+					 int userId = ud.findSeller_ID(curUser);
 					 System.out.println("------------------"+userId);
 					 ud.changePwd(userId, newPwd1);
 					 request.getSession().removeAttribute("curUser");
-					 response.sendRedirect("login.jsp");	
+					 response.sendRedirect("login.jsp");
 					 return;
 				 }
 			}else{//旧密码不一致
@@ -51,6 +51,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		request.getRequestDispatcher("change_password.jsp").forward(request, response);
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
 		if("changepwd".equals(method)) {
@@ -58,6 +59,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");

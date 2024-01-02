@@ -20,6 +20,6 @@ public class UpdateGoodTest {
 			// TODO: handle exception
 			return "failed";
 		}
-		
+
 	}
 }

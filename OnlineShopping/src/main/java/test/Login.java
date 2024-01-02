@@ -1,9 +1,5 @@
 package test;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import bean.User;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 

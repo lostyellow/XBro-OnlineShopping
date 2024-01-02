@@ -13,7 +13,7 @@ public class GoodList {
 	public List<Good> getGoodsList() {
 		return this.goodsList;
 	}
-	
+
 	public int getLength() {
 		return this.goodsList.size();
 	}

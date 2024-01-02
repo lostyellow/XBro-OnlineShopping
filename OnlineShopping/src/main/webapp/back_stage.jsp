@@ -60,14 +60,12 @@
 	        <div class="yp">
 	        <%
 	        	if(gd.anyForSale()){
-	        %>
-	        <%
 	        	GoodList gl = gd.findOnSaleGood();
-     	        List<Good> goodList = gl.getGoodsList();
-     	        Good g = goodList.get(0);
+				List<Good> goodList = gl.getGoodsList();
+				Good g = goodList.get(0);
 	        %>
-	        	<form action="UpdateGoodServlet" method="post">
-		        	<img src="./img/yp.png">
+				<form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
+					上传图片: <input type="file" name="picture" />
 		            <div class="discribe">
 		                <p>商品名称:<input type="text" name="name" value=<%=g.getItemName() %>></p>
 		                <p>商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>></p>
@@ -95,14 +93,10 @@
 		                <input type="submit" value="修改"><input type="submit" formaction="DeleteGoodServlet" value="下架">
 		            </div>
 		        </form>
-	        <%}else{ %>
+	        <%}/*else{*/ %>
 	        <div class="tianjia">
-                <form action="${pageContext.request.contextPath}/fileUpload" method="post" enctype="multipart/form-data">
-					上传图片: <input type="file" name="file" />
-					<input type="submit" value="上传" />
-				</form>
-             </div>
-	            <form action="AddGoodServlet" method="post">
+                <form action="AddGoodServlet" method="post" enctype="multipart/form-data">
+					上传图片: <input type="file" name="picture" />
 	             <div class="discribe2">
 	                 <p>商品名称:<input type="text" name="name" required></p>
 	                 <p>商品描述:<input type="text" name="detail" required></p>
@@ -112,9 +106,14 @@
 	                 <p>商品价格:<input type="text" name="price" required></p>
 	                 <p>商品数量:<input type="text" name="inventory" required></p>
 	                 <input type="submit" value="上架">
+	                 <%
+	                 	}else{
+	                 %>
+	                 <input type="submit" value="已发布商品" disabled>
+	                 <%} %>
 	             </div>
 	            </form>
-	            <%} %>
+	            <%/*}*/ %>
 	        </div>
 	    </div>
 	    <div class="sidebar"></div>
