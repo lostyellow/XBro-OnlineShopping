@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.impl.GoodDaoImpl"%>
+<%@page import="dao.GoodDao"%>
 <%@page import="bean.Good"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,6 +16,8 @@
 <body>
     <%
     	Good g = (Good)session.getAttribute("goods");
+    	GoodDao gd = new GoodDaoImpl();
+    	List<String> pictures = gd.findAllPictures(g.getId());
     %>
     <div class="head">
         <div class="header">
@@ -35,7 +40,7 @@
                 </div>
                 <div class="yp">
                     <div class="photo">
-                        <img src=<%=g.getImgURL() %>>
+                        <img src=<%=pictures.get(0) %>>
                     </div>
                     <div class="discribe">
                         <p>商品名称:<%=g.getItemName() %></p>

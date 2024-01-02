@@ -106,11 +106,6 @@
 	                 <p>商品价格:<input type="text" name="price" required></p>
 	                 <p>商品数量:<input type="text" name="inventory" required></p>
 	                 <input type="submit" value="上架">
-	                 <%
-	                 	}else{
-	                 %>
-	                 <input type="submit" value="已发布商品" disabled>
-	                 <%} %>
 	             </div>
 	            </form>
 	            <%/*}*/ %>

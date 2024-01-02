@@ -87,7 +87,7 @@ public class AddGoodServlet extends HttpServlet {
 
 			good.setItemName(itemName);
 			good.setItemDescription(itemDescription);
-			good.setImgURL(imgURL);
+			// good.setImgURL(imgURL);
 			good.setPrice(price);
 			good.setNumber(number);
 			good.setDate(date);
@@ -95,6 +95,7 @@ public class AddGoodServlet extends HttpServlet {
 			good.setIsFrozen(isFrozen);
 			
 			gd.addGoods(seller_id, good);
+			gd.addGoodPicture(seller_id, imgURL);
 			response.sendRedirect("ShowGoodsList");
 		} catch (Exception e) {
 			// TODO: handle exception

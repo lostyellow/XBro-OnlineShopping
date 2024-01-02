@@ -83,8 +83,8 @@ public class BuyServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		String method = request.getParameter("method");
 		if("submitinfo".equals(method)) {
 			CreatDeal(request, response);

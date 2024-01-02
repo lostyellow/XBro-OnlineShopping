@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.impl.GoodDaoImpl"%>
+<%@page import="dao.GoodDao"%>
 <%@page import="bean.Good"%>
 <%@page import="bean.GoodList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -38,18 +41,16 @@
             <div class="content">
                 <div class="yp">
                 	<%
+                		GoodDao gd = new GoodDaoImpl();
                 		GoodList gl = (GoodList)session.getAttribute("goodsList");
-                	                	                		for(Good g:gl.getGoodsList()){
+                	    for(Good g:gl.getGoodsList()){
+                	    	List<String> pictures = gd.findAllPictures(g.getId());
                 	%>
-                			<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><img src=<%=g.getImgURL()%>></a>
+                			<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><img src=<%=pictures.get(0)%>></a>
                     		<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><p><%=g.getItemName()%></p></a>
                 			<%
                 		}
                 	%>
-                	<!--
-                    <a href="information.jsp"><img src="./img/yp.png"></a>
-                    <a href="information.jsp"><p>商品名称</p></a>
-                    -->
                 </div>
                 <div class="notice">
                     <p>敬情期待...</p>

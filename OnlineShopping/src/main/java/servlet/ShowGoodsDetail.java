@@ -58,8 +58,8 @@ public class ShowGoodsDetail extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 
