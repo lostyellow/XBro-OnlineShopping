@@ -24,5 +24,6 @@ public interface TransactionDao {
 	public DealList findDealsByProduct_id(int product_id);//寻找某个商品的所有订单
 
 	public Boolean IsExistIngDeal(int product_id);
-
+	
+	public DealList findDealsByBuyer_id(int buyer_id);//查看单个用户的所有订单
 }

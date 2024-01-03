@@ -12,4 +12,5 @@ public Boolean checkLogin(String username, String password);//username不能重�
 public int findSeller_ID(User user);//查找卖家ID
 public void changePwd(int userId, String newPwd);//查看旧密码是否正确
 public String findSeller_PWD(String realname, String id_card);//查找卖家密码
+public UserList findBuyer_information();//查看所有注册用户信息
 }

@@ -5,6 +5,8 @@ public class Deal {
 	private String status;
 	private String time;
 	private Float amount;
+	private int buyer_id ;
+	
 	public Integer getProduct_id() {
 		return product_id;
 	}
@@ -36,6 +38,12 @@ public class Deal {
 	public Deal() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public int getBuyer_id() {
+		return buyer_id;
+	}
+	public void setBuyer_id(int buyer_id) {
+		this.buyer_id = buyer_id;
 	}
 	
 	

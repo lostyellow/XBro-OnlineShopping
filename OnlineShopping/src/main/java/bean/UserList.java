@@ -27,4 +27,8 @@ public class UserList {
 		}
 		return false;
 	}
+	
+	public List<User> getUsers(){
+		return this.users;
+	}
 }
