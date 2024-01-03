@@ -89,8 +89,6 @@ GoodList gl = (GoodList) session.getAttribute("goodsList");
             %>
         
     </div>
-    <div class="sidebar">
-    </div>
     <div class="footer">
         <a href="#">关于我们</a>
         <a href="#">联系我们</a>
