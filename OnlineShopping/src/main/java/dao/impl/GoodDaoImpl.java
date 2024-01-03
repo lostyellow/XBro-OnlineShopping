@@ -313,8 +313,8 @@ public class GoodDaoImpl implements GoodDao {
             Connection conn = DriverManager.getConnection(URL);
             String sql = "insert into drugs"
                     + "(seller_id,product_name,product_description,product_price,"
-                    + "batch_number,expiration_date,prescription_required,is_frozen,inventory) "
-                    + "values(?,?,?,?,?,?,?,?,?)";
+                    + "batch_number,expiration_date,prescription_required,is_frozen,inventory,parent_sub_relation_id) "
+                    + "values(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, seller_id);
             ps.setString(2, good.getItemName());
@@ -325,6 +325,7 @@ public class GoodDaoImpl implements GoodDao {
             ps.setBoolean(7, good.getIsPres());
             ps.setBoolean(8, good.getIsFrozen());
             ps.setInt(9, good.getInventory());
+            ps.setInt(10, good.getPSID());
 
             ps.executeUpdate();
 
@@ -370,7 +371,8 @@ public class GoodDaoImpl implements GoodDao {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL);
-            String sql = "delete from drugs where product_id=?";
+//            String sql = "delete from drugs where product_id=?";
+            String sql = "update drugs set inventory = 0 where product_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, product_id);
             ps.executeUpdate();
@@ -491,7 +493,6 @@ public class GoodDaoImpl implements GoodDao {
 				good.setSellerId(rs.getInt("seller_id"));
 				good.setItemName(rs.getString("product_name"));
 				good.setItemDescription(rs.getString("product_description"));
-				good.setImgURL(rs.getString("product_image"));
 				good.setPrice(rs.getFloat("product_price"));
 				good.setNumber(rs.getString("batch_number"));
 				good.setDate(rs.getString("expiration_date"));
@@ -513,35 +514,34 @@ public class GoodDaoImpl implements GoodDao {
 		return null;
 	}
 
+
 	@Override
-	public GoodList selectGoodsByTypes(Boolean medicine_type) {
+	public List<Good> findAllByPSID(int PSID) {
+		// TODO 自动生成的方法存根
 		try {
 			Class.forName(DRIVER);
 			
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs "
-					+"where is_frozen = ? "
-					+"and inventory <> 0 "
-					+"and prescription_required = ?";
+					+"where parent_sub_relation_id = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setBoolean(1, false);
-			ps.setBoolean(2, medicine_type);
+			ps.setInt(1, PSID);
 			ResultSet rs = ps.executeQuery();
 			
-			GoodList goodList = new GoodList();
+			List<Good> goodList = new ArrayList<Good>();
 			while(rs.next()) {
 				Good good = new Good();
 				good.setId(rs.getInt("product_id"));
 				good.setSellerId(rs.getInt("seller_id"));
 				good.setItemName(rs.getString("product_name"));
 				good.setItemDescription(rs.getString("product_description"));
-				good.setImgURL(rs.getString("product_image"));
 				good.setPrice(rs.getFloat("product_price"));
 				good.setNumber(rs.getString("batch_number"));
 				good.setDate(rs.getString("expiration_date"));
 				good.setIsPres(rs.getBoolean("prescription_required"));
 				good.setIsFrozen(rs.getBoolean("is_frozen"));
 				good.setInventory(rs.getInt("inventory"));
+				good.setPSID(rs.getInt("parent_sub_relation_id"));
 				goodList.add(good);
 			}
 			

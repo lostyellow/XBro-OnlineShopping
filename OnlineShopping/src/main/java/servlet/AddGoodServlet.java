@@ -3,8 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +15,10 @@ import com.jspsmart.upload.SmartUpload;
 import com.jspsmart.upload.File;
 import com.jspsmart.upload.Request;
 
+import dao.CategoryDao;
 import dao.GoodDao;
 import dao.UserDao;
-import dao.impl.GoodDaoImpl;
-import dao.impl.UserDaoImpl;
-import bean.Good;
-import bean.User;
-import dao.UserDao;
+import dao.impl.CategoryDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
 import bean.Good;
@@ -94,6 +89,17 @@ public class AddGoodServlet extends HttpServlet {
             } else {
                 isPres = false;
             }
+            
+            int parentID = 1;
+            if(!isPres) {
+            	parentID = 2;
+            }
+            String subCategory = suRequest.getParameter("subCategory");
+            
+            CategoryDao cd = new CategoryDaoImpl();
+            int subID = cd.findSubIDBySubName(subCategory);
+            int PSID = cd.findPSIDByPIDAndSID(parentID, subID);
+            
             int inventory = Integer.parseInt(suRequest.getParameter("inventory"));
 
             good.setItemName(itemName);
@@ -105,6 +111,7 @@ public class AddGoodServlet extends HttpServlet {
             good.setIsPres(isPres);
             good.setIsFrozen(isFrozen);
             good.setInventory(inventory);
+            good.setPSID(PSID);
 
             gd.addGoods(seller_id, good);
             int product_id = gd.findProduct_ID(seller_id, good);
