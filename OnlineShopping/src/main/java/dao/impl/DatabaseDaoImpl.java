@@ -105,6 +105,58 @@ public class DatabaseDaoImpl implements DatabaseDao {
                     ");";
             stmt.executeUpdate(sqlParentCategory);
 
+            //创建 SubCategory 表
+            String sqlSubCategory = "CREATE TABLE IF NOT EXISTS SubCategory (" +
+                    "    SubID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "    SubName TEXT UNIQUE NOT NULL" +
+                    ");";
+            stmt.executeUpdate(sqlSubCategory);
+            
+            //创建 ParentSubRelation表
+            String sqlParentSubRelation = "CREATE TABLE IF NOT EXISTS ParentSubRelation (" +
+                    "    ParentSubID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "    ParentID INTEGER," +
+                    "    SubID INTEGER," +
+                    "    FOREIGN KEY (ParentID) REFERENCES ParentCategory(ParentID)," +
+                    "    FOREIGN KEY (SubID) REFERENCES SubCategory(SubID)" +
+                    ");";
+            stmt.executeUpdate(sqlParentSubRelation);
+
+            //插入数据
+            String insertParent1 = "INSERT INTO ParentCategory (ParentName) VALUES ('处方药');";
+            stmt.executeUpdate(insertParent1);
+
+            String insertParent2 = "INSERT INTO ParentCategory (ParentName) VALUES ('非处方药（OTC）');";
+            stmt.executeUpdate(insertParent2);
+
+            // 处方药的子类
+            String[] subCategoryPrescription = {"心血管药物", "抗生素", "抗抑郁药", "镇痛药"};
+            for (String sub : subCategoryPrescription) {
+                String sql = "INSERT INTO SubCategory (SubName) VALUES ('" + sub + "');";
+                stmt.executeUpdate(sql);
+            }
+
+            // 非处方药（OTC）的子类
+            String[] subCategoryOTC = {"感冒和流感", "止痛药", "消化系统药物", "皮肤护理药膏"};
+            for (String sub : subCategoryOTC) {
+                String sql = "INSERT INTO SubCategory (SubName) VALUES ('" + sub + "');";
+                stmt.executeUpdate(sql);
+            }
+
+			// 假设处方药的 ParentID 是 1，非处方药的 ParentID 是 2
+			// 假设子类 ID 从 1 开始，按照插入顺序递增
+			int[] prescriptionSubIDs = {1, 2, 3, 4}; // 对应处方药的子类
+			for (int subID : prescriptionSubIDs) {
+			    String sql = "INSERT INTO ParentSubRelation (ParentID, SubID) VALUES (1, " + subID + ");";
+			    stmt.executeUpdate(sql);
+			}
+			
+			int[] otcSubIDs = {5, 6, 7, 8}; // 对应非处方药（OTC）的子类
+			for (int subID : otcSubIDs) {
+			    String sql = "INSERT INTO ParentSubRelation (ParentID, SubID) VALUES (2, " + subID + ");";
+			    stmt.executeUpdate(sql);
+			}
+
 
             stmt.close();
             conn.close();
