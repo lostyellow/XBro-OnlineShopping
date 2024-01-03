@@ -59,9 +59,7 @@
                 		GoodList gl = (GoodList)session.getAttribute("goodsList");
                 	                	                		for(Good g:gl.getGoodsList()){
                 	%>
-                			<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">
-                        <img src=<%=pictures.get(0)%>>
-                    </a>
+                			<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><img src=<%=g.getImgURL()%>></a>
                     		<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><p><%=g.getItemName()%></p></a>
                 			<%
                 		}
