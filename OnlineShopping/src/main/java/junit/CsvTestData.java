@@ -7,121 +7,121 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
-import bean.Goods;
+import bean.Good;
 
 public class CsvTestData {
-	private String Filename;
+    private String Filename;
 
-	public CsvTestData(String filename) {
-		Filename = filename;// TODO Auto-generated constructor stub
-	}
+    public CsvTestData(String filename) {
+        Filename = filename;// TODO Auto-generated constructor stub
+    }
 
-	public String getFilename() {
-		return Filename;
-	}
+    public String getFilename() {
+        return Filename;
+    }
 
-	public void setFilename(String filename) {
-		Filename = filename;
-	}
+    public void setFilename(String filename) {
+        Filename = filename;
+    }
 
-	public List<Goods> addGoodReader(){
-		List<Goods> goodList = new ArrayList<>();
+    public List<Good> addGoodReader() {
+        List<Good> goodList = new ArrayList<Good>();
 
-		try {
-			FileInputStream fis = new FileInputStream(Filename);
-			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
-			CSVReader csvreader = new CSVReader(isr);
+        try {
+            FileInputStream fis = new FileInputStream(Filename);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            CSVReader csvreader = new CSVReader(isr);
 
-			Goods g = null;
-			String[] nextLine;
+            Good g = null;
+            String[] nextLine;
 
-			csvreader.readNext();
+            csvreader.readNext();
 
-			while(null != (nextLine = csvreader.readNext())) {
-				g = new Goods();
-				String itemName = nextLine[0];
-				String itemDescription = nextLine[1];
-				String imgURL = nextLine[2];
-				String number = nextLine[3];
-				String date = nextLine[4];
-				Boolean isPres;
+            while (null != (nextLine = csvreader.readNext())) {
+                g = new Good();
+                String itemName = nextLine[0];
+                String itemDescription = nextLine[1];
+                String imgURL = nextLine[2];
+                String number = nextLine[3];
+                String date = nextLine[4];
+                Boolean isPres;
 
-				if(nextLine[5].equals("true")) {
-					isPres = true;
-				}else {
-					isPres = false;
-				}
-				Float price = Float.parseFloat(nextLine[6]);
-				String expected = nextLine[7];
+                if (nextLine[5].equals("true")) {
+                    isPres = true;
+                } else {
+                    isPres = false;
+                }
+                Float price = Float.parseFloat(nextLine[6]);
+                String expected = nextLine[7];
 
-				g.setItemName(itemName);
-				g.setItemDescription(itemDescription);
-				g.setImgURL(imgURL);
-				g.setNumber(number);
-				g.setDate(date);
-				g.setIsPres(isPres);
-				g.setIsFrozen(false);
-				g.setPrice(price);
+                g.setItemName(itemName);
+                g.setItemDescription(itemDescription);
+                g.setImgURL(imgURL);
+                g.setNumber(number);
+                g.setDate(date);
+                g.setIsPres(isPres);
+                g.setIsFrozen(false);
+                g.setPrice(price);
 
-				goodList.add(g);
-			}
-			isr.close();
-			fis.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return goodList;
-	}
+                goodList.add(g);
+            }
+            isr.close();
+            fis.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return goodList;
+    }
 
-	public List<String> expectedReader(){
-		List<String> expectedList = new ArrayList<>();
+    public List<String> expectedReader() {
+        List<String> expectedList = new ArrayList<>();
 
-		try {
-			FileInputStream fis = new FileInputStream(Filename);
-			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
-			CSVReader csvreader = new CSVReader(isr);
+        try {
+            FileInputStream fis = new FileInputStream(Filename);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            CSVReader csvreader = new CSVReader(isr);
 
-			String[] nextLine;
-			String[] header = csvreader.readNext();
-			int columnIndex = -1;
+            String[] nextLine;
+            String[] header = csvreader.readNext();
+            int columnIndex = -1;
 
-			for(int i = 0;i<header.length;i++) {
-				if (header[i].equals("expected")) {
-		            columnIndex = i;
-		            break;
-		        }
-			}
+            for (int i = 0; i < header.length; i++) {
+                if (header[i].equals("expected")) {
+                    columnIndex = i;
+                    break;
+                }
+            }
 
-			while(null!=(nextLine = csvreader.readNext())) {
-				String expected = nextLine[columnIndex];
+            while (null != (nextLine = csvreader.readNext())) {
+                String expected = nextLine[columnIndex];
 
-				expectedList.add(expected);
-			}
-			isr.close();
-			fis.close();
+                expectedList.add(expected);
+            }
+            isr.close();
+            fis.close();
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return expectedList;
-	}
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return expectedList;
+    }
 
-	public static void main(String[] args) {
-		List<Goods> goodList = new ArrayList<>();
-		List<String> expectedList = new ArrayList<>();
+    public static void main(String[] args) {
+        List<Good> goodList = new ArrayList<Good>();
+        List<String> expectedList = new ArrayList<String>();
 
-		CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
+        CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
 
-		goodList.addAll(td.addGoodReader());
-		expectedList.addAll(td.expectedReader());
+        goodList.addAll(td.addGoodReader());
+        expectedList.addAll(td.expectedReader());
 
-		for (Goods good : goodList) {
-			System.out.println(good.toString());
-		}
-		for (String string : expectedList) {
-			System.out.println(string);
-		}
-	}
+        for (Good good : goodList) {
+            System.out.println(good.toString());
+        }
+        for (String string : expectedList) {
+            System.out.println(string);
+        }
+    }
 }
