@@ -20,81 +20,81 @@ import bean.Good;
 
 @WebServlet("/BuyServlet")
 public class BuyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public BuyServlet() {
         super();
     }
 
     protected void CreatDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	try {
-    		Good g = (Good)request.getSession().getAttribute("goods");
-			String time = request.getParameter("date");
+        try {
+            Good g = (Good) request.getSession().getAttribute("goods");
+            String time = request.getParameter("date");
 
-			Deal deal = new Deal();
-			deal.setProduct_id(g.getId());
-			deal.setStatus("wait");
-			deal.setTime(time);
-			deal.setAmount(g.getPrice());
-			
+            Deal deal = new Deal();
+            deal.setProduct_id(g.getId());
+            deal.setStatus("wait");
+            deal.setTime(time);
+            deal.setAmount(g.getPrice());
+
 //			UserDao ud = new UserDaoImpl();
-			TransactionDao td = new TransactionDaoImpl();
-			
-			td.purchase(deal);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
+            TransactionDao td = new TransactionDaoImpl();
+
+            td.purchase(deal);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
 
     protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	try {
-    		UserDao ud = new UserDaoImpl();
-    		TransactionDao td = new TransactionDaoImpl();
-    		OrderDao od = new OrderDaoImpl();
-    		Good g = (Good)request.getSession().getAttribute("goods");
-    		
-    		Integer id = td.findTrans_ID(g.getId(), "wait");
-			String realname = request.getParameter("realname");
-			String address = request.getParameter("address");
-			String dealtime = request.getParameter("date");
-			String idcard = request.getParameter("idcard");
-			String phone = request.getParameter("phone");
-			String gender = request.getParameter("option");
-			String remark =request.getParameter("remark");
+        try {
+            UserDao ud = new UserDaoImpl();
+            TransactionDao td = new TransactionDaoImpl();
+            OrderDao od = new OrderDaoImpl();
+            Good g = (Good) request.getSession().getAttribute("goods");
 
-			Buyer buyer = new Buyer();
-			buyer.setId(id);
-			buyer.setBuyer_name(realname);
-			buyer.setAddress(address);
-			buyer.setAppointment_time(dealtime);
-			buyer.setBuyer_identification(idcard);
-			buyer.setBuyer_gender(gender);
-			buyer.setBuyer_phone_number(phone);
-			buyer.setText(remark);
-			
-			od.submitdeal(buyer);
-			response.sendRedirect("ShowGoodsList");
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
+            Integer id = td.findTrans_ID(g.getId(), "wait");
+            String realname = request.getParameter("realname");
+            String address = request.getParameter("address");
+            String dealtime = request.getParameter("date");
+            String idcard = request.getParameter("idcard");
+            String phone = request.getParameter("phone");
+            String gender = request.getParameter("option");
+            String remark = request.getParameter("remark");
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		String method = request.getParameter("method");
-		if("submitinfo".equals(method)) {
-			CreatDeal(request, response);
-			SubmitInformation(request, response);
-		}
-	}
+            Buyer buyer = new Buyer();
+            buyer.setId(id);
+            buyer.setBuyer_name(realname);
+            buyer.setAddress(address);
+            buyer.setAppointment_time(dealtime);
+            buyer.setBuyer_identification(idcard);
+            buyer.setBuyer_gender(gender);
+            buyer.setBuyer_phone_number(phone);
+            buyer.setText(remark);
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+            od.submitdeal(buyer);
+            response.sendRedirect("ShowGoodsList");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        String method = request.getParameter("method");
+        if ("submitinfo".equals(method)) {
+            CreatDeal(request, response);
+            SubmitInformation(request, response);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 }

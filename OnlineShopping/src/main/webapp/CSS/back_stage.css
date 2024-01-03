@@ -1,17 +1,18 @@
 
-.main{
+.main {
     background-color: white;
     left: 0;
     right: 0;
     bottom: 0;
     height: 1040px;
     width: 1503px;
-    position:relative ;
+    position: relative;
     border: 1px rgb(224, 224, 224) solid;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-.head{
+
+.head {
     border: 1px rgb(224, 224, 224) solid;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -22,7 +23,8 @@
     width: 1503px;
     background-color: white;
 }
-.header{
+
+.header {
     top: 0;
     left: 0;
     margin-left: 1100px;
@@ -32,27 +34,31 @@
     margin-bottom: 5px;
     width: 400px;
 }
-.header a{
+
+.header a {
     color: black;
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;
 }
-.navbar{
+
+.navbar {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     height: 150px;
     width: 1502px;
     background-color: white;
 }
-.navbar img{
+
+.navbar img {
     margin-top: 25px;
     margin-left: 300px;
     height: 100px;
     width: 100px;
 }
-.menu{
+
+.menu {
     position: absolute;
     left: 0;
     top: 145px;
@@ -60,7 +66,8 @@
     width: 200px;
     background-color: white;
 }
-.content{
+
+.content {
     position: absolute;
     left: 249px;
     top: 145px;
@@ -68,7 +75,8 @@
     width: 1000px;
     background-color: white;
 }
-.sidebar{
+
+.sidebar {
     position: absolute;
     left: 1298px;
     top: 145px;
@@ -76,7 +84,8 @@
     width: 200px;
     background-color: white;
 }
-.footer{
+
+.footer {
     position: absolute;
     left: 0;
     top: 980px;
@@ -87,31 +96,36 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-.footer a{
+
+.footer a {
     font-size: 12px;
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;
 }
-.content .shop{
+
+.content .shop {
     border: 1px rgb(224, 224, 224) solid;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     height: 40px;
     width: 1000px;
     border-radius: 20px;
 }
-.content .shop span{
+
+.content .shop span {
     font-size: 30px;
     font-weight: bolder;
     margin-right: 200px;
     margin-left: 460px;
 }
-.content .shop a{
+
+.content .shop a {
     text-decoration: none;
 }
-.content .yp{
+
+.content .yp {
     border: 1px rgb(224, 224, 224) solid;
     border-radius: 10px;
     position: absolute;
@@ -120,18 +134,21 @@
     height: 700px;
     width: 1000px;
 }
-.yp .photo{
+
+.yp .photo {
     position: absolute;
     left: 20px;
     top: 20px;
     height: 300px;
     width: 300px;
 }
-.yp img{
+
+.yp img {
     height: 300px;
     width: 300px;
 }
-.yp .discribe{
+
+.yp .discribe {
     position: absolute;
     left: 340px;
     top: 20px;
@@ -139,7 +156,8 @@
     width: 600px;
     text-align: left;
 }
-.yp .tianjia{
+
+.yp .tianjia {
     position: absolute;
     left: 20px;
     top: 20px;
@@ -147,7 +165,8 @@
     width: 300px;
     border: 1px rgb(224, 224, 224) solid;
 }
-.yp .discribe2{
+
+.yp .discribe2 {
     position: absolute;
     left: 340px;
     top: 20px;
@@ -155,11 +174,13 @@
     width: 600px;
     text-align: left;
 }
-.foot{
+
+.foot {
     margin-top: 20px;
     text-align: center;
 }
-.foot a{
+
+.foot a {
     font-size: 12px;
     text-decoration: none;
     margin-left: 10px;

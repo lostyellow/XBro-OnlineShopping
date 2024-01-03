@@ -7,16 +7,16 @@ package bean;
  *
  * **/
 public class Database {
-	private static String UserName = "TestStore";
-	private static String Password = "123456abc";
+    private static String UserName = "TestStore";
+    private static String Password = "123456abc";
 
-	public String itemName;
-	public String itemDiscription;
-	public String imgURL;
-	public Long price;
+    public String itemName;
+    public String itemDiscription;
+    public String imgURL;
+    public Long price;
 
-	public static void initUsers() {
-		User su = new User(UserName, Password);
-		UserList.users.add(su);
-	}
+    public static void initUsers() {
+        User su = new User(UserName, Password);
+        UserList.users.add(su);
+    }
 }

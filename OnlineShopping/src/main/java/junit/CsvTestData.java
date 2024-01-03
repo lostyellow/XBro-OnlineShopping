@@ -10,118 +10,118 @@ import au.com.bytecode.opencsv.CSVReader;
 import bean.Good;
 
 public class CsvTestData {
-	private String Filename;
+    private String Filename;
 
-	public CsvTestData(String filename) {
-		Filename = filename;// TODO Auto-generated constructor stub
-	}
+    public CsvTestData(String filename) {
+        Filename = filename;// TODO Auto-generated constructor stub
+    }
 
-	public String getFilename() {
-		return Filename;
-	}
+    public String getFilename() {
+        return Filename;
+    }
 
-	public void setFilename(String filename) {
-		Filename = filename;
-	}
-	
-	public List<Good> addGoodReader(){
-		List<Good> goodList = new ArrayList<Good>();
-		
-		try {
-			FileInputStream fis = new FileInputStream(Filename);
-			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
-			CSVReader csvreader = new CSVReader(isr);
-			
-			Good g = null;
-			String[] nextLine;
+    public void setFilename(String filename) {
+        Filename = filename;
+    }
 
-			csvreader.readNext();
+    public List<Good> addGoodReader() {
+        List<Good> goodList = new ArrayList<Good>();
 
-			while(null != (nextLine = csvreader.readNext())) {
-				g = new Good();
-				String itemName = nextLine[0];
-				String itemDescription = nextLine[1];
-				String imgURL = nextLine[2];
-				String number = nextLine[3];
-				String date = nextLine[4];
-				Boolean isPres;
+        try {
+            FileInputStream fis = new FileInputStream(Filename);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            CSVReader csvreader = new CSVReader(isr);
 
-				if(nextLine[5].equals("true")) {
-					isPres = true;
-				}else {
-					isPres = false;
-				}
-				Float price = Float.parseFloat(nextLine[6]);
-				String expected = nextLine[7];
+            Good g = null;
+            String[] nextLine;
 
-				g.setItemName(itemName);
-				g.setItemDescription(itemDescription);
-				g.setImgURL(imgURL);
-				g.setNumber(number);
-				g.setDate(date);
-				g.setIsPres(isPres);
-				g.setIsFrozen(false);
-				g.setPrice(price);
+            csvreader.readNext();
 
-				goodList.add(g);
-			}
-			isr.close();
-			fis.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return goodList;
-	}
+            while (null != (nextLine = csvreader.readNext())) {
+                g = new Good();
+                String itemName = nextLine[0];
+                String itemDescription = nextLine[1];
+                String imgURL = nextLine[2];
+                String number = nextLine[3];
+                String date = nextLine[4];
+                Boolean isPres;
 
-	public List<String> expectedReader(){
-		List<String> expectedList = new ArrayList<>();
+                if (nextLine[5].equals("true")) {
+                    isPres = true;
+                } else {
+                    isPres = false;
+                }
+                Float price = Float.parseFloat(nextLine[6]);
+                String expected = nextLine[7];
 
-		try {
-			FileInputStream fis = new FileInputStream(Filename);
-			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
-			CSVReader csvreader = new CSVReader(isr);
+                g.setItemName(itemName);
+                g.setItemDescription(itemDescription);
+                g.setImgURL(imgURL);
+                g.setNumber(number);
+                g.setDate(date);
+                g.setIsPres(isPres);
+                g.setIsFrozen(false);
+                g.setPrice(price);
 
-			String[] nextLine;
-			String[] header = csvreader.readNext();
-			int columnIndex = -1;
+                goodList.add(g);
+            }
+            isr.close();
+            fis.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return goodList;
+    }
 
-			for(int i = 0;i<header.length;i++) {
-				if (header[i].equals("expected")) {
-		            columnIndex = i;
-		            break;
-		        }
-			}
+    public List<String> expectedReader() {
+        List<String> expectedList = new ArrayList<>();
 
-			while(null!=(nextLine = csvreader.readNext())) {
-				String expected = nextLine[columnIndex];
+        try {
+            FileInputStream fis = new FileInputStream(Filename);
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            CSVReader csvreader = new CSVReader(isr);
 
-				expectedList.add(expected);
-			}
-			isr.close();
-			fis.close();
+            String[] nextLine;
+            String[] header = csvreader.readNext();
+            int columnIndex = -1;
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return expectedList;
-	}
+            for (int i = 0; i < header.length; i++) {
+                if (header[i].equals("expected")) {
+                    columnIndex = i;
+                    break;
+                }
+            }
 
-	public static void main(String[] args) {
-		List<Good> goodList = new ArrayList<Good>();
-		List<String> expectedList = new ArrayList<String>();
-		
-		CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
+            while (null != (nextLine = csvreader.readNext())) {
+                String expected = nextLine[columnIndex];
 
-		goodList.addAll(td.addGoodReader());
-		expectedList.addAll(td.expectedReader());
-		
-		for (Good good : goodList) {
-			System.out.println(good.toString());
-		}
-		for (String string : expectedList) {
-			System.out.println(string);
-		}
-	}
+                expectedList.add(expected);
+            }
+            isr.close();
+            fis.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return expectedList;
+    }
+
+    public static void main(String[] args) {
+        List<Good> goodList = new ArrayList<Good>();
+        List<String> expectedList = new ArrayList<String>();
+
+        CsvTestData td = new CsvTestData("src/main/java/example/上架商品单元测试用例.csv");
+
+        goodList.addAll(td.addGoodReader());
+        expectedList.addAll(td.expectedReader());
+
+        for (Good good : goodList) {
+            System.out.println(good.toString());
+        }
+        for (String string : expectedList) {
+            System.out.println(string);
+        }
+    }
 }

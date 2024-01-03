@@ -21,7 +21,7 @@ import dao.impl.UserDaoImpl;
  */
 @WebServlet("/DeleteGoodServlet")
 public class DeleteGoodServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,43 +31,43 @@ public class DeleteGoodServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		deleteGood(request,response);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        deleteGood(request, response);
+    }
 
-	private void deleteGood(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		try {
-			User user = null;
-			user = (User)request.getSession().getAttribute("curUser");
-			UserDao ud = new UserDaoImpl();
+    private void deleteGood(HttpServletRequest request, HttpServletResponse response) {
+        // TODO Auto-generated method stub
+        try {
+            User user = null;
+            user = (User) request.getSession().getAttribute("curUser");
+            UserDao ud = new UserDaoImpl();
 
-			int seller_id = ud.findSeller_ID(user);
-			
-			GoodDao gd = new GoodDaoImpl();
-			GoodList gl = gd.findForSaleGoods();
-			Good old_good = gl.getGoodsList().get(0);
-			int product_id = gd.findProduct_ID(seller_id, old_good);
-			gd.deleteGoods(product_id);
-			response.sendRedirect("ShowGoodsList");
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
+            int seller_id = ud.findSeller_ID(user);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+            GoodDao gd = new GoodDaoImpl();
+            GoodList gl = gd.findForSaleGoods();
+            Good old_good = gl.getGoodsList().get(0);
+            int product_id = gd.findProduct_ID(seller_id, old_good);
+            gd.deleteGoods(product_id);
+            response.sendRedirect("ShowGoodsList");
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
