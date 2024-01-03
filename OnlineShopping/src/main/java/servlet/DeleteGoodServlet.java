@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.Good;
 import bean.GoodList;
+import bean.Good;
+import bean.GoodList;
 import bean.User;
 import dao.GoodDao;
+import dao.GoodDao;
 import dao.UserDao;
+import dao.impl.GoodDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
 

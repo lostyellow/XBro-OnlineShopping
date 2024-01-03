@@ -5,43 +5,76 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import dao.UserDao;
+import bean.Buyer;
+import bean.Deal;
+import bean.DealList;
+import bean.Details;
+import bean.Good;
+import bean.GoodList;
 import bean.User;
 import bean.UserList;
-import dao.UserDao;
 
-public class UserDaoImpl implements UserDao {
-    public static final String DRIVER = "org.sqlite.JDBC";
-    public static final String URL = "jdbc:sqlite:xbro.db";
-    public static final String USER = "root";
-    public static final String PWD = "root";
-
-    @Override
-    public void register(User user) {
-        // TODO Auto-generated method stub
-        try {
-            Class.forName(DRIVER);
-
-            Connection conn = DriverManager.getConnection(URL);
-            String sql = "insert into users(username,password,name,id_card,sex,tele,e_mail,user_group,birth) values(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, user.getUserName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getName());
-            ps.setString(4, user.getId_card());
-            ps.setString(5, user.getSex());
-            ps.setString(6, user.getTele());
-            ps.setString(7, user.getE_mail());
-            ps.setString(8, "seller");
-            ps.setString(9, user.getBirth());
-            ps.executeUpdate();
-
-            ps.close();
-            conn.close();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-    }
+public class UserDaoImpl implements UserDao{
+	public static final String DRIVER = "org.sqlite.JDBC";
+	public static final String URL = "jdbc:sqlite:xbro.db";
+	public static final String USER = "root";
+	public static final String PWD = "root";
+	
+	public void businessRegister(User user) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "insert into users(username,password,name,id_card,sex,tele,e_mail,user_group,birth) values(?,?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getId_card());
+			ps.setString(5, user.getSex());
+			ps.setString(6, user.getTele());
+			ps.setString(7, user.getE_mail());
+			ps.setString(8, "seller");
+			ps.setString(9, user.getBirth());
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public void userRegister(User user) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "insert into users(username,password,name,id_card,sex,tele,user_group,address) values(?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getId_card());
+			ps.setString(5, user.getSex());
+			ps.setString(6, user.getTele());
+			ps.setString(7, "user");
+			ps.setString(8, user.getAddress());
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 
     @Override
     public UserList findAll() {

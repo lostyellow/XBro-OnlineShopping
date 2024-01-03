@@ -24,7 +24,10 @@ import dao.impl.UserDaoImpl;
 import bean.Good;
 import bean.User;
 import dao.UserDao;
+import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
+import bean.Good;
+import bean.User;
 
 /**
  * Servlet implementation class AddGoodServlet

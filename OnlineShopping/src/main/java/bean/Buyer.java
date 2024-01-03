@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Objects;
+
 public class Buyer {
     private int id;
     private String appointment_time;

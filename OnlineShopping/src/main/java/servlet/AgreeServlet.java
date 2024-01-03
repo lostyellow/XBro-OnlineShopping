@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.GoodDao;
 import dao.TransactionDao;
+import dao.GoodDao;
+import dao.TransactionDao;
 import dao.UserDao;
+import dao.impl.GoodDaoImpl;
+import dao.impl.TransactionDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.TransactionDaoImpl;
 import dao.impl.UserDaoImpl;

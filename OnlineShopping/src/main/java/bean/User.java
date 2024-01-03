@@ -9,6 +9,24 @@ public class User {
     private String Tele;
     private String E_mail;
     private String Birth;
+	private String UserName;
+	private String Password;
+	private String Name;
+	private String Id_card;
+	private String Sex;
+	private String Tele;
+	private String E_mail;
+	private String Birth;
+	private String Address;
+	private String user_group;
+
+	public String getUser_group() {
+		return user_group;
+	}
+
+	public void setUser_group(String user_group) {
+		this.user_group = user_group;
+	}
 
     public User() {
         // TODO Auto-generated constructor stub
@@ -82,6 +100,14 @@ public class User {
     public void setBirth(String birth) {
         Birth = birth;
     }
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String adress) {
+		Address = adress;
+	}
 
 
 }

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,11 @@ import com.jspsmart.upload.SmartUpload;
 import dao.GoodDao;
 import dao.UserDao;
 import dao.impl.GoodDaoImpl;
+import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
+import bean.Good;
+import bean.GoodList;
+import bean.User;
 import bean.Good;
 import bean.GoodList;
 import bean.User;

@@ -84,4 +84,20 @@ public interface GoodDao {
     public void deleteGoodPicture(int product_id, String img_url);//删除对应商品的一张图片,图片库不删图片,数据库删url
 
     public List<String> findAllPictures(int product_id);//查找对应商品的所有图片,返回字符串列表
+
+	/*
+	 * searchForGoodByName()
+	 * 输入参数为 商品name
+	 * 返回符合名字输入的商品list
+	 * 用于查找商品
+	 * **/
+	public GoodList searchForGoodByName(String good_name);
+	
+	/*
+	 * selectGoodsByTypes()
+	 * 输入参数为 商品类型type
+	 * 返回符合名字输入的商品list
+	 * 用于筛选商品
+	 * **/
+	public GoodList selectGoodsByTypes(Boolean medicine_type);
 }

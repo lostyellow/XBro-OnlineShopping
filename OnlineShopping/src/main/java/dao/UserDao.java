@@ -1,12 +1,6 @@
 package dao;
 
-import bean.Buyer;
-import bean.Deal;
-import bean.DealList;
-import bean.Details;
-import bean.Good;
-import bean.User;
-import bean.UserList;
+import bean.*;
 
 public interface UserDao {
     /*对Users表的操作*/

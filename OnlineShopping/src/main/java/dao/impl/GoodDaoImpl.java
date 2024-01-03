@@ -468,4 +468,92 @@ public class GoodDaoImpl implements GoodDao {
         }
         return null;
     }
+	
+	@Override
+	public GoodList searchForGoodByName(String good_name) {
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from drugs "
+					+"where is_frozen = ? "
+					+"and inventory <> 0 "
+					+"and product_name like ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ps.setString(2, "%" + good_name + "%");
+			ResultSet rs = ps.executeQuery();
+			
+			GoodList goodList = new GoodList();
+			while(rs.next()) {
+				Good good = new Good();
+				good.setId(rs.getInt("product_id"));
+				good.setSellerId(rs.getInt("seller_id"));
+				good.setItemName(rs.getString("product_name"));
+				good.setItemDescription(rs.getString("product_description"));
+				good.setImgURL(rs.getString("product_image"));
+				good.setPrice(rs.getFloat("product_price"));
+				good.setNumber(rs.getString("batch_number"));
+				good.setDate(rs.getString("expiration_date"));
+				good.setIsPres(rs.getBoolean("prescription_required"));
+				good.setIsFrozen(rs.getBoolean("is_frozen"));
+				good.setInventory(rs.getInt("inventory"));
+				goodList.add(good);
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return goodList;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public GoodList selectGoodsByTypes(Boolean medicine_type) {
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select * from drugs "
+					+"where is_frozen = ? "
+					+"and inventory <> 0 "
+					+"and prescription_required = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ps.setBoolean(2, medicine_type);
+			ResultSet rs = ps.executeQuery();
+			
+			GoodList goodList = new GoodList();
+			while(rs.next()) {
+				Good good = new Good();
+				good.setId(rs.getInt("product_id"));
+				good.setSellerId(rs.getInt("seller_id"));
+				good.setItemName(rs.getString("product_name"));
+				good.setItemDescription(rs.getString("product_description"));
+				good.setImgURL(rs.getString("product_image"));
+				good.setPrice(rs.getFloat("product_price"));
+				good.setNumber(rs.getString("batch_number"));
+				good.setDate(rs.getString("expiration_date"));
+				good.setIsPres(rs.getBoolean("prescription_required"));
+				good.setIsFrozen(rs.getBoolean("is_frozen"));
+				good.setInventory(rs.getInt("inventory"));
+				goodList.add(good);
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return goodList;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

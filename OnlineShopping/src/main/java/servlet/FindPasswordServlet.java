@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,7 @@ public class FindPasswordServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
     protected void findpwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String realname = request.getParameter("RealName");
         String idcard = request.getParameter("id_card");
