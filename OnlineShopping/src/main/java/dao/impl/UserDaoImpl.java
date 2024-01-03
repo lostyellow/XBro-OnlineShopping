@@ -227,30 +227,31 @@ public class UserDaoImpl implements UserDao{
         return "";
     }
 
-    @Override
-    public String onlyOneUser() {
-        // TODO Auto-generated method stub
-        try {
-            Class.forName(DRIVER);
-
-            Connection conn = DriverManager.getConnection(URL);
-            String sql = "select username from users";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            String exist = "";
-            if (rs.next()) {
-                exist = rs.getString(1);
-            }
-
-            ps.close();
-            conn.close();
-            rs.close();
-
-            return exist;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	@Override
+	public String onlyOneUser() {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select username from users where user_group = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "seller");
+			ResultSet rs = ps.executeQuery();
+			
+			String exist = "";
+			if(rs.next()) {
+				exist = rs.getString(1);
+			}
+			
+			ps.close();
+			conn.close();
+			rs.close();
+			
+			return exist;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

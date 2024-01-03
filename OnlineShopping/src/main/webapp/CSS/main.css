@@ -128,9 +128,23 @@
     text-decoration: none;
 }
 
-.notice {
-    text-align: center;
-    width: 400px;
-    height: 200px;
-    font-size: 80px;
+.menu-item {
+    list-style-type: none;
 }
+
+.menu-item a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 5px;
+}
+
+.menu-item a:hover {
+    background-color: #ddd;
+}
+
+.submenu {
+    list-style-type: none;
+    padding: 5px;
+}
+

@@ -35,7 +35,45 @@
     <div class="navbar">
         <img src="./img/Xbro.jpg">
     </div>
-    <div class="menu"></div>
+    <div class="search-container">
+		<div class="search-box">
+			<form action="SearchForGoodsServlet?method=namesearch" method="post">
+				<input type="text" placeholder="请输入商品名搜索" name="goodName">
+				<button type="submit">查找</button>
+			</form>
+		</div>
+		<div class="search-box">
+			<form action="SearchForGoodsServlet?method=select" method="post">
+				<select id="medicineType" name="medicineType">
+				  <option value="prescription" selected>处方药</option>
+				  <option value="non-prescription">非处方药</option>
+				</select>
+				<button type="submit">筛选</button>
+			</form>
+		</div>
+	</div>
+    <div class="menu">
+   	    <ul>
+	        <li class="menu-item">
+	            <a href="#" onclick="toggleMenu('prescription')">处方药</a>
+	            <ul id="prescription" class="submenu" style="display:none;">
+	                <li><a href="#">心血管药物</a></li>
+	                <li><a href="#">抗生素</a></li>
+	                <li><a href="#">抗抑郁药</a></li>
+	                <li><a href="#">镇痛药</a></li>
+	            </ul>
+	        </li>
+	        <li class="menu-item">
+	            <a href="#" onclick="toggleMenu('otc')">非处方药（OTC）</a>
+	            <ul id="otc" class="submenu" style="display:none;">
+	                <li><a href="#">感冒和流感</a></li>
+	                <li><a href="#">止痛药</a></li>
+	                <li><a href="#">消化系统药物</a></li>
+	                <li><a href="#">皮肤护理药膏</a></li>
+	            </ul>
+	        </li>
+	    </ul>
+    </div>
     <div class="content">
         <div class="yp">
             <%
@@ -55,7 +93,8 @@
             %>
         </div>
     </div>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+    </div>
     <div class="footer">
         <a href="#">关于我们</a>
         <a href="#">联系我们</a>
@@ -63,5 +102,15 @@
         <a href="#">公益活动</a>
     </div>
 </div>
+<script type="text/javascript">
+function toggleMenu(menuId) {
+    var menu = document.getElementById(menuId);
+    if (menu.style.display === 'none') {
+        menu.style.display = 'block';
+    } else {
+        menu.style.display = 'none';
+    }
+}
+</script>
 </body>
 </html>

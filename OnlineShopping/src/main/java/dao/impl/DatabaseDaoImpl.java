@@ -50,9 +50,10 @@ public class DatabaseDaoImpl implements DatabaseDao {
                     "    id_card TEXT NOT NULL," +
                     "    sex TEXT NOT NULL," +
                     "    tele TEXT NOT NULL," +
-                    "    e_mail TEXT NOT NULL," +
+                    "    e_mail TEXT," +
                     "    user_group TEXT NOT NULL," +
-                    "    birth TEXT NOT NULL" +
+                    "    birth TEXT," +
+                    "    address TEXT" +
                     ");";
             stmt.executeUpdate(sqlUsers);
 
@@ -96,6 +97,14 @@ public class DatabaseDaoImpl implements DatabaseDao {
                     "	FOREIGN KEY (product_id) REFERENCES drugs(product_id)" +
                     ");";
             stmt.executeUpdate(sqlPictures);
+            
+            //创建 ParentCategory 表
+            String sqlParentCategory = "CREATE TABLE IF NOT EXISTS ParentCategory (" +
+                    "    ParentID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "    ParentName TEXT UNIQUE NOT NULL" +
+                    ");";
+            stmt.executeUpdate(sqlParentCategory);
+
 
             stmt.close();
             conn.close();
