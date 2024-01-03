@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +13,12 @@
     <div class="header">
         <a href="ShowGoodsList">首页</a>
         <a href="back_stage.jsp">进入后台</a>
-        <%if (request.getSession().getAttribute("curUser") == null) { %>
-        <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%}%><% else
-        { %>
-        <a href="QuitServlet">退出登录</a><%} %>
+        <% if (request.getSession().getAttribute("curUser") == null) { %>
+            <a href="login.jsp">登录</a>
+            <a href="register.jsp">注册</a>
+        <% } else { %>
+            <a href="QuitServlet">退出登录</a>
+        <% } %>
     </div>
 </div>
 <div class="main">
@@ -47,7 +48,6 @@
     <a href="#">联系我们</a>
     <a href="#">隐私政策</a>
     <a href="#">公益活动</a>
-</div>
 </div>
 </body>
 </html>

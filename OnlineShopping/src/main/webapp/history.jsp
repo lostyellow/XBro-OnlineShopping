@@ -20,18 +20,13 @@
     <div class="header">
         <a href="ShowGoodsList">首页</a>
         <a href="back_stage.jsp">进入后台</a>
-        <%
-            if (request.getSession().getAttribute("curUser") == null) {
-        %>
-        <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%
-        }
-    %><%
-        else
-        {
-    %>
-        <a href="QuitServlet">退出登录</a><%
-        }
-    %>
+        <c:if test="${empty sessionScope.curUser}">
+            <a href="login.jsp">登录</a>
+            <a href="register.jsp">注册</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.curUser}">
+            <a href="QuitServlet">退出登录</a>
+        </c:if>
     </div>
 </div>
 <div class="main">
@@ -48,89 +43,18 @@
         <p>商品价格</p>
         <p>详情</p>
         <%
-            GoodDao
-            gd
-            =
-            new
-            GoodDaoImpl
-            (
-            )
-            ;
-            GoodList
-            goodsList
-            =
-            gd
-            .
-            findAllGoods
-            (
-            )
-            ;
-            List
-            <
-            Good
-            >
-            gl
-            =
-            goodsList
-            .
-            getGoodsList
-            (
-            )
-            ;
-            for
-            (
-            Good
-            g
-            :
-            gl
-            )
-            {
-            int
-            product_id
-            =
-            g
-            .
-            getId
-            (
-            )
-            ;
+            GoodDao gd = new GoodDaoImpl();
+            GoodList goodsList = gd.findAllGoods();
+            List<Good> gl = goodsList.getGoodsList();
+            for (Good g : gl) {
+                int product_id = g.getId();
         %>
-        <p><%=g
-            .
-            getItemName
-            (
-            ) %>
-        </p>
-        <p><%=g
-            .
-            getItemDescription
-            (
-            ) %>
-        </p>
-        <p><%=g
-            .
-            getNumber
-            (
-            ) %>
-        </p>
-        <p><%=g
-            .
-            getDate
-            (
-            ) %>
-        </p>
-        <p><%=g
-            .
-            getIsPres
-            (
-            ) %>
-        </p>
-        <p><%=g
-            .
-            getPrice
-            (
-            ) %>
-        </p>
+        <p><%=g.getItemName() %></p>
+        <p><%=g.getItemDescription() %></p>
+        <p><%=g.getNumber() %></p>
+        <p><%=g.getDate() %></p>
+        <p><%=g.getIsPres() %></p>
+        <p><%=g.getPrice() %></p>
         <p><a href="ShowDealList?product_id=<%=product_id %>">查看订单</a></p>
         <%
             }
