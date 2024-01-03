@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -63,7 +65,12 @@ public class AddGoodServlet extends HttpServlet {
             su.upload();
             File file = su.getFiles().getFile(0);
             String fileName = file.getFileName();
-            String url = "./img/customs/" + fileName;
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date dateTime = new Date();
+            String formatDateTime = sdf.format(dateTime);
+            
+            String url = "./img/customs/" + formatDateTime + "_" + fileName;
             file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
             Request suRequest = su.getRequest();
 
@@ -97,7 +104,8 @@ public class AddGoodServlet extends HttpServlet {
             good.setInventory(inventory);
 
             gd.addGoods(seller_id, good);
-            gd.addGoodPicture(seller_id, imgURL);
+            int product_id = gd.findProduct_ID(seller_id, good);
+            gd.addGoodPicture(product_id, imgURL);
             response.sendRedirect("ShowGoodsList");
         } catch (Exception e) {
             // TODO: handle exception

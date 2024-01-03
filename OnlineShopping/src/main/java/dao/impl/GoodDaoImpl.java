@@ -408,8 +408,11 @@ public class GoodDaoImpl implements GoodDao {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL);
+            
+            
             String sql = "insert into pictures (img_url, product_id) values (?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
+            
             ps.setString(1, img_url);
             ps.setInt(2, product_id);
 
