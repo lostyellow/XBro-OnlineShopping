@@ -43,7 +43,7 @@ public class DeleteGoodServlet extends HttpServlet {
 	private void deleteGood(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			User user = new User();
+			User user = null;
 			user = (User)request.getSession().getAttribute("curUser");
 			UserDao ud = new UserDaoImpl();
 

@@ -84,6 +84,7 @@ public class AddGoodServlet extends HttpServlet {
 			}else {
 				isPres = false;
 			}
+			int inventory = Integer.parseInt(suRequest.getParameter("inventory"));
 
 			good.setItemName(itemName);
 			good.setItemDescription(itemDescription);
@@ -93,6 +94,7 @@ public class AddGoodServlet extends HttpServlet {
 			good.setDate(date);
 			good.setIsPres(isPres);
 			good.setIsFrozen(isFrozen);
+			good.setInventory(inventory);
 			
 			gd.addGoods(seller_id, good);
 			gd.addGoodPicture(seller_id, imgURL);

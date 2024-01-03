@@ -52,9 +52,6 @@
                 		}
                 	%>
                 </div>
-                <div class="notice">
-                    <p>敬情期待...</p>
-                </div>
     
             </div>
             <div class="sidebar"></div>
