@@ -42,63 +42,13 @@
     <div class="content">
         <div class="yp">
             <%
-                GoodDao
-                gd
-                =
-                new
-                GoodDaoImpl
-                (
-                )
-                ;
-                GoodList
-                gl
-                =
-                (
-                GoodList
-                )
-                session
-                .
-                getAttribute
-                (
-                "goodsList"
-                )
-                ;
-                for
-                (
-                Good
-                g
-                :
-                gl
-                .
-                getGoodsList
-                (
-                )
-                )
-                {
-                List
-                <
-                String
-                >
-                pictures
-                =
-                gd
-                .
-                findAllPictures
-                (
-                g
-                .
-                getId
-                (
-                )
-                )
-                ;
+                GoodDao gd = new GoodDaoImpl();
+                GoodList gl = (GoodList) session.getAttribute("goodsList");
+                for(Good g: gl.getGoodsList()){
+                List<String> pictures = gd.findAllPictures(g.getId());
             %>
             <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><img src=<%=pictures.get(0)%>></a>
-            <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><p><%=g
-                .
-                getItemName
-                (
-                )%>
+            <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><p><%=g.getItemName()%>
             </p></a>
             <%
                 }
