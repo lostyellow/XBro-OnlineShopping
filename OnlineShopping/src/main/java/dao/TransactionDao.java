@@ -11,7 +11,7 @@ public interface TransactionDao {
      * **/
     public int findTrans_ID(int product_id, String time);//通过商品id查找订单号
 
-    public void purchase(Deal deal);//根据buy页面的购买按钮实现交易商品信息以及时间的那个的上传。
+    public void purchase(Deal deal,int seller_id);//根据buy页面的购买按钮实现交易商品信息以及时间的那个的上传。
 
     public void updateTrans(int trans_id, String status);//更新订单状态,没有删除,交易失败则状态设置为“失败”
 

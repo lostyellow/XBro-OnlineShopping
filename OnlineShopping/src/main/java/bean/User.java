@@ -1,14 +1,6 @@
 package bean;
 
 public class User {
-    private String UserName;
-    private String Password;
-    private String Name;
-    private String Id_card;
-    private String Sex;
-    private String Tele;
-    private String E_mail;
-    private String Birth;
 	private String UserName;
 	private String Password;
 	private String Name;

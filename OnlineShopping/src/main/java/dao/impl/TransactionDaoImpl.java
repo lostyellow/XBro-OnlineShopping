@@ -46,33 +46,33 @@ public class TransactionDaoImpl implements TransactionDao {
         return 0;
     }
 
-    @Override
-    public void purchase(Deal deal) {
-        // TODO Auto-generated method stub
-        try {
-            Class.forName(DRIVER);
-
-            Connection conn = DriverManager.getConnection(URL);
-            String sql = "insert into transactions"
-                    + "(product_id,buyer_id,transaction_status,transaction_time,transaction_amount)"
-                    + "values(?,?,?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, deal.getProduct_id());
-            //Test
-            ps.setInt(2, 1);
-            ps.setString(3, deal.getStatus());
-            ps.setString(4, deal.getTime());
-            ps.setFloat(5, deal.getAmount());
-
-            ps.executeUpdate();
-
-            ps.close();
-            conn.close();
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void purchase(Deal deal,int buy_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+			
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "insert into transactions"
+					+ "(product_id,buyer_id,transaction_status,transaction_time,transaction_amount)"
+					+ "values(?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, deal.getProduct_id());
+			//Test
+			ps.setInt(2, buy_id);
+			ps.setString(3, deal.getStatus());
+			ps.setString(4, deal.getTime());
+			ps.setFloat(5, deal.getAmount());
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 
     @Override
     public void updateTrans(int trans_id, String status) {

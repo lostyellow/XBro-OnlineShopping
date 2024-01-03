@@ -4,8 +4,10 @@ import bean.*;
 
 public interface UserDao {
     /*对Users表的操作*/
-    public void register(User user);//注册功能
-
+	public void businessRegister(User user);
+	
+	public void userRegister(User user);
+	
     public String onlyOneUser();//判断是否只有一个商家
 
     public UserList findAll();//遍历数据库查找账户密码
