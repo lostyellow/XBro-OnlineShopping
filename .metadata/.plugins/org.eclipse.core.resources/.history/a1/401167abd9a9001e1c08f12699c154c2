@@ -50,7 +50,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 	        		"    id_card TEXT NOT NULL," + 
 	        		"    sex TEXT NOT NULL," + 
 	        		"    tele TEXT NOT NULL," + 
-	        		"    e_mail TEXT," + 
+	        		"    e_mail TEXT NOT NULL," + 
 	        		"    user_group TEXT NOT NULL," + 
 	        		"    birth TEXT," + 
 	        		"	 address TEXT" +

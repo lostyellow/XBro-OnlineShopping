@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String method = request.getParameter("method");
 		if ("business".equals(method)) {
+			System.out.println("-----------------111111");
 			businessRegister(request, response);
 		} else if ("user".equals(method)) {
 			userRegister(request, response);
@@ -67,6 +68,7 @@ public class RegisterServlet extends HttpServlet {
 				user.setTele(tele);
 				user.setE_mail(e_mail);
 				user.setBirth(birth);
+				System.out.println("-----------------22222222222");
 
 				ud.businessRegister(user);
 				response.sendRedirect("login.jsp");

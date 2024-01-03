@@ -70,9 +70,6 @@
 					</table>
 					<input type="submit" value="商家注册" class="register-button"
 						style="top: 85%;">
-					<c:if test="${not empty pbm }">
-					<p style="color:red;">商家注册人数上限了</p>
-					</c:if>
 				</div>
 			</form>
 				<!--用户注册 -->
