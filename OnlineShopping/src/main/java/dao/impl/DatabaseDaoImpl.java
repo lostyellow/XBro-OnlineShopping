@@ -28,7 +28,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
             String sqlDrugs = "CREATE TABLE IF NOT EXISTS drugs (" +
                     "    product_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "    seller_id INTEGER NOT NULL," +
-                    "    product_name TEXT NOT NULL," +
+                    "    product_name TEXT NOT NULL UNIQUE," +
                     "    product_description TEXT," +
                     // "    product_image TEXT," +
                     "    product_price REAL NOT NULL," +
