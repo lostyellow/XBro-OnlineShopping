@@ -17,7 +17,7 @@ import dao.impl.UserDaoImpl;
  */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -58,15 +58,15 @@ public class RegisterServlet extends HttpServlet {
 				String e_mail = request.getParameter("email");
 				String birth = request.getParameter("birthday");
 
-				User user = new User();
-				user.setUserName(username);
-				user.setPassword(password);
-				user.setName(name);
-				user.setId_card(id_card);
-				user.setSex(sex);
-				user.setTele(tele);
-				user.setE_mail(e_mail);
-				user.setBirth(birth);
+                User user = new User();
+                user.setUserName(username);
+                user.setPassword(password);
+                user.setName(name);
+                user.setId_card(id_card);
+                user.setSex(sex);
+                user.setTele(tele);
+                user.setE_mail(e_mail);
+                user.setBirth(birth);
 
 				ud.businessRegister(user);
 				response.sendRedirect("login.jsp");

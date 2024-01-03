@@ -20,78 +20,78 @@ public class User {
 		this.user_group = user_group;
 	}
 
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
+    public User() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public User(String UserName, String Password) {
-		this.UserName = UserName;
-		this.Password = Password;
-	}
+    public User(String UserName, String Password) {
+        this.UserName = UserName;
+        this.Password = Password;
+    }
 
-	public String getUserName() {
-		return UserName;
-	}
+    public String getUserName() {
+        return UserName;
+    }
 
-	public void setUserName(String UserName) {
-		this.UserName = UserName;
-	}
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
 
-	public String getPassword() {
-		return Password;
-	}
+    public String getPassword() {
+        return Password;
+    }
 
-	public void setPassword(String password) {
-		this.Password = password;
-	}
+    public void setPassword(String password) {
+        this.Password = password;
+    }
 
-	public String getName() {
-		return Name;
-	}
+    public String getName() {
+        return Name;
+    }
 
-	public void setName(String name) {
-		Name = name;
-	}
+    public void setName(String name) {
+        Name = name;
+    }
 
-	public String getId_card() {
-		return Id_card;
-	}
+    public String getId_card() {
+        return Id_card;
+    }
 
-	public void setId_card(String id_card) {
-		Id_card = id_card;
-	}
+    public void setId_card(String id_card) {
+        Id_card = id_card;
+    }
 
-	public String getSex() {
-		return Sex;
-	}
+    public String getSex() {
+        return Sex;
+    }
 
-	public void setSex(String sex) {
-		Sex = sex;
-	}
+    public void setSex(String sex) {
+        Sex = sex;
+    }
 
-	public String getTele() {
-		return Tele;
-	}
+    public String getTele() {
+        return Tele;
+    }
 
-	public void setTele(String tele) {
-		Tele = tele;
-	}
+    public void setTele(String tele) {
+        Tele = tele;
+    }
 
-	public String getE_mail() {
-		return E_mail;
-	}
+    public String getE_mail() {
+        return E_mail;
+    }
 
-	public void setE_mail(String e_mail) {
-		E_mail = e_mail;
-	}
+    public void setE_mail(String e_mail) {
+        E_mail = e_mail;
+    }
 
-	public String getBirth() {
-		return Birth;
-	}
+    public String getBirth() {
+        return Birth;
+    }
 
-	public void setBirth(String birth) {
-		Birth = birth;
-	}
+    public void setBirth(String birth) {
+        Birth = birth;
+    }
 
 	public String getAddress() {
 		return Address;

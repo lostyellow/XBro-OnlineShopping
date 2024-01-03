@@ -76,164 +76,157 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
-	@Override
-	public UserList findAll() {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-			Connection conn = DriverManager.getConnection(URL);
-			
-			String sql = "select username,password from users";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			
-			UserList users = new UserList();
-			User user = null;
-			
-			while(rs.next()) {
-				user = new User();
-				user.setUserName(rs.getString(1));
-				user.setPassword(rs.getString(2));
-				users.add(user);
-			}
-			
-			ps.close();
-			conn.close();
-			rs.close();
-			
-			return users;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	@Override
-	public Boolean checkLogin(String username, String password) {
-		try {
-			Class.forName(DRIVER);
-			Connection conn = DriverManager.getConnection(URL);
-			
-			String sql = "select username,password from users where username=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
-			
-			String dbPassword = null;
-			if(rs.next()) {
-				dbPassword = rs.getString("password");
+    @Override
+    public UserList findAll() {
+        // TODO Auto-generated method stub
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection(URL);
+
+            String sql = "select username,password from users";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            UserList users = new UserList();
+            User user = null;
+
+            while (rs.next()) {
+                user = new User();
+                user.setUserName(rs.getString(1));
+                user.setPassword(rs.getString(2));
+                users.add(user);
+            }
+
+            ps.close();
+            conn.close();
+            rs.close();
+
+            return users;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean checkLogin(String username, String password) {
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection(URL);
+
+            String sql = "select username,password from users where username=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            String dbPassword = null;
+            if (rs.next()) {
+                dbPassword = rs.getString("password");
 //				dbPassword = rs.getString(3);
-				if(dbPassword.equals(password)) {
-					ps.close();
-					conn.close();
-					rs.close();
-					return true;
-				}
-			}
-			ps.close();
-			conn.close();
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	@Override
-	public int findSeller_ID(User user) {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-			Connection conn = DriverManager.getConnection(URL);
-			
-			String sql = "select user_id from users where username=? and password=?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getUserName());
-			ps.setString(2, user.getPassword());
-			ResultSet rs = ps.executeQuery();
-			
-			int seller_id = 0;
-			if(rs.next()) {
-				seller_id = rs.getInt(1);
-			}
-			
-			ps.close();
-			conn.close();
-			rs.close();
-			
-			return seller_id;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return 0;
-	}
+                if (dbPassword.equals(password)) {
+                    ps.close();
+                    conn.close();
+                    rs.close();
+                    return true;
+                }
+            }
+            ps.close();
+            conn.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public int findSeller_ID(User user) {
+        // TODO Auto-generated method stub
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection(URL);
+
+            String sql = "select user_id from users where username=? and password=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            ResultSet rs = ps.executeQuery();
+
+            int seller_id = 0;
+            if (rs.next()) {
+                seller_id = rs.getInt(1);
+            }
+
+            ps.close();
+            conn.close();
+            rs.close();
+
+            return seller_id;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 
-	
-	@Override
-	public void changePwd(int userId, String newPwd) {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-			
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "update users "
-			+ "set password = ? "
-			+ "where user_id = ?";
-		
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, newPwd);
-			ps.setInt(2, userId);
-			ps.executeUpdate();
-			
-			ps.close();
-			conn.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
+    @Override
+    public void changePwd(int userId, String newPwd) {
+        // TODO Auto-generated method stub
+        try {
+            Class.forName(DRIVER);
 
-	@Override
-	public String findSeller_PWD(String realname, String id_card) {
-		try {
-			Class.forName(DRIVER);
-			
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select password "
-			+ "from users "
-			+ "where name = ? and id_card = ?";
-		
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, realname);
-			ps.setString(2, id_card);
-			ResultSet rs = ps.executeQuery();
-			
-			String pwd = "";
-			if(rs.next()) {
-				pwd = rs.getString(1);
-			}
-			
-			ps.close();
-			conn.close();
-			rs.close();
-			
-			return pwd;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return "";
-	}
+            Connection conn = DriverManager.getConnection(URL);
+            String sql = "update users "
+                    + "set password = ? "
+                    + "where user_id = ?";
 
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, newPwd);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
 
+            ps.close();
+            conn.close();
 
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public String findSeller_PWD(String realname, String id_card) {
+        try {
+            Class.forName(DRIVER);
 
-	
+            Connection conn = DriverManager.getConnection(URL);
+            String sql = "select password "
+                    + "from users "
+                    + "where name = ? and id_card = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, realname);
+            ps.setString(2, id_card);
+            ResultSet rs = ps.executeQuery();
+
+            String pwd = "";
+            if (rs.next()) {
+                pwd = rs.getString(1);
+            }
+
+            ps.close();
+            conn.close();
+            rs.close();
+
+            return pwd;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 	@Override
 	public String onlyOneUser() {
 		// TODO Auto-generated method stub
