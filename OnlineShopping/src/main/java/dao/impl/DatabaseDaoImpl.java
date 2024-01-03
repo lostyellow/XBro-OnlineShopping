@@ -24,7 +24,6 @@ public class DatabaseDaoImpl implements DatabaseDao {
             //创建 xbro 数据库
             String sqlXBroDB = "";
 
-            // 创建 drugs 表
             String sqlDrugs = "CREATE TABLE IF NOT EXISTS drugs (" +
                     "    product_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "    seller_id INTEGER NOT NULL," +
@@ -37,7 +36,9 @@ public class DatabaseDaoImpl implements DatabaseDao {
                     "    prescription_required BOOLEAN DEFAULT NULL," +
                     "    is_frozen BOOLEAN DEFAULT NULL," +
                     "    inventory INTEGER DEFAULT 0," +
-                    "    FOREIGN KEY (seller_id) REFERENCES users(user_id)" +
+                    "    parent_sub_relation_id INTEGER," +
+                    "    FOREIGN KEY (seller_id) REFERENCES users(user_id)," +
+                    "    FOREIGN KEY (parent_sub_relation_id) REFERENCES ParentSubRelation(ParentSubID)" +
                     ");";
             stmt.executeUpdate(sqlDrugs);
 
@@ -142,16 +143,21 @@ public class DatabaseDaoImpl implements DatabaseDao {
                 String sql = "INSERT INTO SubCategory (SubName) VALUES ('" + sub + "');";
                 stmt.executeUpdate(sql);
             }
+            
+            //其他子类，可以是两种父类的子类
+            String subOther = "其他";
+            String sqlOther = "INSERT INTO SubCategory (SubName) VALUES ('" + subOther + "');";
+            stmt.executeUpdate(sqlOther);
 
 			// 假设处方药的 ParentID 是 1，非处方药的 ParentID 是 2
 			// 假设子类 ID 从 1 开始，按照插入顺序递增
-			int[] prescriptionSubIDs = {1, 2, 3, 4}; // 对应处方药的子类
+			int[] prescriptionSubIDs = {1, 2, 3, 4, 9}; // 对应处方药的子类
 			for (int subID : prescriptionSubIDs) {
 			    String sql = "INSERT INTO ParentSubRelation (ParentID, SubID) VALUES (1, " + subID + ");";
 			    stmt.executeUpdate(sql);
 			}
 			
-			int[] otcSubIDs = {5, 6, 7, 8}; // 对应非处方药（OTC）的子类
+			int[] otcSubIDs = {5, 6, 7, 8, 9}; // 对应非处方药（OTC）的子类
 			for (int subID : otcSubIDs) {
 			    String sql = "INSERT INTO ParentSubRelation (ParentID, SubID) VALUES (2, " + subID + ");";
 			    stmt.executeUpdate(sql);

@@ -93,11 +93,12 @@ public interface GoodDao {
 	 * **/
 	public GoodList searchForGoodByName(String good_name);
 	
+		
 	/*
-	 * selectGoodsByTypes()
-	 * 输入参数为 商品类型type
-	 * 返回符合名字输入的商品list
-	 * 用于筛选商品
+	 * findAllByPSID()
+	 * 输入参数为 父子关系表ID
+	 * 返回符合二级类别的商品List
+	 * 用户二级管理筛选商品
 	 * **/
-	public GoodList selectGoodsByTypes(Boolean medicine_type);
+	public List<Good> findAllByPSID(int PSID);
 }

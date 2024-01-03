@@ -1,19 +1,17 @@
 package bean;
 
-import java.sql.Date;
-
 public class Good {
     private Integer id;
     private Integer sellerId;
     private String itemName;
     private String itemDescription;
-    private String imgURL;
     private Float price;
     private String number;//生产批次号
     private String date;//有效期
     private Boolean isPres;//是否为处方药
     private Boolean isFrozen;//是否被冻结
     private Integer inventory;
+    private int PSID;
 
 
     public Integer getId() {
@@ -46,14 +44,6 @@ public class Good {
 
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
-    }
-
-    public String getImgURL() {
-        return imgURL;
-    }
-
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
     }
 
     public Float getPrice() {
@@ -104,12 +94,22 @@ public class Good {
         this.inventory = inventory;
     }
 
-    @Override
-    public String toString() {
-        return "Goods [id=" + id + ", sellerId=" + sellerId + ", itemName=" + itemName + ", itemDescription="
-                + itemDescription + ", imgURL=" + imgURL + ", price=" + price + ", number=" + number + ", date=" + date
-                + ", isPres=" + isPres + ", isFrozen=" + isFrozen + "]";
-    }
+	public int getPSID() {
+		return PSID;
+	}
+
+	public void setPSID(int pSID) {
+		PSID = pSID;
+	}
+
+	@Override
+	public String toString() {
+		return "Good [id=" + id + ", sellerId=" + sellerId + ", itemName=" + itemName + ", itemDescription="
+				+ itemDescription + ", price=" + price + ", number=" + number + ", date=" + date
+				+ ", isPres=" + isPres + ", isFrozen=" + isFrozen + ", inventory=" + inventory + ", PSID=" + PSID + "]";
+	}
+    
+    
 
 
 }
