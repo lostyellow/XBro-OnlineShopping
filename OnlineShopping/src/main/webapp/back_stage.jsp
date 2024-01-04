@@ -55,61 +55,14 @@
         <div class="shop">
             <span>店名</span> 
             <a href="history.jsp">查看历史商品</a>
+            <a href="ShowBuyerInformation">查看用户信息</a>
         </div>
         <div class="yp">
-            <%
-                if (gd.anyForSale()) {
-                    GoodList gl = gd.findOnSaleGood();
-                    List<Good> goodList = gl.getGoodsList();
-                    Good g = goodList.get(0);
-            %>
-            <form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
-                上传图片: <input type="file" name="picture"/>
-                <div class="discribe">
-                    <p>
-                        商品名称:<input type="text" name="name" value=<%=g.getItemName() %>>
-                    </p>
-                    <p>
-                        商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>>
-                    </p>
-                    <p>
-                        商品生产批次:<input type="text" name="batch" value=<%=g.getNumber() %>>
-                    </p>
-                    <p>
-                        商品有效期:<input type="date" name="date" value=<%=g.getDate() %>>
-                    </p>
-                    <p>
-                        商品是否为处方药：
-                        <%if (g.getIsPres()) { %>
-                        <input type="radio" name="option3" value="yes" checked>是
-                        <input type="radio" name="option3" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option3" value="yes">是 
-                        <input type="radio" name="option3" value="no" checked>否
-                        <%} %>
-                    </p>
-                    <p>
-                        商品价格:<input type="text" name="price" value=<%=g.getPrice() %>>
-                    </p>
-                    <p>
-                        商品是否被冻结：
-                        <%if (g.getIsFrozen()) { %>
-                        <input type="radio" name="option4" value="yes" checked>是
-                        <input type="radio" name="option4" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option4" value="yes">是 
-                        <input type="radio" name="option4" value="no" checked>否
-                        <%} %>
-                    </p>
-                    <input type="submit" value="修改">
-                    <input type="submit" formaction="DeleteGoodServlet" value="下架">
-                </div>
-            </form>
-            <%}/* else {*/ %>
+
             <div class="tianjia">
                 <form action="AddGoodServlet" method="post" enctype="multipart/form-data">
                     上传图片: <input type="file" name="picture"/>
-                    <div class="discribe2">
+                    <div class="discribe">
                         <p>
                             商品名称:<input type="text" name="name" required>
                         </p>
@@ -144,7 +97,6 @@
                     </div>
                 </form>
             </div>
-            <%/* } */%>
         </div>
     </div>
     <div class="sidebar"></div>

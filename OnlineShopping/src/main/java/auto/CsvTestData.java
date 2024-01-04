@@ -97,7 +97,6 @@ public class CsvTestData {
 
                 g.setItemName(itemName);
                 g.setItemDescription(itemDescription);
-                g.setImgURL(imgURL);
                 g.setNumber(number);
                 g.setDate(date);
                 g.setIsPres(isPres);

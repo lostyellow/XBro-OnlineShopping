@@ -104,7 +104,7 @@
                         <%} %>
                     </p>
                     <input type="submit" value="修改">
-                    <input type="submit" formaction="DeleteGoodServlet" value="下架">
+                    <input type="submit" formaction="DeleteGoodServlet?product_name=<%=g.getItemName() %>" value="下架">
                 </div>
             </form>
 		        <%}else{ %>

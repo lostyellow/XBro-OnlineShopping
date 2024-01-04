@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.DealList;
+import bean.User;
 import dao.TransactionDao;
 import dao.impl.TransactionDaoImpl;
 @WebServlet("/ShowBuyerDeal")
@@ -17,7 +18,20 @@ public class ShowBuyerDeal extends HttpServlet{
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		show(request,response);
+		String method = request.getParameter("method");
+		if("1".equals(method)) {
+			show(request,response);
+		}else {
+			TransactionDao td = new TransactionDaoImpl();
+			DealList dl = new DealList();
+			User user = (User)request.getSession().getAttribute("curUser");
+			int buyer_id = user.getId();
+			dl = td.findDealsByBuyer_id(buyer_id);
+			request.getSession().setAttribute("dealList",dl);
+		    response.sendRedirect("record2.jsp");
+		}
+		
+		
 	}
 	private void show(HttpServletRequest request, HttpServletResponse response) {
 		try {

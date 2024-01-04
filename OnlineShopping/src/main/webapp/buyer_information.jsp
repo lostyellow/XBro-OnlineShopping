@@ -37,7 +37,7 @@
                 	<%
                 		UserDao ud = new UserDaoImpl();
                 	    UserList ul = (UserList)session.getAttribute("userList");
-                	    for(User u:ul.getUsers()){
+                	    for(User u:ul.getUserList()){
                 			%>
                     		<p><%=u.getUserName()%></p>
                             <p><%=u.getPassword()%></p>

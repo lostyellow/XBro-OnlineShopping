@@ -17,4 +17,19 @@ public class GoodList {
     public int getLength() {
         return this.goodsList.size();
     }
+    
+    public Good getGoodByName(String product_name) {
+    	try {
+			//here
+    		for (Good good : goodsList) {
+                if (good.getItemName().equalsIgnoreCase(product_name)) {
+                    return good;
+                }
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    	return null;
+    }
 }

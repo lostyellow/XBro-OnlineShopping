@@ -271,7 +271,7 @@ public class TransactionDaoImpl implements TransactionDao {
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select product_id,transaction_time,transaction_status,transaction_amount,buyer_id from transactions where buyer_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(5, buyer_id);
+			ps.setInt(1, buyer_id);
 			ResultSet rs = ps.executeQuery();
 
 			DealList dealList = new DealList();

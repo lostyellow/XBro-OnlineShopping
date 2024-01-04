@@ -109,25 +109,26 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public Boolean checkLogin(String username, String password) {
+    public String checkLogin(String username, String password) {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL);
 
-            String sql = "select username,password from users where username=?";
+            String sql = "select username,password,user_group from users where username = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
             String dbPassword = null;
+            String user_group = null;
             if (rs.next()) {
                 dbPassword = rs.getString("password");
-//				dbPassword = rs.getString(3);
                 if (dbPassword.equals(password)) {
+                	user_group = rs.getString("user_group");
                     ps.close();
                     conn.close();
                     rs.close();
-                    return true;
+                    return user_group;
                 }
             }
             ps.close();
@@ -136,7 +137,7 @@ public class UserDaoImpl implements UserDao{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -262,8 +263,9 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL);
 
-			String sql = "select username,password,tele,address from users where user_group = user";
+			String sql = "select username,password,tele,address from users where user_group = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "user");
 			ResultSet rs = ps.executeQuery();
 
 			UserList userlist = new UserList();

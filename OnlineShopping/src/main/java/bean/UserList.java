@@ -10,6 +10,9 @@ public class UserList {
 	public static void add(User u) {
 		users.add(u);
 	}
+	public List<User> getUserList() {
+        return this.users;
+    }
 	public static User getUserByID(String userName) {
 		for(User u : users) {
 			if(u.getUserName().equals(userName)) {
