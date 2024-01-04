@@ -5,6 +5,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bean.User;
 import bean.DealList;
 import dao.TransactionDao;
 import dao.impl.TransactionDaoImpl;
@@ -23,8 +25,9 @@ public class ShowBuyerDeal extends HttpServlet{
 		try {
 			TransactionDao td = new TransactionDaoImpl();
 			DealList dl = new DealList();
-			int product_id = Integer.parseInt(request.getParameter("buyer_id"));
-			dl = td.findDealsByBuyer_id(product_id);
+			User user = (User)request.getSession().getAttribute("curUser");
+			int buyer_id = user.getId();
+			dl = td.findDealsByBuyer_id(buyer_id);
 			request.getSession().setAttribute("dealList",dl);
 		    response.sendRedirect("record2.jsp");
 		} catch (IOException e) {

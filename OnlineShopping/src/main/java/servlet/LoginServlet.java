@@ -41,18 +41,30 @@ public class LoginServlet extends HttpServlet {
 			String password = request.getParameter("Password");
 			
 			UserDao ud = new UserDaoImpl();
-			if(ud.checkLogin(username, password)) {
+			String user_group = ud.checkLogin(username, password);
+			if("seller".equals(user_group)) {
 				request.getSession().setAttribute("loginStatus", "succeed");
-				// 可能要在session中加入登录的用户信息
+				// 商家登录
 				User user = new User();
 				user.setUserName(username);
 				user.setPassword(password);
+				user.setUser_group(user_group);
 				request.getSession().setAttribute("curUser", user);
-				response.sendRedirect("back_stage.jsp");;
-			}
-			else {
+				response.sendRedirect("back_stage.jsp");
+			}else if("user".equals(user_group)){
+				request.getSession().setAttribute("loginStatus", "succeed");
+				//用户登录
+				User user = new User();
+				user.setUserName(username);
+				user.setPassword(password);
+				user.setId(ud.findSeller_ID(user));
+				user.setUser_group(user_group);
+				request.getSession().setAttribute("curUser", user);
+				response.sendRedirect("main.jsp");
+			}else {
 				request.getSession().setAttribute("loginStatus", "failed");
 				response.sendRedirect("login.jsp");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
