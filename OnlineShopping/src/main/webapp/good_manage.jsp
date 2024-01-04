@@ -62,7 +62,7 @@
 	        	GoodDao gd = new GoodDaoImpl();
 	        	Good g = gd.findGoods(product_id);
 	        	int inventory =g.getInventory();
-				if(g.getInventory() != 0){
+	            List<String> pictures = gd.findAllPictures(product_id);
 	        %>
 	        
 	        	<form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
@@ -103,53 +103,28 @@
                         <input type="radio" name="option4" value="no" checked>否
                         <%} %>
                     </p>
+                    <p>
+                    	商品数量：<input type="text" name="inventory" value=<%=g.getInventory() %>>
+                    </p>
+                    
+                    <%if(g.getInventory() != 0){ %>
                     <input type="submit" value="修改">
                     <input type="submit" formaction="DeleteGoodServlet?product_name=<%=g.getItemName() %>" value="下架">
-                </div>
-            </form>
-		        <%}else{ %>
-		        <form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
-                上传图片: <input type="file" name="picture"/>
-                <div class="discribe">
-                    <p>
-                        商品名称:<input type="text" name="name" value=<%=g.getItemName() %> readonly>
-                    </p>
-                    <p>
-                        商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>>
-                    </p>
-                    <p>
-                        商品生产批次:<input type="text" name="batch" value=<%=g.getNumber() %>>
-                    </p>
-                    <p>
-                        商品有效期:<input type="date" name="date" value=<%=g.getDate() %>>
-                    </p>
-                    <p>
-                        商品是否为处方药：
-                        <%if (g.getIsPres()) { %>
-                        <input type="radio" name="option3" value="yes" checked>是
-                        <input type="radio" name="option3" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option3" value="yes">是 
-                        <input type="radio" name="option3" value="no" checked>否
-                        <%} %>
-                    </p>
-                    <p>
-                        商品价格:<input type="text" name="price" value=<%=g.getPrice() %>>
-                    </p>
-                    <p>
-                        商品是否被冻结：
-                        <%if (g.getIsFrozen()) { %>
-                        <input type="radio" name="option4" value="yes" checked>是
-                        <input type="radio" name="option4" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option4" value="yes">是 
-                        <input type="radio" name="option4" value="no" checked>否
-                        <%} %>
-                    </p>
+                    <%}else{ %>
                     <input type="submit" value="重新上架">
-                </div>
-            </form>
-		        <%} %>
+		        	<%} %>
+	        </div>
+	        <div>
+	        	<!-- 图片全部显示，之后改成切换 -->  
+                <%
+                	for(String i : pictures){
+                		%>
+                		<a href="DeletePictureServlet?product_id=<%=product_id %>&url=<%=i %>">
+                			<img src=<%=i %>>
+                		</a>
+                		<%
+                	}
+                %>
 	        </div>
 	    </div>
 	    <div class="sidebar"></div>

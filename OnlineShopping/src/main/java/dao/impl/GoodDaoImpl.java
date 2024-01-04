@@ -429,7 +429,7 @@ public class GoodDaoImpl implements GoodDao {
     }
 
     @Override
-    public void deleteGoodPicture(int product_id, String img_url) {
+    public void deleteGoodPicture(String img_url) {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL);
