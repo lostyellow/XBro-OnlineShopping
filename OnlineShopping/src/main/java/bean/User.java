@@ -1,6 +1,7 @@
 package bean;
 
 public class User {
+	private int id;
 	private String UserName;
 	private String Password;
 	private String Name;
@@ -99,6 +100,14 @@ public class User {
 
 	public void setAddress(String adress) {
 		Address = adress;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

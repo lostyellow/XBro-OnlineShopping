@@ -30,43 +30,43 @@
     </div>
 </div>
 <div class="main">
-    <div class="navbar">
-        <img src="./img/Xbro.png">
-    </div>
-    <div class="menu"></div>
-    <div class="content">
-        <p>商品名称</p>
-        <p>商品描述</p>
-        <p>商品生产批次</p>
-        <p>商品有效期</p>
-        <p>商品是否为处方药</p>
-        <p>商品价格</p>
-        <p>详情</p>
-        <%
-            GoodDao gd = new GoodDaoImpl();
-            GoodList goodsList = gd.findAllGoods();
-            List<Good> gl = goodsList.getGoodsList();
-            for (Good g : gl) {
-                int product_id = g.getId();
-        %>
-        <p><%=g.getItemName() %></p>
-        <p><%=g.getItemDescription() %></p>
-        <p><%=g.getNumber() %></p>
-        <p><%=g.getDate() %></p>
-        <p><%=g.getIsPres() %></p>
-        <p><%=g.getPrice() %></p>
-        <p><a href="ShowDealList?product_id=<%=product_id %>">查看订单</a></p>
-        <%
-            }
-        %>
-    </div>
-    <div class="sidebar"></div>
-    <div class="footer">
-        <a href="#">关于我们</a>
-        <a href="#">联系我们</a>
-        <a href="#">隐私政策</a>
-        <a href="#">公益活动</a>
-    </div>
+        <div class="navbar">
+            <img src="./img/Xbro.png">
+        </div>
+        <div class="menu"></div>
+        <div class="content">
+       		<p>商品名称</p>
+            <p>商品描述</p>
+            <p>商品生产批次</p>
+            <p>商品有效期</p>
+            <p>商品是否为处方药</p>
+            <p>商品价格</p>
+            <p>详情</p>
+         <%
+         	GoodDao gd = new GoodDaoImpl();
+         	GoodList goodsList = gd.findAllGoods();
+         	List<Good> gl = goodsList.getGoodsList();
+         	for(Good g:gl){
+         	int product_id = g.getId();
+         %>
+         		<p><a href="good_manage.jsp?method=1 &product_id=<%=product_id %>"><%=g.getItemName()%></a></p>
+         		<p><%=g.getItemDescription() %></p>
+         		<p><%=g.getNumber() %></p>
+         		<p><%=g.getDate() %></p>
+         		<p><%=g.getIsPres() %></p>
+         		<p><%=g.getPrice() %></p>
+         		<p><a href="ShowDealList?product_id=<%=product_id %>">查看订单</a></p>
+         		<%
+         	}
+          %>
+        </div>
+        <div class="sidebar"></div>
+        <div class="footer">
+            <a href="#">关于我们</a>
+            <a href="#">联系我们</a>
+            <a href="#">隐私政策</a>
+            <a href="#">公益活动</a>
+        </div>
 </div>
 </body>
 </html>

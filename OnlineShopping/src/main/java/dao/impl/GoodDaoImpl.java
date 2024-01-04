@@ -81,6 +81,7 @@ public class GoodDaoImpl implements GoodDao {
                 goods.setDate(rs.getString("expiration_date"));
                 goods.setIsPres(rs.getBoolean("prescription_required"));
                 goods.setIsFrozen(rs.getBoolean("is_frozen"));
+                goods.setInventory(rs.getInt("inventory"));
             }
 
             ps.close();

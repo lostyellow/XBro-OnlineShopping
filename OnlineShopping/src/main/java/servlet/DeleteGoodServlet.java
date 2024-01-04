@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.Good;
 import bean.GoodList;
-import bean.Good;
-import bean.GoodList;
 import bean.User;
 import dao.GoodDao;
-import dao.GoodDao;
 import dao.UserDao;
-import dao.impl.GoodDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
 
@@ -54,7 +50,8 @@ public class DeleteGoodServlet extends HttpServlet {
 
             GoodDao gd = new GoodDaoImpl();
             GoodList gl = gd.findForSaleGoods();
-            Good old_good = gl.getGoodsList().get(0);
+            String product_name = request.getParameter("product_name");
+            Good old_good = gl.getGoodByName(product_name);
             int product_id = gd.findProduct_ID(seller_id, old_good);
             gd.deleteGoods(product_id);
             response.sendRedirect("ShowGoodsList");

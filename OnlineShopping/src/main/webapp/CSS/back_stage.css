@@ -160,20 +160,12 @@
 .yp .tianjia {
     position: absolute;
     left: 20px;
-    top: 220px;
+    top: 20px;
     height: 300px;
     width: 300px;
     border: 1px rgb(224, 224, 224) solid;
 }
 
-.yp .discribe2 {
-    position: absolute;
-    left: 340px;
-    top: 220px;
-    height: 300px;
-    width: 600px;
-    text-align: left;
-}
 
 .foot {
     margin-top: 20px;
