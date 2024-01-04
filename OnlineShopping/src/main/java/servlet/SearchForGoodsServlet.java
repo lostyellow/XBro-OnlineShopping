@@ -37,25 +37,11 @@ public class SearchForGoodsServlet extends HttpServlet {
 		response.sendRedirect("main.jsp");
 	}
     
-    protected void selectGoodsByType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String medicineType = request.getParameter("medicineType");
-		GoodDao gd= new GoodDaoImpl();
-		GoodList gl = new GoodList();
-		if("prescription".equals(medicineType)) {
-			gl = gd.selectGoodsByTypes(true);
-		}else if("non-prescription".equals(medicineType)) {
-			gl = gd.selectGoodsByTypes(false);
-		}
-		request.getSession().setAttribute("goodsList", gl);
-		response.sendRedirect("main.jsp");
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
 		if("namesearch".equals(method)) {
 			findGoodsByName(request, response);
-		}else if("select".equals(method)){
-			selectGoodsByType(request, response);
 		}
 		
 	}

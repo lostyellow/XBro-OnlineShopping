@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     height: 1040px;
-    width: 1503px;
+    width: 100%;
     position: relative;
     border: 1px rgb(224, 224, 224) solid;
     border-bottom-left-radius: 5px;
@@ -46,7 +46,7 @@
     left: 0;
     top: 0;
     height: 150px;
-    width: 1502px;
+    width: 100%;
     background-color: white;
 }
 
@@ -57,34 +57,46 @@
     width: 100px;
 }
 
-.menu {
-    position: absolute;
-    left: 0;
-    top: 180px;
-    height: 800px;
-    width: 200px;
-    background-color: white
-}
-
 .content {
     position: absolute;
-    left: 249px;
+    left: 210px; /* 将左边距调整至靠近菜单 */
     top: 180px;
-    border: 1px rgb(224, 224, 224) solid;
-    height: 800px;
-    width: 1000px;
-    background-color: white;
+    border: 1px solid #e0e0e0; /* 轻微的灰色边框 */
+    height: 750px;
+    width: calc(100% - 300px); /* 自动计算宽度 */
+    background-color: #f9f9f9; /* 浅灰色背景 */
     display: grid;
-    grid-template-columns: 250px 250px 250px 250px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* 响应式网格 */
+    grid-gap: 15px; /* 网格间隙 */
+    padding: 15px; /* 内边距 */
 }
 
-.sidebar {
-    position: absolute;
-    left: 1298px;
-    top: 145px;
-    height: 800px;
-    width: 200px;
-    background-color: white;
+.yp {
+    width: 100%;
+    height: 280px;
+    text-align: center;
+    background-color: #fff; /* 白色背景 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 轻微的阴影 */
+    border-radius: 5px; /* 圆角边框 */
+    overflow: hidden; /* 防止内容溢出 */
+    transition: box-shadow 0.3s; /* 平滑阴影过渡 */
+}
+
+.yp img {
+    width: 100%; /* 图片宽度 */
+    height: auto; /* 自动高度 */
+    border-bottom: 1px solid #e0e0e0; /* 图片下的边框 */
+}
+
+.yp:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 悬停时的阴影 */
+}
+
+.yp a {
+    text-decoration: none;
+    color: #333; /* 深色字体 */
+    display: block; /* 占满整个块 */
+    padding: 10px; /* 内边距 */
 }
 
 .footer {
@@ -107,79 +119,99 @@
     margin-right: 10px;
 }
 
-.yp {
-    width: 250px;
-    height: 280px;
-    text-align: center;
-}
 
-.yp img {
-    margin-top: 25px;
-    margin-left: 20px;
+
+.menu {
+    position: absolute;
+    left: 0;
+    top: 180px;
+    height: 750px;
     width: 200px;
-    height: 200px;
-}
-
-.yp:hover {
-    border: 1px red solid;
-}
-
-.yp a {
-    text-decoration: none;
+    background-color: #f9f9f9; /* 浅灰色背景 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 轻微的阴影 */
+    border-right: 1px solid #ddd; /* 右侧边框 */
 }
 
 .menu-item {
     list-style-type: none;
+    border-bottom: 1px solid #ddd; /* 每个菜单项下的边框 */
 }
 
-<<<<<<< HEAD
-    /* 搜索框样式 */
-    .search-container {
-      display: flex;
-      margin-top: 120px;
-      margin-left: 250px;
-    }
+.menu-item a {
+    text-decoration: none;
+    color: #333; /* 深色字体 */
+    display: block;
+    padding: 10px 15px; /* 增加内边距 */
+    font-size: 15px; /* 增加字体大小 */
+    transition: background-color 0.3s; /* 平滑背景色过渡 */
+}
 
-    .search-box {
-      position: relative;
-    }
+.menu-item a:hover {
+    background-color: #eee; /* 悬停时的背景色 */
+}
 
-    .search-box input[type="text"] {
-      padding: 10px;
-      width: 200px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      outline: none;
-    }
+.submenu {
+    display: none; /* 默认隐藏子菜单 */
+    list-style-type: none;
+    padding-left: 0; /* 移除子菜单的内边距 */
+}
 
-    .search-box input[type="text"]:focus {
-      border-color: #333;
-    }
+.menu-item:hover .submenu {
+    display: block; /* 显示子菜单 */
+}
 
-    .search-box button {
-      padding: 10px;
-      border: none;
-      background: #333;
-      color: #fff;
-      border-radius: 0 5px 5px 0;
-      cursor: pointer;
-    }
+.submenu li a {
+    padding-left: 20px; /* 子菜单项内边距 */
+    font-size: 14px; /* 子菜单项字体大小 */
+}
 
-    /* 响应式设计 */
-    @media screen and (max-width: 600px) {
-      .search-box input[type="text"] {
-        width: 150px;
-      }
-    }
-    /* 定义下拉菜单的样式 */
+/* 搜索框样式 */
+.search-container {
+  display: flex;
+  margin-top: 120px;
+  margin-left: 250px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box input[type="text"] {
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-box input[type="text"]:focus {
+  border-color: #333;
+}
+
+.search-box button {
+  padding: 10px;
+  border: none;
+  background: #333;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 600px) {
+  .search-box input[type="text"] {
+    width: 150px;
+  }
+}
+/* 定义下拉菜单的样式 */
 #medicineType {
   padding: 8px 12px; /* 内边距 */
-  font-size: 16px; /* 字体大小 */
-  border: 1px solid #ccc; /* 边框 */
-  border-radius: 4px; /* 圆角 */
-  background-color: #fff; /* 背景色 */
-  color: #333; /* 文字颜色 */
-  appearance: none; /* 隐藏默认的下拉箭头 */
+font-size: 16px; /* 字体大小 */
+border: 1px solid #ccc; /* 边框 */
+border-radius: 4px; /* 圆角 */
+background-color: #fff; /* 背景色 */
+color: #333; /* 文字颜色 */
+appearance: none; /* 隐藏默认的下拉箭头 */
 }
 
 /* 鼠标悬停时的样式 */
@@ -192,22 +224,4 @@
   outline: none;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
-    
-=======
-.menu-item a {
-    text-decoration: none;
-    color: black;
-    display: block;
-    padding: 5px;
-}
 
-.menu-item a:hover {
-    background-color: #ddd;
-}
-
-.submenu {
-    list-style-type: none;
-    padding: 5px;
-}
-
->>>>>>> main
