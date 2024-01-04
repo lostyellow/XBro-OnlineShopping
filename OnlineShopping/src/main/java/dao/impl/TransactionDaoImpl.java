@@ -103,68 +103,6 @@ public class TransactionDaoImpl implements TransactionDao {
         try {
             Class.forName(DRIVER);
 
-<<<<<<< HEAD
-	@Override
-	public Boolean IsExistIngDeal(int product_id) {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-			
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select * from transactions where transaction_status = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, "ing");
-			ResultSet rs = ps.executeQuery();
-			
-			Boolean exist = false;
-			if(rs.next()) {
-				exist = true;
-			}
-			
-			ps.close();
-			conn.close();
-			
-			return exist;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	@Override
-	public DealList findDealsByBuyer_id(int buyer_id) {
-		// TODO Auto-generated method stub
-		try {
-			Class.forName(DRIVER);
-
-			Connection conn = DriverManager.getConnection(URL);
-			String sql = "select product_id,transaction_time,transaction_status,transaction_amount,buyer_id from transactions where buyer_id = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(5, buyer_id);
-			ResultSet rs = ps.executeQuery();
-
-			DealList dealList = new DealList();
-			while(rs.next()) {
-				Deal deal = new Deal();
-				deal.setProduct_id(rs.getInt("product_id"));
-				deal.setTime(rs.getString("transaction_time"));
-				deal.setStatus(rs.getString("transaction_status"));
-				deal.setAmount(rs.getFloat("transaction_amount"));
-				deal.setBuyer_id(rs.getInt("buyer_id"));
-				dealList.add(deal);
-			}
-
-			ps.close();
-			conn.close();
-
-			return dealList;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return null;
-	}
-=======
             Connection conn = DriverManager.getConnection(URL);
             String sql = "select product_id,transaction_time,transaction_status,transaction_amount from transactions";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -323,5 +261,38 @@ public class TransactionDaoImpl implements TransactionDao {
         }
         return null;
     }
->>>>>>> main
+    
+	@Override
+	public DealList findDealsByBuyer_id(int buyer_id) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(DRIVER);
+
+			Connection conn = DriverManager.getConnection(URL);
+			String sql = "select product_id,transaction_time,transaction_status,transaction_amount,buyer_id from transactions where buyer_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(5, buyer_id);
+			ResultSet rs = ps.executeQuery();
+
+			DealList dealList = new DealList();
+			while(rs.next()) {
+				Deal deal = new Deal();
+				deal.setProduct_id(rs.getInt("product_id"));
+				deal.setTime(rs.getString("transaction_time"));
+				deal.setStatus(rs.getString("transaction_status"));
+				deal.setAmount(rs.getFloat("transaction_amount"));
+				deal.setBuyer_id(rs.getInt("buyer_id"));
+				dealList.add(deal);
+			}
+
+			ps.close();
+			conn.close();
+
+			return dealList;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
 }

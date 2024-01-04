@@ -16,79 +16,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    <div class="head">
-        <div class="header">
-          <a href="ShowGoodsList">首页</a>
-          <a href="back_stage.jsp">进入后台</a>
-          <%
-          	if(request.getSession().getAttribute("curUser")==null){
-          %>
-          <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%
-          	}
-          %><%
-          	else{
-          %>
-          <a href="QuitServlet">退出登录</a><%
-          	}
-          %>
-          
-        </div>
-    </div>   
-    <div class="main">
-            <div class="navbar">
-                <img src="./img/Xbro.jpg">
-            </div>
-            <br/>                
-            <div class="search-container">
-				<div class="search-box">
-					<form action="SearchForGoodsServlet?method=namesearch" method="post">
-						<input type="text" placeholder="请输入商品名搜索" name="goodName">
-						<button type="submit">查找</button>
-					</form>
-				</div>
-				<div class="search-box">
-					<form action="SearchForGoodsServlet?method=select" method="post">
-						<select id="medicineType" name="medicineType">
-						  <option value="prescription" selected>处方药</option>
-						  <option value="non-prescription">非处方药</option>
-						</select>
-						<button type="submit">筛选</button>
-					</form>
-				</div>
-			</div>
-            <div class="menu"></div>
-            <div class="content">
-                <div class="yp">
-                	<%
-                		GoodList gl = (GoodList)session.getAttribute("goodsList");
-                	                	                		for(Good g:gl.getGoodsList()){
-                	%>
-                			<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">
-                        <img src=<%=pictures.get(0)%>>
-                    </a>
-                    		<a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>"><p><%=g.getItemName()%></p></a>
-                			<%
-                		}
-                	%>
-                	<!--
-                    <a href="information.jsp"><img src="./img/yp.png"></a>
-                    <a href="information.jsp"><p>商品名称</p></a>
-                    -->
-                </div>
-                <div class="notice">
-                    <p>敬情期待...</p>
-                </div>
-    
-            </div>
-            <div class="sidebar"></div>
-            <div class="footer">
-                <a href="#">关于我们</a>
-                <a href="#">联系我们</a>
-                <a href="#">隐私政策</a>
-                <a href="#">公益活动</a>
-            </div>
-=======
 <div class="head">
     <div class="header">
         <a href="ShowGoodsList">首页</a>
@@ -102,7 +29,6 @@
                 <a href="QuitServlet">退出登录</a>
             </c:otherwise>
         </c:choose>
->>>>>>> main
     </div>
 </div>
 <div class="main">
