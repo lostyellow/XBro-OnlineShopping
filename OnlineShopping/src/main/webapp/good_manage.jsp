@@ -1,3 +1,4 @@
+<%@page import="bean.User"%>
 <%@page import="bean.GoodList"%>
 <%@page import="dao.impl.GoodDaoImpl"%>
 <%@page import="dao.GoodDao"%>
@@ -17,6 +18,11 @@
 <link type="text/css" rel="stylesheet" href="./CSS/good_manage.css">
 </head>
 <%
+	User curu = (User)request.getSession().getAttribute("curUser");
+	if (curu==null || !"seller".equals(curu.getUser_group())) {
+		response.sendRedirect("login.jsp");
+	}
+	
 	int product_id = Integer.parseInt(request.getParameter("product_id"));
 	GoodDao gd = new GoodDaoImpl();
 	Good g = gd.findGoods(product_id);

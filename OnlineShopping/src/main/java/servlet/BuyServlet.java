@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.GoodDao;
 import dao.OrderDao;
 import dao.TransactionDao;
 import dao.UserDao;
+import dao.impl.GoodDaoImpl;
 import dao.impl.OrderDaoImpl;
 import dao.impl.TransactionDaoImpl;
 import dao.impl.UserDaoImpl;
@@ -34,9 +36,10 @@ public class BuyServlet extends HttpServlet {
     
     protected void CreatDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
-    		Good g = (Good)request.getSession().getAttribute("goods");
+    		GoodDao gd = new GoodDaoImpl();
+    		Good g = gd.findGoods(Integer.parseInt(request.getParameter("product_id")));
 			String time = request.getParameter("date");
-			User curu = (User)request.getSession().getAttribute("curUser");
+			Integer sellerId = g.getSellerId();
     		
 			Deal deal = new Deal();
 			deal.setProduct_id(g.getId());
@@ -47,7 +50,7 @@ public class BuyServlet extends HttpServlet {
 			UserDao ud = new UserDaoImpl();
 			TransactionDao td = new TransactionDaoImpl();
 			
-			td.purchase(deal,ud.findSeller_ID(curu));
+			td.purchase(deal, sellerId);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -56,10 +59,11 @@ public class BuyServlet extends HttpServlet {
     
     protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
-    		UserDao ud = new UserDaoImpl();
+//    		UserDao ud = new UserDaoImpl();
     		TransactionDao td = new TransactionDaoImpl();
     		OrderDao od = new OrderDaoImpl();
-    		Good g = (Good)request.getSession().getAttribute("goods");
+    		GoodDao gd = new GoodDaoImpl();
+    		Good g = gd.findGoods(Integer.parseInt(request.getParameter("product_id")));
     		
     		Integer id = td.findTrans_ID(g.getId(), "wait");
 			String realname = request.getParameter("realname");
@@ -89,13 +93,10 @@ public class BuyServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
-		String method = request.getParameter("method");
-		if("submitinfo".equals(method)) {
-			CreatDeal(request, response);
-			SubmitInformation(request, response);
-		}
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		CreatDeal(request, response);
+		SubmitInformation(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

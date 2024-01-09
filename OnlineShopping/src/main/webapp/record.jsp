@@ -1,3 +1,4 @@
+<%@page import="bean.User"%>
 <%@ page import="dao.impl.TransactionDaoImpl" %>
 <%@ page import="dao.TransactionDao" %>
 <%@ page import="dao.impl.UserDaoImpl" %>
@@ -18,6 +19,12 @@
     <div class="header">
         <a href="ShowGoodsList">首页</a>
         <a href="back_stage.jsp">进入后台</a>
+        <%
+	        User curu = (User)request.getSession().getAttribute("curUser");
+	        if (curu==null || !"seller".equals(curu.getUser_group())) {
+	        	response.sendRedirect("login.jsp");
+	        }
+        %>
         <% if (request.getSession().getAttribute("curUser") == null) { %>
             <a href="login.jsp">登录</a><a href="register.jsp">注册</a>
         <% } else { %>
