@@ -39,7 +39,13 @@
         </div>
         <div class="yp">
             <div class="photo">
-                <img src="<%= pictures.get(0) %>">
+                <!-- <img src="<%= pictures.get(0) %>"> -->
+                <!-- 图片全部显示，之后改成切换 -->
+                <%
+                	for(String i : pictures){
+                		%> <img src=<%=i %>> <%
+                	}
+                %>
             </div>
             <div class="discribe">
                 <p>商品名称: <%= g.getItemName() %></p>

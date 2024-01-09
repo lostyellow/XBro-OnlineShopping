@@ -1,7 +1,0 @@
-﻿username,password,期待结果
-hanyuyellow,123456,success
-hanyuyellow,123,fail
-hanyuyello,123456,fail
-null,123456,fail
-hanyuyellow,null,fail
-null,null,fail

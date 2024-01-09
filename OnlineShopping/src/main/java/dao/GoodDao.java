@@ -81,7 +81,7 @@ public interface GoodDao {
 
     public void addGoodPicture(int product_id, String img_url);//添加对应商品的一张图片,图片库加图片,数据库加url
 
-    public void deleteGoodPicture(int product_id, String img_url);//删除对应商品的一张图片,图片库不删图片,数据库删url
+    public void deleteGoodPicture(String img_url);//删除一张图片,图片库不删图片,数据库删url
 
     public List<String> findAllPictures(int product_id);//查找对应商品的所有图片,返回字符串列表
 

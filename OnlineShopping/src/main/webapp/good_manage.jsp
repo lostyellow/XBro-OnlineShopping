@@ -16,8 +16,20 @@
     <title>Document</title>
 <link type="text/css" rel="stylesheet" href="./CSS/good_manage.css">
 </head>
+<%
+	int product_id = Integer.parseInt(request.getParameter("product_id"));
+	GoodDao gd = new GoodDaoImpl();
+	Good g = gd.findGoods(product_id);
+	int inventory =g.getInventory();
+   	boolean isPres = g.getIsPres();
+    List<String> pictures = gd.findAllPictures(product_id);
+%>
 
-<body>
+<%if(isPres){ %>
+<body onload="showSubCategory('yes')">
+<%}else{ %>
+<body onload="showSubCategory('no')">
+<%} %>
 
 	<%
 		Good good = new Good();
@@ -57,15 +69,8 @@
 	            <span>店名</span>
 	        </div>
 	        <div class="yp">
-	        <%
-	        	int product_id = Integer.parseInt(request.getParameter("product_id"));
-	        	GoodDao gd = new GoodDaoImpl();
-	        	Good g = gd.findGoods(product_id);
-	        	int inventory =g.getInventory();
-				if(g.getInventory() != 0){
-	        %>
 	        
-	        	<form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
+	        	<form action="UpdateGoodServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data">
                 上传图片: <input type="file" name="picture"/>
                 <div class="discribe">
                     <p>
@@ -81,14 +86,25 @@
                         商品有效期:<input type="date" name="date" value=<%=g.getDate() %>>
                     </p>
                     <p>
-                        商品是否为处方药：
-                        <%if (g.getIsPres()) { %>
-                        <input type="radio" name="option3" value="yes" checked>是
-                        <input type="radio" name="option3" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option3" value="yes">是 
-                        <input type="radio" name="option3" value="no" checked>否
-                        <%} %>
+                    <%
+                    	if(isPres){
+                    %>
+		    商品是否为处方药:
+		        <input type="radio" name="option3" value="yes" onchange="showSubCategory(this.value)" checked required>是
+		        <input type="radio" name="option3" value="no" onchange="showSubCategory(this.value)">否
+		        	<%}else{ %>
+			商品是否为处方药:
+		        <input type="radio" name="option3" value="yes" onchange="showSubCategory(this.value)" required>是
+		        <input type="radio" name="option3" value="no" onchange="showSubCategory(this.value)" checked>否
+		        	<%} %>
+					    </p>
+					    
+					    <!-- 隐藏的子类下拉列表 -->
+					    <p id="subCategoryContainer" style="display: none;">
+		    商品子类别:
+		        <select id="subCategorySelect" name="subCategory">
+		            <!-- 这里可以根据需要填充选项 -->
+		        </select>
                     </p>
                     <p>
                         商品价格:<input type="text" name="price" value=<%=g.getPrice() %>>
@@ -103,53 +119,28 @@
                         <input type="radio" name="option4" value="no" checked>否
                         <%} %>
                     </p>
+                    <p>
+                    	商品数量：<input type="text" name="inventory" value=<%=g.getInventory() %>>
+                    </p>
+                    
+                    <%if(g.getInventory() != 0){ %>
                     <input type="submit" value="修改">
                     <input type="submit" formaction="DeleteGoodServlet?product_name=<%=g.getItemName() %>" value="下架">
-                </div>
-            </form>
-		        <%}else{ %>
-		        <form action="UpdateGoodServlet" method="post" enctype="multipart/form-data">
-                上传图片: <input type="file" name="picture"/>
-                <div class="discribe">
-                    <p>
-                        商品名称:<input type="text" name="name" value=<%=g.getItemName() %> readonly>
-                    </p>
-                    <p>
-                        商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>>
-                    </p>
-                    <p>
-                        商品生产批次:<input type="text" name="batch" value=<%=g.getNumber() %>>
-                    </p>
-                    <p>
-                        商品有效期:<input type="date" name="date" value=<%=g.getDate() %>>
-                    </p>
-                    <p>
-                        商品是否为处方药：
-                        <%if (g.getIsPres()) { %>
-                        <input type="radio" name="option3" value="yes" checked>是
-                        <input type="radio" name="option3" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option3" value="yes">是 
-                        <input type="radio" name="option3" value="no" checked>否
-                        <%} %>
-                    </p>
-                    <p>
-                        商品价格:<input type="text" name="price" value=<%=g.getPrice() %>>
-                    </p>
-                    <p>
-                        商品是否被冻结：
-                        <%if (g.getIsFrozen()) { %>
-                        <input type="radio" name="option4" value="yes" checked>是
-                        <input type="radio" name="option4" value="no">否
-                        <%} else { %>
-                        <input type="radio" name="option4" value="yes">是 
-                        <input type="radio" name="option4" value="no" checked>否
-                        <%} %>
-                    </p>
+                    <%}else{ %>
                     <input type="submit" value="重新上架">
-                </div>
-            </form>
-		        <%} %>
+		        	<%} %>
+	        </div>
+	        <div>
+	        	<!-- 图片全部显示，之后改成切换 -->  
+                <%
+                	for(String i : pictures){
+                		%>
+                		<a href="DeletePictureServlet?product_id=<%=product_id %>&url=<%=i %>">
+                			<img src=<%=i %>>
+                		</a>
+                		<%
+                	}
+                %>
 	        </div>
 	    </div>
 	    <div class="sidebar"></div>
@@ -160,5 +151,35 @@
 	        <a href="#">公益活动</a>
 	    </div>
     </div>
+<script type="text/javascript">
+function showSubCategory(isPrescription) {
+    var container = document.getElementById('subCategoryContainer');
+    var select = document.getElementById('subCategorySelect');
+
+    if (isPrescription === 'yes') {
+        // 显示处方药的子类别
+        container.style.display = 'block';
+        // 假设这些是处方药的子类别
+        select.innerHTML = '<option value="心血管药物">心血管药物</option>'
+        +'<option value="抗生素">抗生素</option>'
+        +'<option value="抗抑郁药">抗抑郁药</option>'
+        +'<option value="镇痛药">镇痛药</option>'
+        +'<option value="其他">其他</option>';
+    } else if (isPrescription === 'no') {
+        // 显示非处方药的子类别
+        container.style.display = 'block';
+        // 假设这些是非处方药的子类别
+        select.innerHTML = '<option value="感冒和流感">感冒和流感</option>'
+        +'<option value="止痛药">止痛药</option>'
+        +'<option value="消化系统药物">消化系统药物</option>'
+        +'<option value="皮肤护理膏药">皮肤护理膏药</option>'
+        +'<option value="其他">其他</option>';
+    } else {
+        // 如果没有选择，隐藏下拉列表
+        container.style.display = 'none';
+        select.innerHTML = '';
+    }
+}
+</script>
 </body>
 </html>

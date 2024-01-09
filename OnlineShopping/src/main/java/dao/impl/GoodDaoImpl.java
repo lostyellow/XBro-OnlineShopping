@@ -345,7 +345,7 @@ public class GoodDaoImpl implements GoodDao {
             Class.forName(DRIVER);
 
             Connection conn = DriverManager.getConnection(URL);
-            String sql = "update drugs set product_name=?,product_description=?,product_price=?, batch_number=?,expiration_date=?,prescription_required=?,is_frozen=? where product_id = ?";
+            String sql = "update drugs set product_name=?,product_description=?,product_price=?, batch_number=?,expiration_date=?,prescription_required=?,is_frozen=?,inventory=?,parent_sub_relation_id=? where product_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, good.getItemName());
             ps.setString(2, good.getItemDescription());
@@ -355,7 +355,9 @@ public class GoodDaoImpl implements GoodDao {
             ps.setString(5, good.getDate());
             ps.setBoolean(6, good.getIsPres());
             ps.setBoolean(7, good.getIsFrozen());
-            ps.setInt(8, product_id);
+            ps.setInt(8, good.getInventory());
+            ps.setInt(9, good.getPSID());
+            ps.setInt(10, product_id);
             ps.executeUpdate();
 
             ps.close();
@@ -429,7 +431,7 @@ public class GoodDaoImpl implements GoodDao {
     }
 
     @Override
-    public void deleteGoodPicture(int product_id, String img_url) {
+    public void deleteGoodPicture(String img_url) {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL);
@@ -524,7 +526,7 @@ public class GoodDaoImpl implements GoodDao {
 			
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs "
-					+"where parent_sub_relation_id = ? ";
+					+"where parent_sub_relation_id = ? and inventory <> 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, PSID);
 			ResultSet rs = ps.executeQuery();
