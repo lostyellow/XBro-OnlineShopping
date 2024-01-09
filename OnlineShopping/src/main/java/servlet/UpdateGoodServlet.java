@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +16,10 @@ import com.jspsmart.upload.File;
 import com.jspsmart.upload.Request;
 import com.jspsmart.upload.SmartUpload;
 
+import dao.CategoryDao;
 import dao.GoodDao;
 import dao.UserDao;
+import dao.impl.CategoryDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.GoodDaoImpl;
 import dao.impl.UserDaoImpl;
@@ -63,7 +68,12 @@ public class UpdateGoodServlet extends HttpServlet {
             su.upload();
             File file = su.getFiles().getFile(0);
             String fileName = file.getFileName();
-            String url = "./img/customs/" + fileName;
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date dateTime = new Date();
+            String formatDateTime = sdf.format(dateTime);
+            
+            String url = "./img/customs/" + formatDateTime + "_" + fileName;
             file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
             Request suRequest = su.getRequest();
 
@@ -84,11 +94,24 @@ public class UpdateGoodServlet extends HttpServlet {
             } else {
                 isPres = false;
             }
+            
+            int parentID = 1;
+            if(!isPres) {
+            	parentID = 2;
+            }
+            String subCategory = suRequest.getParameter("subCategory");
+            
+            CategoryDao cd = new CategoryDaoImpl();
+            int subID = cd.findSubIDBySubName(subCategory);
+            int PSID = cd.findPSIDByPIDAndSID(parentID, subID);
+            
             if (suRequest.getParameter("option4").equals("yes")) {
                 isFrozen = true;
             } else {
                 isFrozen = false;
             }
+            
+            int inventory = Integer.parseInt(suRequest.getParameter("inventory"));
 
             good.setItemName(itemName);
             good.setItemDescription(itemDescription);
@@ -98,18 +121,12 @@ public class UpdateGoodServlet extends HttpServlet {
             good.setDate(date);
             good.setIsPres(isPres);
             good.setIsFrozen(isFrozen);
+            good.setInventory(inventory);
+            good.setPSID(PSID);
 
-            int product_id = 1;
-            /*
-             * 需要旧的商品信息，从获取功能得到封装old_good
-             * **/
-            //product_id = ud.findProduct_ID(seller_id, old_good);
-
-            // 以下是基线内获取单个商品的id，若有多个商品则获取的是第一个
+            
+            int product_id = Integer.parseInt(request.getParameter("product_id"));
             GoodDao gd = new GoodDaoImpl();
-            GoodList gl = gd.findAllGoods();
-            product_id = gl.getGoodsList().get(0).getId();
-
             gd.updateGoods(good, product_id);
             gd.addGoodPicture(product_id, imgURL);
             response.sendRedirect("ShowGoodsList");

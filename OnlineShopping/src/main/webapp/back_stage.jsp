@@ -77,7 +77,7 @@
                         </p>
 					    <p>
 		    商品是否为处方药:
-		        <input type="radio" name="option3" value="yes" onchange="showSubCategory(this.value)">是
+		        <input type="radio" name="option3" value="yes" onchange="showSubCategory(this.value)" required>是
 		        <input type="radio" name="option3" value="no" onchange="showSubCategory(this.value)">否
 					    </p>
 					    
