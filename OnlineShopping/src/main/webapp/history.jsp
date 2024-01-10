@@ -43,12 +43,13 @@
         <div class="menu"></div>
         <div class="content">
        		<p>商品名称</p>
-            <p>商品描述</p>
+            <!-- <p>商品描述</p> -->
             <p>商品生产批次</p>
             <p>商品有效期</p>
             <p>商品是否为处方药</p>
             <p>商品价格</p>
             <p>详情</p>
+            <br>
          <%
          	GoodDao gd = new GoodDaoImpl();
          	GoodList goodsList = gd.findAllGoods();
@@ -56,13 +57,14 @@
          	for(Good g:gl){
          	int product_id = g.getId();
          %>
-         		<p><a href="good_manage.jsp?method=1 &product_id=<%=product_id %>"><%=g.getItemName()%></a></p>
-         		<p><%=g.getItemDescription() %></p>
+         		<p><a href="good_manage.jsp?method=1&product_id=<%=product_id %>"><%=g.getItemName()%></a></p>
+         		<!-- <p><%=g.getItemDescription() %></p> -->
          		<p><%=g.getNumber() %></p>
          		<p><%=g.getDate() %></p>
          		<p><%=g.getIsPres() %></p>
          		<p><%=g.getPrice() %></p>
          		<p><a href="ShowDealList?product_id=<%=product_id %>">查看订单</a></p>
+         		<br>
          		<%
          	}
           %>

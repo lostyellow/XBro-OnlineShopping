@@ -50,7 +50,10 @@
             </div>
             <div class="discribe">
                 <p>商品名称: <%= g.getItemName() %></p>
-                <p>商品描述: <%= g.getItemDescription() %></p>
+                <p>商品描述: </p>
+                <div style="width:300px; height: 150px; border: 1px solid black; border-radius:2px; overflow:auto;">
+                	<%= g.getItemDescription() %>
+                </div>
                 <p>商品生产批次: <%= g.getNumber() %></p>
                 <p>商品有效期: <%= g.getDate() %></p>
                 <p>商品是否为处方药：
