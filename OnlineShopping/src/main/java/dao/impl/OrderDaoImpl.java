@@ -26,7 +26,7 @@ public class OrderDaoImpl implements OrderDao {
                     + "values(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             //test
-            ps.setInt(1, 1);
+            ps.setInt(1, buyer.getId());
             ps.setString(2, buyer.getAppointment_time());
             ps.setString(3, buyer.getAddress());
             ps.setString(4, buyer.getBuyer_name());

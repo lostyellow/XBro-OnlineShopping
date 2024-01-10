@@ -33,11 +33,8 @@ public class ShowDealList extends HttpServlet {
 
             UserDao ud = new UserDaoImpl();
             TransactionDao td = new TransactionDaoImpl();
-            DealList dl = new DealList();
             int product_id = Integer.parseInt(request.getParameter("product_id"));
-            dl = td.findDealsByProduct_id(product_id);
-            request.getSession().setAttribute("dealList", dl);
-            response.sendRedirect("record.jsp");
+            response.sendRedirect("record.jsp?product_id=" + product_id);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -47,7 +47,7 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
 	@Override
-	public void purchase(Deal deal,int buy_id) {
+	public Integer purchase(Deal deal,int buyer_id) {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(DRIVER);
@@ -59,19 +59,24 @@ public class TransactionDaoImpl implements TransactionDao {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, deal.getProduct_id());
 			//Test
-			ps.setInt(2, buy_id);
+			ps.setInt(2, buyer_id);
 			ps.setString(3, deal.getStatus());
 			ps.setString(4, deal.getTime());
 			ps.setFloat(5, deal.getAmount());
-			
 			ps.executeUpdate();
+			
+			ResultSet rs = conn.createStatement().executeQuery("SELECT last_insert_rowid()");
+            Integer lastId = null;
+            if(rs.next()) lastId = rs.getInt(1);
 			
 			ps.close();
 			conn.close();
+			return lastId;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		return null;
 	}
 
     @Override

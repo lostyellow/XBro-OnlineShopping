@@ -23,9 +23,6 @@
     UserDao ud = new UserDaoImpl();
     GoodDao gd = new GoodDaoImpl();
     List<Good> goods = new ArrayList<Good>();
-    if (session.getAttribute("loginStatus") == null || session.getAttribute("loginStatus").equals("failed")) {
-        response.sendRedirect("login.jsp");
-    }
 %>
 
 <div class="head">

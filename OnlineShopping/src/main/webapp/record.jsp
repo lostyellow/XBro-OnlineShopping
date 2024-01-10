@@ -46,7 +46,8 @@
         <%
             UserDao ud = new UserDaoImpl();
             TransactionDao td = new TransactionDaoImpl();
-            DealList dl = (DealList) session.getAttribute("dealList");
+            Integer productId = Integer.parseInt(request.getParameter("product_id"));
+            DealList dl = td.findDealsByProduct_id(productId);
             for (Deal d : dl.getDeals()) {
         %>
         <p><%=d.getProduct_id() %></p>

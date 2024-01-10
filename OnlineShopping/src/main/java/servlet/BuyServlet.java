@@ -34,7 +34,7 @@ public class BuyServlet extends HttpServlet {
         super();
     }
     
-    protected void CreatDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected Integer CreatDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
     		GoodDao gd = new GoodDaoImpl();
     		Good g = gd.findGoods(Integer.parseInt(request.getParameter("product_id")));
@@ -50,14 +50,15 @@ public class BuyServlet extends HttpServlet {
 			UserDao ud = new UserDaoImpl();
 			TransactionDao td = new TransactionDaoImpl();
 			
-			td.purchase(deal, sellerId);
+			return td.purchase(deal, sellerId);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+    	return null;
 	}
     
-    protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response, Integer transId) throws ServletException, IOException {
     	try {
 //    		UserDao ud = new UserDaoImpl();
     		TransactionDao td = new TransactionDaoImpl();
@@ -65,7 +66,8 @@ public class BuyServlet extends HttpServlet {
     		GoodDao gd = new GoodDaoImpl();
     		Good g = gd.findGoods(Integer.parseInt(request.getParameter("product_id")));
     		
-    		Integer id = td.findTrans_ID(g.getId(), "wait");
+//    		Integer id = td.findTrans_ID(g.getId(), "wait");
+    		Integer id = transId;
 			String realname = request.getParameter("realname");
 			String address = request.getParameter("address");
 			String dealtime = request.getParameter("date");
@@ -95,8 +97,8 @@ public class BuyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		CreatDeal(request, response);
-		SubmitInformation(request, response);
+		Integer transId = CreatDeal(request, response);
+		SubmitInformation(request, response, transId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

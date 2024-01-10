@@ -135,6 +135,7 @@
                     <%}else{ %>
                     <input type="submit" value="重新上架">
 		        	<%} %>
+		        	<p style="color:red">请重新选择商品子类别和是否冻结</p>
 	        </div>
 	        <div>
 	        	<!-- 图片全部显示，之后改成切换 -->  
