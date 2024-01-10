@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/information.css">
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 </head>
 <body>
 <%
@@ -51,7 +52,7 @@
             <div class="discribe">
                 <p>商品名称: <%= g.getItemName() %></p>
                 <p>商品描述: </p>
-                <div style="width:300px; height: 150px; border: 1px solid black; border-radius:2px; overflow:auto;">
+                <div id="editor" style="width:300px; height: 150px; border: 1px solid black; border-radius:2px;">
                 	<%= g.getItemDescription() %>
                 </div>
                 <p>商品生产批次: <%= g.getNumber() %></p>
@@ -88,5 +89,27 @@
         <a href="#">公益活动</a>
     </div>
 </div>
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+const toolbarOptions = [
+	['bold', 'italic', 'underline', 'strike'],
+	['blockquote', 'code-block'],
+	[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+	[{ 'script': 'sub'}, { 'script': 'super' }],
+	[{ 'indent': '-1'}, { 'indent': '+1' }],
+	[{ 'direction': 'rtl' }],
+	[{ 'size': ['small', false, 'large', 'huge'] }],
+	[{ 'header': [1, 2, 3, 4, false] }],
+	['clean']
+]
+var quill = new Quill('#editor', {
+	theme: 'bubble',
+	modules: {
+		toolbar: toolbarOptions
+	}
+});
+quill.disable();
+</script>
+
 </body>
 </html>

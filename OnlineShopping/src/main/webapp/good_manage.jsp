@@ -15,7 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link type="text/css" rel="stylesheet" href="./CSS/good_manage.css">
+	<link type="text/css" rel="stylesheet" href="./CSS/good_manage.css">
+	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 </head>
 <%
 	User curu = (User)request.getSession().getAttribute("curUser");
@@ -76,14 +77,17 @@
 	        </div>
 	        <div class="yp">
 	        
-	        	<form action="UpdateGoodServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data">
+	        	<form action="UpdateGoodServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
                 上传图片: <input type="file" name="picture"/>
                 <div class="discribe">
                     <p>
                         商品名称:<input type="text" name="name" value=<%=g.getItemName() %>>
                     </p>
                     <p>
-                        商品描述:<input type="text" name="detail" value=<%=g.getItemDescription() %>>
+                        商品描述:<input type="text" name="detail" style="display:none" id="description"><br>
+		                <div id="editor" style="width:300px; height: 150px; border: 1px solid black; border-radius:2px;">
+		                	<%= g.getItemDescription() %>
+		                </div>
                     </p>
                     <p>
                         商品生产批次:<input type="text" name="batch" value=<%=g.getNumber() %>>
@@ -158,6 +162,7 @@
 	        <a href="#">公益活动</a>
 	    </div>
     </div>
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 <script type="text/javascript">
 function showSubCategory(isPrescription) {
     var container = document.getElementById('subCategoryContainer');
@@ -186,6 +191,29 @@ function showSubCategory(isPrescription) {
         container.style.display = 'none';
         select.innerHTML = '';
     }
+}
+
+const toolbarOptions = [
+	['bold', 'italic', 'underline', 'strike'],
+	['blockquote', 'code-block'],
+	[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+	[{ 'script': 'sub'}, { 'script': 'super' }],
+	[{ 'indent': '-1'}, { 'indent': '+1' }],
+	[{ 'direction': 'rtl' }],
+	[{ 'size': ['small', false, 'large', 'huge'] }],
+	[{ 'header': [1, 2, 3, 4, false] }],
+	['clean']
+]
+var quill = new Quill('#editor', {
+	theme: 'bubble',
+	modules: {
+		toolbar: toolbarOptions
+	}
+});
+
+function checkForm(){
+	document.getElementById('description').value = (document.getElementsByClassName('ql-editor')[0]).innerHTML;
+	return true;
 }
 </script>
 </body>
