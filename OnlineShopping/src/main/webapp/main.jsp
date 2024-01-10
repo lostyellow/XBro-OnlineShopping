@@ -23,7 +23,12 @@ GoodList gl = (GoodList) session.getAttribute("goodsList");
 <div class="head">
     <div class="header">
         <a href="ShowGoodsList">首页</a>
-        <a href="back_stage.jsp">进入后台</a>
+        <c:if test="${curUser.user_group eq 'seller' }">
+	        <a href="back_stage.jsp">进入后台</a>
+        </c:if>
+        <c:if test="${curUser.user_group eq 'user' }">
+	        <a href="ShowBuyerDeal?method=userCheck">查看下单详情</a>
+        </c:if>
         <c:choose>
             <c:when test="${empty sessionScope.curUser}">
                 <a href="login.jsp">登录</a>

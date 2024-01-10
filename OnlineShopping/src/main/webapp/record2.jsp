@@ -18,12 +18,23 @@
 <body>
     <div class="head">
         <div class="header">
-          <a href="ShowGoodsList">首页</a>
-          <a href="back_stage.jsp">进入后台</a>
-          <%if(request.getSession().getAttribute("curUser")==null){ %>
-          <a href="login.jsp">登录</a><a href="register.jsp">注册</a><%}%><% else{ %>
-          <a href="QuitServlet">退出登录</a><%} %>
-        </div>
+        <a href="ShowGoodsList">首页</a>
+        <c:if test="${curUser.user_group eq 'seller' }">
+	        <a href="back_stage.jsp">进入后台</a>
+        </c:if>
+        <c:if test="${curUser.user_group eq 'user' }">
+	        <a href="ShowBuyerDeal?method=userCheck">查看下单详情</a>
+        </c:if>
+        <c:choose>
+            <c:when test="${empty sessionScope.curUser}">
+                <a href="login.jsp">登录</a>
+                <a href="register.jsp">注册</a>
+            </c:when>
+            <c:otherwise>
+                <a href="QuitServlet">退出登录</a>
+            </c:otherwise>
+        </c:choose>
+    </div>
     </div>   
     <div class="main">
             <div class="navbar">
