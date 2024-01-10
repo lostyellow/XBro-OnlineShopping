@@ -44,11 +44,9 @@ public class ShowGoodsDetail extends HttpServlet {
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         try {
             GoodDao gd = new GoodDaoImpl();
-            Good g = new Good();
-            String id = request.getParameter("id");
-            g = gd.findGoods(Integer.parseInt(id));
-            request.getSession().setAttribute("goods", g);
-            response.sendRedirect("information.jsp?id=" + id);
+            String id = request.getParameter("product_id");
+            Good g = gd.findGoods(Integer.parseInt(id));
+            response.sendRedirect("information.jsp?product_id=" + id);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

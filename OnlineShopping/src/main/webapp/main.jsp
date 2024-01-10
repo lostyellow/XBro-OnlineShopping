@@ -82,7 +82,7 @@ GoodList gl = (GoodList) session.getAttribute("goodsList");
                     List<String> pictures = gd.findAllPictures(g.getId());
             %>
 	            	<div class="yp">
-	                    <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">
+	                    <a href="ShowGoodsDetail?product_id=<%=Integer.toString(g.getId())%>">
 	                        <img src=<%=pictures.get(0)%>>
 	                    </a>
 	                    <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">

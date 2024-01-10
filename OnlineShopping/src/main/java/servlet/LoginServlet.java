@@ -60,9 +60,10 @@ public class LoginServlet extends HttpServlet {
 				user.setId(ud.findSeller_ID(user));
 				user.setUser_group(user_group);
 				request.getSession().setAttribute("curUser", user);
-				response.sendRedirect("main.jsp");
+				response.sendRedirect("ShowGoodsList");
 			}else {
 				request.getSession().setAttribute("loginStatus", "failed");
+				request.getSession().setAttribute("curUser", null);
 				response.sendRedirect("login.jsp");
 				
 			}
@@ -76,8 +77,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		doGet(request, response);
 	}
 

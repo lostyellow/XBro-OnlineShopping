@@ -19,16 +19,19 @@ public class ShowBuyerDeal extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String method = request.getParameter("method");
-		if("1".equals(method)) {
-			show(request,response);
-		}else {
-			TransactionDao td = new TransactionDaoImpl();
-			DealList dl = new DealList();
-			User user = (User)request.getSession().getAttribute("curUser");
-			int buyer_id = user.getId();
-			dl = td.findDealsByBuyer_id(buyer_id);
-			request.getSession().setAttribute("dealList",dl);
-		    response.sendRedirect("record2.jsp");
+		if("userCheck".equals(method)) { // 买家查看自己信息
+//			TransactionDao td = new TransactionDaoImpl();
+//			DealList dl = new DealList();
+//			User user = (User)request.getSession().getAttribute("curUser");
+//			int buyer_id = user.getId();
+//			dl = td.findDealsByBuyer_id(buyer_id);
+//			request.getSession().setAttribute("dealList",dl);
+			User curUser = (User)request.getSession().getAttribute("curUser");
+		    response.sendRedirect("record2.jsp?buyer_id=" + curUser.getId());
+		}else { // 卖家查看买家信息
+//		    show(request,response);
+			int buyer_id = Integer.parseInt(request.getParameter("buyer_id"));
+			response.sendRedirect("record2.jsp?buyer_id=" + buyer_id);
 		}
 		
 		
@@ -37,10 +40,10 @@ public class ShowBuyerDeal extends HttpServlet{
 		try {
 			TransactionDao td = new TransactionDaoImpl();
 			DealList dl = new DealList();
-			int product_id = Integer.parseInt(request.getParameter("buyer_id"));
-			dl = td.findDealsByBuyer_id(product_id);
-			request.getSession().setAttribute("dealList",dl);
-		    response.sendRedirect("record2.jsp");
+			int buyer_id = Integer.parseInt(request.getParameter("buyer_id"));
+//			dl = td.findDealsByBuyer_id(product_id);
+//			request.getSession().setAttribute("dealList",dl);
+		    response.sendRedirect("record2.jsp" + buyer_id);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,8 +51,8 @@ public class ShowBuyerDeal extends HttpServlet{
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		doGet(request, response);
 	}
 	

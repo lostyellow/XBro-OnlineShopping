@@ -1,3 +1,4 @@
+<%@page import="bean.User"%>
 <%@page import="bean.GoodList" %>
 <%@page import="dao.impl.GoodDaoImpl" %>
 <%@page import="dao.GoodDao" %>
@@ -22,9 +23,6 @@
     UserDao ud = new UserDaoImpl();
     GoodDao gd = new GoodDaoImpl();
     List<Good> goods = new ArrayList<Good>();
-    if (session.getAttribute("loginStatus") == null || session.getAttribute("loginStatus").equals("failed")) {
-        response.sendRedirect("login.jsp");
-    }
 %>
 
 <div class="head">
@@ -33,7 +31,9 @@
         <a href="back_stage.jsp">进入后台</a> 
         <a href="change_password.jsp">修改密码</a>
         <%
-            if (request.getSession().getAttribute("curUser") == null) {
+        	User curu = (User)request.getSession().getAttribute("curUser");
+            if (curu==null || !"seller".equals(curu.getUser_group())) {
+            	response.sendRedirect("login.jsp");
         %>
         <a href="login.jsp">登录</a>
         <a href="register.jsp">注册</a>
@@ -55,7 +55,7 @@
         <div class="shop">
             <span>店名</span> 
             <a href="history.jsp">查看历史商品</a>
-            <a href="ShowBuyerInformation">查看用户信息</a>
+            <a href="buyer_information.jsp">查看用户信息</a>
         </div>
         <div class="yp">
 

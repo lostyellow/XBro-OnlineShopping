@@ -13,6 +13,7 @@ import dao.impl.UserDaoImpl;
 public class ShowBuyerInformation extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
+	// !!!此servlet没有被使用, 可以删除
 	public ShowBuyerInformation() {
 		super();
 	}
@@ -34,8 +35,8 @@ public class ShowBuyerInformation extends HttpServlet{
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
-		response.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 			doGet(request, response);
 		}
 		

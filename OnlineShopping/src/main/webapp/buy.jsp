@@ -1,3 +1,4 @@
+<%@page import="bean.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,17 +36,23 @@
     </div>
     <div class="menu"></div>
     <div class="content">
+    	<%int productId = Integer.parseInt(request.getParameter("product_id")); %>
         <h1>输入个人信息</h1>
-        <form method="post" action="BuyServlet?method=submitinfo">
-            交易时间：<input type="datetime-local" name="date"><br>
-            地址：<input type="text" name="address"><br>
-            交易人：<input type="text" name="realname" style="width: 16px;">
+        <%User curUser = (User)request.getSession().getAttribute("curUser"); %>
+        <%if(curUser == null){ %>
+        <form method="post" action="BuyServlet?product_id=<%=productId %>">
+        <%}else{ %>
+        <form method="post" action="BuyServlet?product_id=<%=productId %>&buyer_id=<%=curUser.getId() %>">
+        <%} %>
+            交易时间：<input type="datetime-local" name="date" required><br>
+            地址：<input type="text" name="address" required><br>
+            交易人：<input type="text" name="realname" style="width: 16px;" required>
             <input type="radio" name="option" value="male" checked>先生
             <input type="radio" name="option" value="female">女士<br>
-            身份证号码：<input type="text" name="idcard"><br>
-            手机号：<input type="text" name="phone"><br>
+            身份证号码：<input type="text" name="idcard" required><br>
+            手机号：<input type="text" name="phone" required><br>
             备注：<br>
-            <textarea name="remark" cols="50" rows="10">请输入内容...</textarea><br>
+            <textarea name="remark" cols="50" rows="10"></textarea><br>
             <input type="submit" value="提交">
         </form>
     </div>

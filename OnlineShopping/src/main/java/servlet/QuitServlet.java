@@ -36,7 +36,7 @@ public class QuitServlet extends HttpServlet {
         try {
             //request.getSession().removeAttribute("curUser");
             //request.getSession().removeAttribute("loginStatus");
-            request.getSession().invalidate();
+            request.getSession().removeAttribute("curUser");
             response.sendRedirect("ShowGoodsList");
         } catch (Exception e) {
             // TODO: handle exception

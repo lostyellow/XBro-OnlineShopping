@@ -526,7 +526,7 @@ public class GoodDaoImpl implements GoodDao {
 			
 			Connection conn = DriverManager.getConnection(URL);
 			String sql = "select * from drugs "
-					+"where parent_sub_relation_id = ? and inventory <> 0";
+					+"where parent_sub_relation_id = ? and inventory <> 0 and is_frozen = 0";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, PSID);
 			ResultSet rs = ps.executeQuery();

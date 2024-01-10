@@ -1,3 +1,4 @@
+<%@page import="bean.User"%>
 <%@page import="dao.impl.TransactionDaoImpl"%>
 <%@page import="dao.TransactionDao"%>
 <%@page import="dao.impl.UserDaoImpl"%>
@@ -49,7 +50,8 @@
                 	<%
                 		UserDao ud = new UserDaoImpl();
                 		TransactionDao td = new TransactionDaoImpl();
-                		DealList dl = (DealList)session.getAttribute("dealList");
+                		Integer buyerId = Integer.parseInt(request.getParameter("buyer_id"));
+                		DealList dl = td.findDealsByBuyer_id(buyerId);
                 		for(Deal d:dl.getDeals()){
                 			%>
                     		<p><%=d.getProduct_id()%></p>

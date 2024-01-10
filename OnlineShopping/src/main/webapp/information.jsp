@@ -13,9 +13,10 @@
 </head>
 <body>
 <%
-    Good g = (Good) session.getAttribute("goods");
+	int productId = Integer.parseInt(request.getParameter("product_id"));
     GoodDao gd = new GoodDaoImpl();
-    List<String> pictures = gd.findAllPictures(g.getId());
+    Good g = gd.findGoods(productId);
+    List<String> pictures = gd.findAllPictures(productId);
 %>
 <div class="head">
     <div class="header">
@@ -71,7 +72,8 @@
                         <input type="radio" name="option2" checked disabled>否
                     <% } %>
                 </p>
-                <a href="buy.jsp"><button>购买</button></a>
+                <p>商品数量: <%=g.getInventory() %></p>
+                <a href="buy.jsp?product_id=<%=productId %>"><button>购买</button></a>
             </div>
         </div>
     </div>

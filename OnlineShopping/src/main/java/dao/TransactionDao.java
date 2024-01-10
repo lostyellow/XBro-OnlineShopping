@@ -9,9 +9,10 @@ public interface TransactionDao {
     /*
      * 购买商品操作，需要商品信息以及交易状态，交易时间，交易金额（建议增加交易订单类进行封装）
      * **/
+	// !!! problems here
     public int findTrans_ID(int product_id, String time);//通过商品id查找订单号
 
-    public void purchase(Deal deal,int seller_id);//根据buy页面的购买按钮实现交易商品信息以及时间的那个的上传。
+    public Integer purchase(Deal deal,int seller_id);//根据buy页面的购买按钮实现交易商品信息以及时间的那个的上传, 返回插入记录的id(整型)。
 
     public void updateTrans(int trans_id, String status);//更新订单状态,没有删除,交易失败则状态设置为“失败”
 
