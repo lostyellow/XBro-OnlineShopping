@@ -25,6 +25,7 @@ public class ShowBuyerInformation extends HttpServlet{
 			UserDao ud = new UserDaoImpl();
 			UserList ul = new UserList();
 			ul = ud.findBuyer_information();
+			request.getSession().removeAttribute("userList");
 			request.getSession().setAttribute("userList",ul);
 		    response.sendRedirect("buyer_information.jsp");
 		} catch (IOException e) {

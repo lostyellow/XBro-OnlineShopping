@@ -49,8 +49,11 @@ public class BuyServlet extends HttpServlet {
 			
 			UserDao ud = new UserDaoImpl();
 			TransactionDao td = new TransactionDaoImpl();
-			
-			return td.purchase(deal, sellerId);
+
+			// !!!未登录购买时 buyerId 设置成 0
+			Integer buyerId = 0;
+			if(request.getParameter("buyer_id") != null) buyerId = Integer.parseInt(request.getParameter("buyer_id"));
+			return td.purchase(deal, buyerId);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

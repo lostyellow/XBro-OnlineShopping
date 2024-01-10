@@ -263,7 +263,7 @@ public class UserDaoImpl implements UserDao{
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL);
 
-			String sql = "select username,password,tele,address from users where user_group = ?";
+			String sql = "select username,password,tele,address,user_id from users where user_group = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, "user");
 			ResultSet rs = ps.executeQuery();
@@ -277,6 +277,7 @@ public class UserDaoImpl implements UserDao{
 				user.setPassword(rs.getString(2));
 				user.setTele(rs.getString(3));
 				user.setAddress(rs.getString(4));
+				user.setId(rs.getInt(5));
 				UserList.add(user);
 			}
 

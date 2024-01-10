@@ -58,7 +58,6 @@ public class TransactionDaoImpl implements TransactionDao {
 					+ "values(?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, deal.getProduct_id());
-			//Test
 			ps.setInt(2, buyer_id);
 			ps.setString(3, deal.getStatus());
 			ps.setString(4, deal.getTime());

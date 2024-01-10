@@ -41,15 +41,16 @@
                 <p>交易地址</p>
                 <p>操作</p>
                 	<%
-                		UserDao ud = new UserDaoImpl();
-                	    UserList ul = (UserList)session.getAttribute("userList");
+	                	UserDao ud = new UserDaoImpl();
+	        			UserList ul = new UserList();
+	        			ul = ud.findBuyer_information();
                 	    for(User u:ul.getUserList()){
                 			%>
                     		<p><%=u.getUserName()%></p>
                             <p><%=u.getPassword()%></p>
                             <p><%=u.getTele()%></p>
                             <p><%=u.getAddress()%></p>
-                            <p><a href="record2.html">查看其订单</a></p>
+                            <p><a href="ShowBuyerDeal?buyer_id=<%=u.getId()%>">查看其订单</a></p>
                 			<%
                 		}
                 	%>
