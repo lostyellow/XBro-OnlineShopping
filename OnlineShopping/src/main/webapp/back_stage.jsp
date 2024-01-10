@@ -55,7 +55,7 @@
         <div class="shop">
             <span>店名</span> 
             <a href="history.jsp">查看历史商品</a>
-            <a href="ShowBuyerInformation">查看用户信息</a>
+            <a href="buyer_information.jsp">查看用户信息</a>
         </div>
         <div class="yp">
 

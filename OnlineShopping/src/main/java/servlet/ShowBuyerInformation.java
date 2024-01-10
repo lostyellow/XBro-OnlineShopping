@@ -13,6 +13,7 @@ import dao.impl.UserDaoImpl;
 public class ShowBuyerInformation extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
+	// !!!此servlet没有被使用, 可以删除
 	public ShowBuyerInformation() {
 		super();
 	}
@@ -25,7 +26,6 @@ public class ShowBuyerInformation extends HttpServlet{
 			UserDao ud = new UserDaoImpl();
 			UserList ul = new UserList();
 			ul = ud.findBuyer_information();
-			request.getSession().removeAttribute("userList");
 			request.getSession().setAttribute("userList",ul);
 		    response.sendRedirect("buyer_information.jsp");
 		} catch (IOException e) {
