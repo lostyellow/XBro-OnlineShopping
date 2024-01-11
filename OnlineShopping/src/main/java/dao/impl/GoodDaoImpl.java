@@ -18,14 +18,15 @@ public class GoodDaoImpl implements GoodDao {
     public static final String PWD = "root";
 
     @Override
-    public GoodList findAllGoods() {
+    public GoodList findAllGoods(int sellerId) {
         // TODO Auto-generated method stub
         try {
             Class.forName(DRIVER);
 
             Connection conn = DriverManager.getConnection(URL);
-            String sql = "select * from drugs";
+            String sql = "select * from drugs where seller_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, sellerId);
             ResultSet rs = ps.executeQuery();
 
             GoodList goodsList = new GoodList();
@@ -65,7 +66,7 @@ public class GoodDaoImpl implements GoodDao {
             Connection conn = DriverManager.getConnection(URL);
             String sql = "select * from drugs where product_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, Integer.toString(product_id));
+            ps.setInt(1, product_id);
             ResultSet rs = ps.executeQuery();
 
             Good goods = new Good();
@@ -210,32 +211,32 @@ public class GoodDaoImpl implements GoodDao {
     }
 
     // 仅基线使用
-    @Override
-    public boolean anyForSale() {
-        try {
-            Class.forName(DRIVER);
-
-            Connection conn = DriverManager.getConnection(URL);
-            String sql = "select * from drugs where inventory <> 0";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            boolean res;
-            if (rs.next()) res = true;
-            else res = false;
-
-            ps.close();
-            conn.close();
-            rs.close();
-
-            return res;
-
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    @Override
+//    public boolean anyForSale() {
+//        try {
+//            Class.forName(DRIVER);
+//
+//            Connection conn = DriverManager.getConnection(URL);
+//            String sql = "select * from drugs where inventory <> 0";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//
+//            boolean res;
+//            if (rs.next()) res = true;
+//            else res = false;
+//
+//            ps.close();
+//            conn.close();
+//            rs.close();
+//
+//            return res;
+//
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
     @Override
     public GoodList findOnSaleGood() {

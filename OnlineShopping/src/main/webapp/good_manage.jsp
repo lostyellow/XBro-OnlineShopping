@@ -19,8 +19,8 @@
 	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 </head>
 <%
-	User curu = (User)request.getSession().getAttribute("curUser");
-	if (curu==null || !"seller".equals(curu.getUser_group())) {
+	User curUser = (User)request.getSession().getAttribute("curUser");
+	if (curUser==null || !"seller".equals(curUser.getUser_group())) {
 		response.sendRedirect("login.jsp");
 	}
 	
@@ -50,7 +50,7 @@
 
     <div class="head">
         <div class="header">
-          <a href="ShowGoodsList">首页</a>
+          <a href="main.jsp">首页</a>
           <a href="back_stage.jsp">进入后台</a>
 	  <a href="change_password.jsp">修改密码</a>	
           <%
@@ -77,8 +77,15 @@
 	        </div>
 	        <div class="yp">
 	        
-	        	<form action="UpdateGoodServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
-                上传图片: <input type="file" name="picture"/>
+	        	<form action="AddPictureServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data">
+		        	<p>
+	                	上传图片: <input type="file" name="picture"/>
+	                </p>
+	                <p>
+	                	<input type="submit" value="上传图片">
+	                </p>
+                </form>
+                <form action="UpdateGoodServlet?product_id=<%=g.getId() %>" method="post" onsubmit="return checkForm();">
                 <div class="discribe">
                     <p>
                         商品名称:<input type="text" name="name" value=<%=g.getItemName() %>>
@@ -140,7 +147,8 @@
                     <input type="submit" value="重新上架">
 		        	<%} %>
 		        	<p style="color:red">请重新选择商品子类别和是否冻结</p>
-	        </div>
+	        	</div>
+	        	</form>
 	        <div>
 	        	<!-- 图片全部显示，之后改成切换 -->  
                 <%
@@ -154,6 +162,7 @@
                 %>
 	        </div>
 	    </div>
+	</div>
 	    <div class="sidebar"></div>
 	    <div class="footer">
 	        <a href="#">关于我们</a>

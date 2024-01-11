@@ -54,7 +54,7 @@ public class DeleteGoodServlet extends HttpServlet {
             Good old_good = gl.getGoodByName(product_name);
             int product_id = gd.findProduct_ID(seller_id, old_good);
             gd.deleteGoods(product_id);
-            response.sendRedirect("ShowGoodsList");
+            response.sendRedirect("main.jsp");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

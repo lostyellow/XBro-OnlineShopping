@@ -19,7 +19,7 @@
 <body>
     <div class="head">
         <div class="header">
-        <a href="ShowGoodsList">首页</a>
+        <a href="main.jsp">首页</a>
         <c:if test="${curUser.user_group eq 'seller' }">
 	        <a href="back_stage.jsp">进入后台</a>
         </c:if>

@@ -17,11 +17,11 @@
 <body>
 <div class="head">
     <div class="header">
-        <a href="ShowGoodsList">首页</a>
+        <a href="main.jsp">首页</a>
         <a href="back_stage.jsp">进入后台</a>
         <%
-	        User curu = (User)request.getSession().getAttribute("curUser");
-	        if (curu==null || !"seller".equals(curu.getUser_group())) {
+	        User curUser = (User)request.getSession().getAttribute("curUser");
+	        if (curUser==null || !"seller".equals(curUser.getUser_group())) {
 	        	response.sendRedirect("login.jsp");
 	        }
         %>

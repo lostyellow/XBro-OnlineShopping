@@ -8,14 +8,13 @@ import bean.GoodList;
 public interface GoodDao {
     /*
      * findAllGoods()
-     * 无输入参数
+     * 输入卖家id
      * 返回值为商品列表类, 仅设置商品的以下信息:
      * 	商品ID (主页面商品url)
      * 	商品名称 (主页面商品名)
-     * 	商品图片 (主页面商品图片)
      * 用于显示历史商品
      * **/
-    public GoodList findAllGoods();
+    public GoodList findAllGoods(int sellerId);
 
     /*
      * findGoods()
@@ -54,7 +53,7 @@ public interface GoodDao {
      * - 仅基线有用
      * 用于在基线判断是否允许上新商品（逻辑为inventory<>0）
      * **/
-    public boolean anyForSale();
+//    public boolean anyForSale();
 
     public void takeOnGood(int product_id);
 
