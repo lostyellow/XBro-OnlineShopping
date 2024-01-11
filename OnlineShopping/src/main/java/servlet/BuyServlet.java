@@ -90,7 +90,7 @@ public class BuyServlet extends HttpServlet {
 			buyer.setText(remark);
 			
 			od.submitdeal(buyer);
-			response.sendRedirect("ShowGoodsList");
+			response.sendRedirect("main.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

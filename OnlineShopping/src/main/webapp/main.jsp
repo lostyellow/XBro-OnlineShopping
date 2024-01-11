@@ -17,12 +17,15 @@
 
 <body>
 <%
+// GoodDao gd = new GoodDaoImpl();
+// GoodList gl = (GoodList) session.getAttribute("goodsList");
 GoodDao gd = new GoodDaoImpl();
-GoodList gl = (GoodList) session.getAttribute("goodsList");
+// GoodList gl = new GoodList();
+GoodList gl = gd.findForSaleGoods();
 %>
 <div class="head">
     <div class="header">
-        <a href="ShowGoodsList">首页</a>
+        <a href="main.jsp">首页</a>
         <c:if test="${curUser.user_group eq 'seller' }">
 	        <a href="back_stage.jsp">进入后台</a>
         </c:if>
@@ -83,7 +86,9 @@ GoodList gl = (GoodList) session.getAttribute("goodsList");
             %>
 	            	<div class="yp">
 	                    <a href="ShowGoodsDetail?product_id=<%=Integer.toString(g.getId())%>">
+	                    	<%if(pictures.size()>0){ %>
 	                        <img src=<%=pictures.get(0)%>>
+	                        <%} %>
 	                    </a>
 	                    <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">
 	                        <p><%=g.getItemName()%></p>

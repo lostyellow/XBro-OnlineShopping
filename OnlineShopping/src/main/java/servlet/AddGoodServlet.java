@@ -116,7 +116,7 @@ public class AddGoodServlet extends HttpServlet {
             gd.addGoods(seller_id, good);
             int product_id = gd.findProduct_ID(seller_id, good);
             gd.addGoodPicture(product_id, imgURL);
-            response.sendRedirect("ShowGoodsList");
+            response.sendRedirect("main.jsp");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

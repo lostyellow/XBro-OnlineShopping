@@ -60,36 +60,43 @@ public class UpdateGoodServlet extends HttpServlet {
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();
-            SmartUpload su = new SmartUpload();
-
-            JspFactory factory = JspFactory.getDefaultFactory();
-            PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
-            su.initialize(pageContext);
-            su.upload();
-            File file = su.getFiles().getFile(0);
-            String fileName = file.getFileName();
             
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            Date dateTime = new Date();
-            String formatDateTime = sdf.format(dateTime);
-            
-            String url = "./img/customs/" + formatDateTime + "_" + fileName;
-            file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
-            Request suRequest = su.getRequest();
-
+            // !!!不允许访问不是自己发布的商品, 会跳转到登录页面
             int seller_id = ud.findSeller_ID(user);
+            int product_id = Integer.parseInt(request.getParameter("product_id"));
+            GoodDao gd = new GoodDaoImpl();
+            Good searchGood = gd.findGoods(product_id);
+            if(!searchGood.getSellerId().equals(seller_id)) {
+            	response.sendRedirect("login.jsp");
+            }
+            
+//            SmartUpload su = new SmartUpload();
+//            JspFactory factory = JspFactory.getDefaultFactory();
+//            PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
+//            su.initialize(pageContext);
+//            su.upload();
+//            File file = su.getFiles().getFile(0);
+//            String fileName = file.getFileName();
+            
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//            Date dateTime = new Date();
+//            String formatDateTime = sdf.format(dateTime);
+            
+//            String url = "./img/customs/" + formatDateTime + "_" + fileName;
+//            file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
+//            Request suRequest = su.getRequest();
 
             Good good = new Good();
 
-            String itemName = suRequest.getParameter("name");
-            String itemDescription = suRequest.getParameter("detail");
-            String imgURL = url;
-            Float price = Float.parseFloat(suRequest.getParameter("price"));
-            String number = suRequest.getParameter("batch");//生产批次号
-            String date = suRequest.getParameter("date");//有效期
+            String itemName = request.getParameter("name");
+            String itemDescription = request.getParameter("detail");
+//            String imgURL = url;
+            Float price = Float.parseFloat(request.getParameter("price"));
+            String number = request.getParameter("batch");//生产批次号
+            String date = request.getParameter("date");//有效期
             Boolean isPres;
             Boolean isFrozen;
-            if (suRequest.getParameter("option3").equals("yes")) {
+            if (request.getParameter("option3").equals("yes")) {
                 isPres = true;
             } else {
                 isPres = false;
@@ -99,19 +106,19 @@ public class UpdateGoodServlet extends HttpServlet {
             if(!isPres) {
             	parentID = 2;
             }
-            String subCategory = suRequest.getParameter("subCategory");
+            String subCategory = request.getParameter("subCategory");
             
             CategoryDao cd = new CategoryDaoImpl();
             int subID = cd.findSubIDBySubName(subCategory);
             int PSID = cd.findPSIDByPIDAndSID(parentID, subID);
             
-            if (suRequest.getParameter("option4").equals("yes")) {
+            if (request.getParameter("option4").equals("yes")) {
                 isFrozen = true;
             } else {
                 isFrozen = false;
             }
             
-            int inventory = Integer.parseInt(suRequest.getParameter("inventory"));
+            int inventory = Integer.parseInt(request.getParameter("inventory"));
 
             good.setItemName(itemName);
             good.setItemDescription(itemDescription);
@@ -125,11 +132,9 @@ public class UpdateGoodServlet extends HttpServlet {
             good.setPSID(PSID);
 
             
-            int product_id = Integer.parseInt(request.getParameter("product_id"));
-            GoodDao gd = new GoodDaoImpl();
             gd.updateGoods(good, product_id);
-            gd.addGoodPicture(product_id, imgURL);
-            response.sendRedirect("ShowGoodsList");
+//            gd.addGoodPicture(product_id, imgURL);
+            response.sendRedirect("main.jsp");
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
