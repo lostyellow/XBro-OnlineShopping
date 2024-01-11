@@ -44,14 +44,24 @@ public class GetCategoryGoods extends HttpServlet {
         
         for (Good good : goodList) {
         	List<String> pictures = gd.findAllPictures(good.getId());
-            htmlResponse.append("<div class='yp'>")
-            			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
-            			.append("<img src='").append(pictures.get(0)).append("' alt='商品图片' />")
-                        .append("</a>")
-            			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
-                        .append("<p>").append(good.getItemName()).append("</p>")
-                        .append("</a>")
-                        .append("</div>");
+        	if(pictures.size()>0) {
+	            htmlResponse.append("<div class='yp'>")
+	            			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
+	            			.append("<img src='").append(pictures.get(0)).append("' alt='商品图片' />")
+	                        .append("</a>")
+	            			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
+	                        .append("<p>").append(good.getItemName()).append("</p>")
+	                        .append("</a>")
+	                        .append("</div>");
+        	} else {
+        		htmlResponse.append("<div class='yp'>")
+			    			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
+			                .append("</a>")
+			    			.append("<a href='ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>'>")
+			                .append("<p>").append(good.getItemName()).append("</p>")
+			                .append("</a>")
+			                .append("</div>");
+        	}
         }
 
         response.setContentType("text/html");
