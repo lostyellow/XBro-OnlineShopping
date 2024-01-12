@@ -48,7 +48,7 @@ public class DeleteGoodServlet extends HttpServlet {
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();
 
-            int seller_id = ud.findSeller_ID(user);
+            int seller_id = ud.findUser_ID(user);
 
             GoodDao gd = new GoodDaoImpl();
             GoodList gl = gd.findForSaleGoods();

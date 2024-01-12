@@ -64,7 +64,7 @@ public class UpdateGoodServlet extends HttpServlet {
             UserDao ud = new UserDaoImpl();
             
             // !!!不允许访问不是自己发布的商品, 会跳转到登录页面
-            int seller_id = ud.findSeller_ID(user);
+            int seller_id = ud.findUser_ID(user);
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             GoodDao gd = new GoodDaoImpl();
             Good searchGood = gd.findGoods(product_id);

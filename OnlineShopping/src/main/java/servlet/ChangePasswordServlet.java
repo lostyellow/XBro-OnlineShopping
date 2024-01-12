@@ -36,7 +36,7 @@ public class ChangePasswordServlet extends HttpServlet {
                     pbm = "notSameNewPwd";
                 } else { //都一样去更改密码
                     UserDao ud = new UserDaoImpl();
-                    int userId = ud.findSeller_ID(curUser);
+                    int userId = ud.findUser_ID(curUser);
                     System.out.println("------------------" + userId);
                     ud.changePwd(userId, newPwd1);
                     request.getSession().removeAttribute("curUser");

@@ -25,7 +25,7 @@ public class FindPasswordServlet extends HttpServlet {
         String realname = request.getParameter("RealName");
         String idcard = request.getParameter("id_card");
         UserDao ud = new UserDaoImpl();
-        String pwd = ud.findSeller_PWD(realname, idcard);
+        String pwd = ud.findUser_PWD(realname, idcard);
         request.setAttribute("pwd", pwd);
         request.getRequestDispatcher("find_password.jsp").forward(request, response);
     }
