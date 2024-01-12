@@ -76,8 +76,14 @@
 	            <span>店名</span>
 	        </div>
 	        <div class="yp">
-	        
-	        	<form action="AddPictureServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data">
+	        	<select name="imageSelector" id="imageSelector" onchange="showSelectedImage()">
+				    <% for(int i = 0; i < pictures.size(); i++) { %>
+				        <option value="image<%= i+1 %>">图片 <%= i+1 %></option>
+				    <% } %>
+				    <option value="newImage">新增图片</option>
+				</select>
+					        	
+	        	<form id="uploadForm" action="AddPictureServlet?product_id=<%=g.getId() %>" method="post" enctype="multipart/form-data">
 		        	<p>
 	                	上传图片: <input type="file" name="picture"/>
 	                </p>
@@ -149,17 +155,9 @@
 		        	<p style="color:red">请重新选择商品子类别和是否冻结</p>
 	        	</div>
 	        	</form>
-	        <div>
-	        	<!-- 图片全部显示，之后改成切换 -->  
-                <%
-                	for(String i : pictures){
-                		%>
-                		<a href="DeletePictureServlet?product_id=<%=product_id %>&url=<%=i %>">
-                			<img src=<%=i %>>
-                		</a>
-                		<%
-                	}
-                %>
+	        <div id="imageContainer">
+		        <img src="" id="displayedImage">
+		        <button id="deleteButton" class="delete-btn">删除</button>
 	        </div>
 	    </div>
 	</div>
@@ -223,6 +221,58 @@ var quill = new Quill('#editor', {
 function checkForm(){
 	document.getElementById('description').value = (document.getElementsByClassName('ql-editor')[0]).innerHTML;
 	return true;
+}
+</script>
+<!-- select切换图片 -->
+<script>
+var images = {
+    <% for(int index = 1; index <= pictures.size(); index++) {
+        String picture = pictures.get(index - 1);
+        out.println("'image" + index + "': '" + picture + "'" + (index < pictures.size() ? "," : ""));
+    } %>
+};
+function showSelectedImage() {
+    var imageSelector = document.getElementById('imageSelector');
+    var selectedValue = imageSelector.value;
+
+    var imageContainer = document.getElementById('imageContainer');
+    var uploadForm = document.getElementById('uploadForm');
+    var deleteButton = document.getElementById('deleteButton'); // 假设删除按钮的 ID 是 'deleteButton'
+
+    if(selectedValue === 'newImage') {
+        // 显示上传表单，隐藏图片容器
+        uploadForm.style.display = 'block';
+        imageContainer.style.display = 'none';
+    } else {
+        // 显示图片，隐藏上传表单
+        uploadForm.style.display = 'none';
+        imageContainer.style.display = 'block';
+
+        // 根据选项的值获取对应的图片 URL
+        var imageUrl = getUrlForImage(selectedValue);
+
+        // 设置图片的 src 属性
+        var displayedImage = document.getElementById('displayedImage');
+        displayedImage.src = imageUrl;
+
+        // 更新删除按钮的 onclick 事件
+        deleteButton.onclick = function() {
+            deleteImage(imageUrl);
+        };
+    }
+}
+
+function deleteImage(imageUrl) {
+    window.location.href = 'DeletePictureServlet?product_id=<%=product_id %>&url=' + encodeURIComponent(imageUrl);
+}
+function getUrlForImage(imageId) {
+    // 这个函数需要返回对应 imageId 的 URL
+    return images[imageId];
+}
+
+// 初始时加载默认图片
+window.onload = function() {
+    showSelectedImage();
 }
 </script>
 </body>

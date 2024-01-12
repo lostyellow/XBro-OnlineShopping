@@ -2,6 +2,7 @@ package dao.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -181,4 +182,35 @@ public class DatabaseDaoImpl implements DatabaseDao {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public String destroyDB() {
+        Connection conn = null;
+        Statement stmt = null;
+		try {
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            stmt = conn.createStatement();
+            
+            String[] tableNameList = {"drugs", "order_details", "pictures", "transactions", "users",
+            		"user_group", "ParentSubRelation", "ParentCategory", "SubCategory"}; 
+            
+            String sql = "DROP TABLE IF EXISTS ?;";
+            PreparedStatement ps = null;
+            for (String tableName : tableNameList) {
+                ps = conn.prepareStatement(sql);
+				ps.setString(1, tableName);
+				int rs = ps.executeUpdate();
+			}
+            
+            ps.close();
+            conn.close();
+            
+            return "destory Database failed success";
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return "destory Database failed";
+	}
 }

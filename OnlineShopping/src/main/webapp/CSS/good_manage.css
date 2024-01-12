@@ -168,3 +168,17 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+#uploadForm {
+    display: none;
+}
+   .image-container {
+    position: relative;
+    display: inline-block; /* 或其他适合的布局方式 */
+}
+
+.delete-btn {
+    display: block;
+    opacity: 0.5; /* 设置透明度 */
+    transition: opacity 0.5s ease; /* 平滑过渡效果 */
+}

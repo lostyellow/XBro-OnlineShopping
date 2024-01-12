@@ -11,6 +11,7 @@
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/information.css">
     <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <%
@@ -40,15 +41,35 @@
             <span><%= g.getSellerId() %></span>
         </div>
         <div class="yp">
-            <div class="photo">
-                <!-- <img src="<%= pictures.get(0) %>"> -->
-                <!-- 图片全部显示，之后改成切换 -->
-                <%
-                	for(String i : pictures){
-                		%> <img src=<%=i %>> <%
-                	}
-                %>
-            </div>
+	        <div class="photo">
+       			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+				  <ol class="carousel-indicators">
+				    <% int index = 0; %>
+				    <% for(String i : pictures) { %>
+				      <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index == 0 ? "active" : "" %>"></li>
+				      <% index++; %>
+				    <% } %>
+				  </ol>
+				  <div class="carousel-inner">
+				    <% index = 0; %>
+				    <% for(String i : pictures) { %>
+				      <div class="carousel-item <%= index == 0 ? "active" : "" %>">
+				        <img class="d-block w-100" src="<%= i %>" alt="Slide <%= index %>">
+				      </div>
+				      <% index++; %>
+				    <% } %>
+				  </div>
+				  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+	        </div>
+
             <div class="discribe">
                 <p>商品名称: <%= g.getItemName() %></p>
                 <p>商品描述: </p>
@@ -110,6 +131,9 @@ var quill = new Quill('#editor', {
 });
 quill.disable();
 </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
