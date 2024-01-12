@@ -90,7 +90,7 @@ GoodList gl = gd.findForSaleGoods();
 	                        <img src=<%=pictures.get(0)%>>
 	                        <%} %>
 	                    </a>
-	                    <a href="ShowGoodsDetail?id=<%=Integer.toString(g.getId())%>">
+	                    <a href="ShowGoodsDetail?product_id=<%=Integer.toString(g.getId())%>">
 	                        <p><%=g.getItemName()%></p>
 	                    </a>
 	            	</div>
