@@ -21,6 +21,8 @@ public class ChangePasswordServlet extends HttpServlet {
     }
 
     protected void verifyOldPwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         User curUser = (User) request.getSession().getAttribute("curUser");
         String oldPwd = request.getParameter("OldPwd");
         String newPwd1 = request.getParameter("NewPassword1");

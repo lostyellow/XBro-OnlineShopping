@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="dao.impl.UserDaoImpl"%>
 <%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,8 +43,7 @@
                 <p>操作</p>
                 	<%
 	                	UserDao ud = new UserDaoImpl();
-	        			UserList ul = new UserList();
-	        			ul = ud.findBuyer_information();
+	        			UserList ul = ud.findBuyer_information();
                 	    for(User u:ul.getUserList()){
                 			%>
                     		<p><%=u.getUserName()%></p>

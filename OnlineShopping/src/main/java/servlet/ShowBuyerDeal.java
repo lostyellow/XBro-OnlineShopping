@@ -38,6 +38,8 @@ public class ShowBuyerDeal extends HttpServlet{
 	}
 	private void show(HttpServletRequest request, HttpServletResponse response) {
 		try {
+	    	request.setCharacterEncoding("utf-8");
+	        response.setCharacterEncoding("utf-8");
 			TransactionDao td = new TransactionDaoImpl();
 			DealList dl = new DealList();
 			int buyer_id = Integer.parseInt(request.getParameter("buyer_id"));

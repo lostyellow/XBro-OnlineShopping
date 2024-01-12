@@ -43,6 +43,8 @@ public class ShowGoodsDetail extends HttpServlet {
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) {
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             GoodDao gd = new GoodDaoImpl();
             String id = request.getParameter("product_id");
             Good g = gd.findGoods(Integer.parseInt(id));

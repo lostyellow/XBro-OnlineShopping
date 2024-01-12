@@ -5,7 +5,11 @@ import java.util.List;
 
 public class UserList {
 
-	static List<User> users = new ArrayList<User>();
+	static List<User> users;
+	
+	public UserList() {
+		this.users = new ArrayList<User>();
+	}
 	
 	public static void add(User u) {
 		users.add(u);
