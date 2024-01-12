@@ -45,6 +45,8 @@ public class RegisterServlet extends HttpServlet {
 	private void businessRegister(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
+	    	request.setCharacterEncoding("utf-8");
+	        response.setCharacterEncoding("utf-8");
 			UserDao ud = new UserDaoImpl();
 
 			String oou = ud.onlyOneUser();

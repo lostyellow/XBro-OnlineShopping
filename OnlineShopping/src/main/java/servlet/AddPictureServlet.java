@@ -50,6 +50,8 @@ public class AddPictureServlet extends HttpServlet {
 	
 	private void addPicture(HttpServletRequest request, HttpServletResponse response) {
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();

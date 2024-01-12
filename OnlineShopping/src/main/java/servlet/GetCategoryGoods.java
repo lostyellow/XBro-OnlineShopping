@@ -33,6 +33,8 @@ public class GetCategoryGoods extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		// TODO Auto-generated method stub
         String psid = request.getParameter("psid");
         int PSID = Integer.parseInt(psid);

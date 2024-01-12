@@ -45,6 +45,8 @@ public class AgreeServlet extends HttpServlet {
     private void agree(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
             UserDao ud = new UserDaoImpl();

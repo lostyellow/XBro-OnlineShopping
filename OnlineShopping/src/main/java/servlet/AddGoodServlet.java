@@ -51,6 +51,8 @@ public class AddGoodServlet extends HttpServlet {
     private void addGood(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();

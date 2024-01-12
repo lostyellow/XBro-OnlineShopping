@@ -37,6 +37,8 @@ public class LoginServlet extends HttpServlet {
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) {
 		try {
+	    	request.setCharacterEncoding("utf-8");
+	        response.setCharacterEncoding("utf-8");
 			String username = request.getParameter("UserName");
 			String password = request.getParameter("Password");
 			
