@@ -14,5 +14,5 @@ public User findUserByID(int userID);//通过ID查找用户
 public void changePwd(int userId, String newPwd);//查看旧密码是否正确
 public String findUser_PWD(String realname, String id_card);//查找卖家密码
 public UserList findBuyer_information();//查看所有注册用户信息
-
+public Boolean hasSameUsername(String userName);//在注册的时候查看查看是否有用户名重复
 }
