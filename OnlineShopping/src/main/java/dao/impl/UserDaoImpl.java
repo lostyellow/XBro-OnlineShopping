@@ -328,4 +328,31 @@ public class UserDaoImpl implements UserDao{
 		}
 		return null;
 	}
+	@Override
+	public Boolean hasSameUsername(String userName) {
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL);
+
+			String sql = "select * from users where username = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userName);
+			ResultSet rs = ps.executeQuery();
+
+
+			while(rs.next()) {
+				return true;
+			}
+
+			ps.close();
+			conn.close();
+			rs.close();
+
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
