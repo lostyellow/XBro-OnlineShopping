@@ -20,6 +20,8 @@ public class FindPasswordServlet extends HttpServlet {
     }
     
     protected void findpwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String realname = request.getParameter("RealName");
         String idcard = request.getParameter("id_card");
         UserDao ud = new UserDaoImpl();

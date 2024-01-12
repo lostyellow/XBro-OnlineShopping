@@ -35,6 +35,8 @@ public class DeletePictureServlet extends HttpServlet {
 	
 	private void deletePicture(HttpServletRequest request, HttpServletResponse response) {
 		try {
+	    	request.setCharacterEncoding("utf-8");
+	        response.setCharacterEncoding("utf-8");
 			String pictureURL = request.getParameter("url");
 			String product_id = request.getParameter("product_id");
 			GoodDao gd = new GoodDaoImpl();

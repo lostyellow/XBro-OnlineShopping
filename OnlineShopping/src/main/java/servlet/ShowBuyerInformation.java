@@ -23,6 +23,8 @@ public class ShowBuyerInformation extends HttpServlet{
 	}
 	private void show(HttpServletRequest request, HttpServletResponse response) {
 		try {
+	    	request.setCharacterEncoding("utf-8");
+	        response.setCharacterEncoding("utf-8");
 			UserDao ud = new UserDaoImpl();
 			UserList ul = new UserList();
 			ul = ud.findBuyer_information();

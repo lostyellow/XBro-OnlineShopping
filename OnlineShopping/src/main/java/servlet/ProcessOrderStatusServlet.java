@@ -25,6 +25,8 @@ public class ProcessOrderStatusServlet extends HttpServlet {
     }
     
     protected void success(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         int product_id = Integer.parseInt(request.getParameter("product_id"));
         int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
         UserDao ud = new UserDaoImpl();
@@ -36,6 +38,8 @@ public class ProcessOrderStatusServlet extends HttpServlet {
     }
 
     protected void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         int transaction_id = Integer.parseInt(request.getParameter("transaction_id"));
         UserDao ud = new UserDaoImpl();
         GoodDao gd = new GoodDaoImpl();

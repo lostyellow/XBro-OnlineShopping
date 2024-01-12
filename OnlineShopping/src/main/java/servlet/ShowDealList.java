@@ -30,7 +30,8 @@ public class ShowDealList extends HttpServlet {
 
     private void show(HttpServletRequest request, HttpServletResponse response) {
         try {
-
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             UserDao ud = new UserDaoImpl();
             TransactionDao td = new TransactionDaoImpl();
             int product_id = Integer.parseInt(request.getParameter("product_id"));

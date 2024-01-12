@@ -57,6 +57,8 @@ public class UpdateGoodServlet extends HttpServlet {
     private void UpdateGood(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();
@@ -147,6 +149,8 @@ public class UpdateGoodServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         doGet(request, response);
     }
 

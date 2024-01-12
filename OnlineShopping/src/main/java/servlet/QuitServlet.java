@@ -34,6 +34,8 @@ public class QuitServlet extends HttpServlet {
     private void quit(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             //request.getSession().removeAttribute("curUser");
             //request.getSession().removeAttribute("loginStatus");
             request.getSession().removeAttribute("curUser");

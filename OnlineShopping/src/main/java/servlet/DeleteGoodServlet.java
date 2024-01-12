@@ -42,6 +42,8 @@ public class DeleteGoodServlet extends HttpServlet {
     private void deleteGood(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
+        	request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
             User user = null;
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();

@@ -63,6 +63,8 @@ public class BuyServlet extends HttpServlet {
     
     protected void SubmitInformation(HttpServletRequest request, HttpServletResponse response, Integer transId) throws ServletException, IOException {
     	try {
+    		request.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding("utf-8");
 //    		UserDao ud = new UserDaoImpl();
     		TransactionDao td = new TransactionDaoImpl();
     		OrderDao od = new OrderDaoImpl();
