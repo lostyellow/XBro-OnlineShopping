@@ -50,9 +50,8 @@ public class LoginServlet extends HttpServlet {
 				User user = new User();
 				user.setUserName(username);
 				user.setPassword(password);
-				user.setUser_group(user_group);
-				Integer id = ud.findSeller_ID(user);
-				user.setId(id);
+				Integer id = ud.findUser_ID(user);
+				user = ud.findUserByID(id);
 				request.getSession().setAttribute("curUser", user);
 				response.sendRedirect("back_stage.jsp");
 			}else if("user".equals(user_group)){
@@ -61,10 +60,8 @@ public class LoginServlet extends HttpServlet {
 				User user = new User();
 				user.setUserName(username);
 				user.setPassword(password);
-				user.setId(ud.findSeller_ID(user));
-				user.setUser_group(user_group);
-				Integer id = ud.findSeller_ID(user);
-				user.setId(id);
+				Integer id = ud.findUser_ID(user);
+				user = ud.findUserByID(id);
 				request.getSession().setAttribute("curUser", user);
 				response.sendRedirect("main.jsp");
 			}else {

@@ -47,9 +47,9 @@ public class DatabaseDaoImpl implements DatabaseDao {
             // 创建 users 表
             String sqlUsers = "CREATE TABLE IF NOT EXISTS users (" +
                     "    user_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "    username TEXT NOT NULL," +
+                    "    username TEXT NOT NULL UNIQUE," +
                     "    password TEXT NOT NULL," +
-                    "    name TEXT NOT NULL UNIQUE," +
+                    "    name TEXT NOT NULL," +
                     "    id_card TEXT NOT NULL," +
                     "    sex TEXT NOT NULL," +
                     "    tele TEXT NOT NULL," +

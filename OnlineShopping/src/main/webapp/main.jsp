@@ -49,10 +49,8 @@ GoodList gl = gd.findForSaleGoods();
     </div>
     <div class="search-container">
 		<div class="search-box">
-			<form action="SearchForGoodsServlet?method=namesearch" method="post">
-				<input type="text" placeholder="请输入商品名搜索" name="goodName">
-				<button type="submit">查找</button>
-			</form>
+			<input type="text" placeholder="请输入商品名搜索" id="words">
+			<button type="submit" onclick="loadSearchContent()">查找</button>
 		</div>
 	</div>
     <div class="menu">
@@ -119,6 +117,17 @@ function toggleMenu(menuId) {
 function loadCategoryContent(psid) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'GetCategoryGoods?psid=' + psid, true);
+    xhr.onload = function () {
+        if (this.status === 200) {
+            document.querySelector('.content').innerHTML = this.responseText;
+        }
+    };
+    xhr.send();
+}
+
+function loadSearchContent() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'SearchForGoodsServlet?words=' + document.getElementById('words').value, true);
     xhr.onload = function () {
         if (this.status === 200) {
             document.querySelector('.content').innerHTML = this.responseText;

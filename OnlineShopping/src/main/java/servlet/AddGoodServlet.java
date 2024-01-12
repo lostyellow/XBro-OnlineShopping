@@ -74,7 +74,7 @@ public class AddGoodServlet extends HttpServlet {
             file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
             Request suRequest = su.getRequest();
 
-            int seller_id = ud.findSeller_ID(user);
+            int seller_id = ud.findUser_ID(user);
 
             Good good = new Good();
 
