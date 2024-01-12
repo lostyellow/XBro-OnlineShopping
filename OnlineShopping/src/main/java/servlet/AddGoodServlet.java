@@ -97,7 +97,7 @@ public class AddGoodServlet extends HttpServlet {
             	parentID = 2;
             }
             String subCategory = suRequest.getParameter("subCategory");
-            
+            System.out.println(subCategory);
             CategoryDao cd = new CategoryDaoImpl();
             int subID = cd.findSubIDBySubName(subCategory);
             int PSID = cd.findPSIDByPIDAndSID(parentID, subID);

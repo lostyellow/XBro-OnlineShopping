@@ -57,8 +57,8 @@ public class UpdateGoodServlet extends HttpServlet {
     private void UpdateGood(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
-        	request.setCharacterEncoding("utf-8");
-            response.setCharacterEncoding("utf-8");
+        	request.setCharacterEncoding("UTF-8");
+        	response.setCharacterEncoding("UTF-8");
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();
@@ -109,11 +109,13 @@ public class UpdateGoodServlet extends HttpServlet {
             	parentID = 2;
             }
             String subCategory = request.getParameter("subCategory");
-            
+            System.out.println(subCategory);
             CategoryDao cd = new CategoryDaoImpl();
             int subID = cd.findSubIDBySubName(subCategory);
             int PSID = cd.findPSIDByPIDAndSID(parentID, subID);
-            
+            System.out.println(parentID);
+            System.out.println(subID);
+            System.out.println(PSID);
             if (request.getParameter("option4").equals("yes")) {
                 isFrozen = true;
             } else {
