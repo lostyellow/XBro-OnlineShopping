@@ -128,12 +128,12 @@ public class UserDaoImpl implements UserDao{
                     ps.close();
                     conn.close();
                     rs.close();
-                    return user_group;
                 }
             }
             ps.close();
             conn.close();
             rs.close();
+            return user_group;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -193,12 +193,12 @@ public class UserDaoImpl implements UserDao{
                 user.setE_mail(rs.getString("e_mail"));
                 user.setAddress(rs.getString("address"));
                 user.setUser_group(rs.getString("user_group"));
-                return user;
             }
 
             ps.close();
             conn.close();
-
+            rs.close();
+            return user;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
