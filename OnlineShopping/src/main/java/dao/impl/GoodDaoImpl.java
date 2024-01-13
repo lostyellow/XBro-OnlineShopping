@@ -476,7 +476,7 @@ public class GoodDaoImpl implements GoodDao {
     }
 	
 	@Override
-	public GoodList searchForGoodByName(String good_name) {
+	public List<Good> searchForGoodByName(String words) {
 		try {
 			Class.forName(DRIVER);
 			
@@ -487,10 +487,10 @@ public class GoodDaoImpl implements GoodDao {
 					+"and product_name like ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, false);
-			ps.setString(2, "%" + good_name + "%");
+			ps.setString(2, "%" + words + "%");
 			ResultSet rs = ps.executeQuery();
-			
-			GoodList goodList = new GoodList();
+
+			List<Good> goodList = new ArrayList<Good>();
 			while(rs.next()) {
 				Good good = new Good();
 				good.setId(rs.getInt("product_id"));

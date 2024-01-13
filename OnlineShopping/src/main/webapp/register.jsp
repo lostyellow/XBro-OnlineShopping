@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>register</title>
 <link rel="stylesheet" type="text/css" href="./CSS/register.css">
@@ -70,9 +70,6 @@
 					</table>
 					<input type="submit" value="商家注册" class="register-button"
 						style="top: 85%;">
-					<c:if test="${not empty pbm }">
-					<p style="color:red;">商家注册人数上限了</p>
-					</c:if>
 				</div>
 			</form>
 				<!--用户注册 -->
@@ -130,6 +127,12 @@
 			</ul>
 			<br>
 			<br>
+			<c:if test="${pbm eq 'hasOneUser' }">
+					<p style="color:red;">商家注册人数上限了</p>
+					</c:if>
+			<c:if test="${pbm eq 'hasSameUsername' }">
+				<p style="color:red;">用户名已被注册</p>
+			</c:if>
 			<p id="p3">
 				已有账号？<a href="login.jsp">立即登录</a>
 			</p>

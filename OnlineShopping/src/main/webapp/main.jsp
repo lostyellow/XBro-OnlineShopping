@@ -3,13 +3,13 @@
 <%@page import="dao.GoodDao" %>
 <%@page import="bean.Good" %>
 <%@page import="bean.GoodList" %>
-<%@page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/main.css">
@@ -49,10 +49,8 @@ GoodList gl = gd.findForSaleGoods();
     </div>
     <div class="search-container">
 		<div class="search-box">
-			<form action="SearchForGoodsServlet?method=namesearch" method="post">
-				<input type="text" placeholder="请输入商品名搜索" name="goodName">
-				<button type="submit">查找</button>
-			</form>
+			<input type="text" placeholder="请输入商品名搜索" id="words">
+			<button type="submit" onclick="loadSearchContent()">查找</button>
 		</div>
 	</div>
     <div class="menu">
@@ -119,6 +117,17 @@ function toggleMenu(menuId) {
 function loadCategoryContent(psid) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'GetCategoryGoods?psid=' + psid, true);
+    xhr.onload = function () {
+        if (this.status === 200) {
+            document.querySelector('.content').innerHTML = this.responseText;
+        }
+    };
+    xhr.send();
+}
+
+function loadSearchContent() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'SearchForGoodsServlet?words=' + document.getElementById('words').value, true);
     xhr.onload = function () {
         if (this.status === 200) {
             document.querySelector('.content').innerHTML = this.responseText;

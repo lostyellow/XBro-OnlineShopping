@@ -95,18 +95,24 @@ public class RegisterServlet extends HttpServlet {
 			String sex = request.getParameter("sex");
 			String tele = request.getParameter("tel");
 			String defaultAddress = request.getParameter("defaultAddress");
+			if(ud.hasSameUsername(username)) {
+				String pbm = "hasSameUsername";
+				request.setAttribute("pbm", pbm);
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+			}else {
+				User user = new User();
+				user.setUserName(username);
+				user.setPassword(password);
+				user.setName(name);
+				user.setId_card(id_card);
+				user.setSex(sex);
+				user.setTele(tele);
+				user.setAddress(defaultAddress);
+				
+				ud.userRegister(user);
+				response.sendRedirect("login.jsp");
+			}
 
-			User user = new User();
-			user.setUserName(username);
-			user.setPassword(password);
-			user.setName(name);
-			user.setId_card(id_card);
-			user.setSex(sex);
-			user.setTele(tele);
-			user.setAddress(defaultAddress);
-			
-			ud.userRegister(user);
-			response.sendRedirect("login.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,8 +125,8 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 

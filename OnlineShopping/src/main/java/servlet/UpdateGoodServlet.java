@@ -57,14 +57,14 @@ public class UpdateGoodServlet extends HttpServlet {
     private void UpdateGood(HttpServletRequest request, HttpServletResponse response) {
         // TODO Auto-generated method stub
         try {
-        	request.setCharacterEncoding("UTF-8");
-        	response.setCharacterEncoding("UTF-8");
+        	request.setCharacterEncoding("utf-8");
+        	response.setCharacterEncoding("utf-8");
             User user = new User();
             user = (User) request.getSession().getAttribute("curUser");
             UserDao ud = new UserDaoImpl();
             
             // !!!不允许访问不是自己发布的商品, 会跳转到登录页面
-            int seller_id = ud.findSeller_ID(user);
+            int seller_id = ud.findUser_ID(user);
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             GoodDao gd = new GoodDaoImpl();
             Good searchGood = gd.findGoods(product_id);

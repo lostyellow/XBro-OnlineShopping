@@ -25,7 +25,7 @@ public class FindPasswordServlet extends HttpServlet {
         String realname = request.getParameter("RealName");
         String idcard = request.getParameter("id_card");
         UserDao ud = new UserDaoImpl();
-        String pwd = ud.findSeller_PWD(realname, idcard);
+        String pwd = ud.findUser_PWD(realname, idcard);
         request.setAttribute("pwd", pwd);
         request.getRequestDispatcher("find_password.jsp").forward(request, response);
     }
@@ -38,8 +38,8 @@ public class FindPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         doGet(request, response);
     }
 

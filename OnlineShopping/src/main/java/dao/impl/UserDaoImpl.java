@@ -128,12 +128,12 @@ public class UserDaoImpl implements UserDao{
                     ps.close();
                     conn.close();
                     rs.close();
-                    return user_group;
                 }
             }
             ps.close();
             conn.close();
             rs.close();
+            return user_group;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,7 +141,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public int findSeller_ID(User user) {
+    public int findUser_ID(User user) {
         // TODO Auto-generated method stub
         try {
             Class.forName(DRIVER);
@@ -168,6 +168,42 @@ public class UserDaoImpl implements UserDao{
             e.printStackTrace();
         }
         return 0;
+    }
+    
+    @Override
+    public User findUserByID(int userId) {
+    	try {
+            Class.forName(DRIVER);
+
+            Connection conn = DriverManager.getConnection(URL);
+            String sql = "select * from users where user_id=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            User user = new User();
+            if (rs.next()) {
+                user.setId(rs.getInt("user_id"));
+                user.setUserName(rs.getString("username"));
+                user.setName(rs.getString("name"));
+                user.setId_card(rs.getString("id_card"));
+                user.setSex(rs.getString("sex"));
+                user.setTele(rs.getString("tele"));
+                user.setE_mail(rs.getString("e_mail"));
+                user.setAddress(rs.getString("address"));
+                user.setUser_group(rs.getString("user_group"));
+            }
+
+            ps.close();
+            conn.close();
+            rs.close();
+            return user;
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    	return null;
     }
 
 
@@ -197,7 +233,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public String findSeller_PWD(String realname, String id_card) {
+    public String findUser_PWD(String realname, String id_card) {
         try {
             Class.forName(DRIVER);
 
@@ -291,5 +327,32 @@ public class UserDaoImpl implements UserDao{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public Boolean hasSameUsername(String userName) {
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL);
+
+			String sql = "select * from users where username = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userName);
+			ResultSet rs = ps.executeQuery();
+
+
+			while(rs.next()) {
+				return true;
+			}
+
+			ps.close();
+			conn.close();
+			rs.close();
+
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
