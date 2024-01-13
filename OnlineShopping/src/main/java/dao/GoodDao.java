@@ -90,7 +90,7 @@ public interface GoodDao {
 	 * 返回符合名字输入的商品list
 	 * 用于查找商品
 	 * **/
-	public List<Good> searchForGoodByName(String good_name);
+	public List<Good> searchForGoodByName(String words);
 	
 		
 	/*
