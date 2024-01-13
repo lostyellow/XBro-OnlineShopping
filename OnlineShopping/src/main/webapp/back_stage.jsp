@@ -7,11 +7,11 @@
 <%@page import="dao.UserDao" %>
 <%@page import="bean.Good" %>
 <%@page import="dao.impl.UserDaoImpl" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/back_stage.css">
@@ -61,7 +61,7 @@
         <div class="yp">
 
             <div class="tianjia">
-                <form action="AddGoodServlet" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
+                <form action="AddGoodServlet?id=<%=curUser.getId() %>" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
                     上传图片: <input type="file" name="picture"/>
                     <div class="discribe">
                         <p>
