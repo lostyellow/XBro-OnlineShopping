@@ -61,7 +61,7 @@
         <div class="yp">
 
             <div class="tianjia">
-                <form action="AddGoodServlet" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
+                <form action="AddGoodServlet?id=<%=curUser.getId() %>" method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
                     上传图片: <input type="file" name="picture"/>
                     <div class="discribe">
                         <p>
