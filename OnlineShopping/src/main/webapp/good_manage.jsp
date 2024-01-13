@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 	<link type="text/css" rel="stylesheet" href="./CSS/good_manage.css">
-	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+	<link href="./CSS/quill.bubble.css" rel="stylesheet">
 </head>
 <%
 	User curUser = (User)request.getSession().getAttribute("curUser");
@@ -37,7 +37,6 @@
 <%}else{ %>
 <body onload="showSubCategory('no')">
 <%} %>
-
 	<%
 		Good good = new Good();
 		UserDao ud = new UserDaoImpl();
@@ -169,7 +168,7 @@
 	        <a href="#">公益活动</a>
 	    </div>
     </div>
-<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="./JS/quill.js"></script>
 <script type="text/javascript">
 function showSubCategory(isPrescription) {
     var container = document.getElementById('subCategoryContainer');

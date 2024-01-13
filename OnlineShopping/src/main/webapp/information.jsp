@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/information.css">
-    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="./CSS/quill.bubble.css" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
 </head>
 <body>
 <%
@@ -110,7 +110,7 @@
         <a href="#">公益活动</a>
     </div>
 </div>
-<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="./JS/quill.js"></script>
 <script>
 const toolbarOptions = [
 	['bold', 'italic', 'underline', 'strike'],
@@ -131,9 +131,9 @@ var quill = new Quill('#editor', {
 });
 quill.disable();
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="./JS/jquery-3.3.1.slim.min.js"></script>
+<script src="./JS/popper.min.js"></script>
+<script src="./JS/bootstrap.min.js"></script>
 
 </body>
 </html>

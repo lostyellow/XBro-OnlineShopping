@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="./CSS/back_stage.css">
-    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <link href="./CSS/quill.bubble.css" rel="stylesheet">
 </head>
 
 <body>
@@ -110,7 +110,7 @@
     </div>
 </div>
 
-<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="./JS/quill.js"></script>
 <script type="text/javascript">
 function showSubCategory(isPrescription) {
     var container = document.getElementById('subCategoryContainer');

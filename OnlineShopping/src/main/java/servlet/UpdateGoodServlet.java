@@ -64,29 +64,13 @@ public class UpdateGoodServlet extends HttpServlet {
             UserDao ud = new UserDaoImpl();
             
             // !!!不允许访问不是自己发布的商品, 会跳转到登录页面
-            int seller_id = ud.findUser_ID(user);
+            int seller_id = user.getId();
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             GoodDao gd = new GoodDaoImpl();
             Good searchGood = gd.findGoods(product_id);
             if(!searchGood.getSellerId().equals(seller_id)) {
             	response.sendRedirect("login.jsp");
             }
-            
-//            SmartUpload su = new SmartUpload();
-//            JspFactory factory = JspFactory.getDefaultFactory();
-//            PageContext pageContext = factory.getPageContext(this, request, response, null, false, 1024, true);
-//            su.initialize(pageContext);
-//            su.upload();
-//            File file = su.getFiles().getFile(0);
-//            String fileName = file.getFileName();
-            
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-//            Date dateTime = new Date();
-//            String formatDateTime = sdf.format(dateTime);
-            
-//            String url = "./img/customs/" + formatDateTime + "_" + fileName;
-//            file.saveAs(url, SmartUpload.SAVE_VIRTUAL);
-//            Request suRequest = su.getRequest();
 
             Good good = new Good();
 
