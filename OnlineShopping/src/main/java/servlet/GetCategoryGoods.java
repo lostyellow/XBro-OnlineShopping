@@ -67,7 +67,7 @@ public class GetCategoryGoods extends HttpServlet {
         }
 
         response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("utf-8");
         response.getWriter().write(htmlResponse.toString());
 	}
 

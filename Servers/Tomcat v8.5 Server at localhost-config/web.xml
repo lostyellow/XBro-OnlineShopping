@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements.  See the NOTICE file distributed with
@@ -298,7 +298,7 @@
   <!--                       [Platform default]                             -->
   <!--                                                                      -->
   <!--   outputEncoding      The encoding to use for the page that results  -->
-  <!--                       from the SSI processing. [UTF-8]               -->
+  <!--                       from the SSI processing. [utf-8]               -->
   <!--                                                                      -->
   <!--   allowExec           Is use of the exec command enabled? [false]    -->
 
@@ -392,7 +392,7 @@
   <!--                                                                      -->
   <!--   parameterEncoding    Name of parameter encoding to be used with    -->
   <!--                        CGI servlet.                                  -->
-  <!--                        [System.getProperty("file.encoding","UTF-8")] -->
+  <!--                        [System.getProperty("file.encoding","utf-8")] -->
   <!--                                                                      -->
   <!--   passShellEnvironment Should the shell environment variables (if    -->
   <!--                        any) be passed to the CGI script? [false]     -->
@@ -503,7 +503,7 @@
         <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
+            <param-value>utf-8</param-value>
         </init-param>
         <async-supported>true</async-supported>
     </filter>

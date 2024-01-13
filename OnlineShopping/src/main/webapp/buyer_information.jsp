@@ -1,14 +1,14 @@
 <%@page import="java.util.List"%>
 <%@page import="dao.impl.UserDaoImpl"%>
 <%@page import="dao.UserDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@page import="bean.User"%>
 <%@page import="bean.UserList"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <link type="text/css" rel="stylesheet" href="./CSS/buyer_information.css">
