@@ -45,7 +45,7 @@ public class ProcessOrderStatusServlet extends HttpServlet {
         GoodDao gd = new GoodDaoImpl();
         TransactionDao td = new TransactionDaoImpl();
         int product_id = td.unfreezeGood(transaction_id);
-        gd.takeOnGood(product_id);
+        //gd.takeOnGood(product_id);
         response.sendRedirect("back_stage.jsp");
     }
 

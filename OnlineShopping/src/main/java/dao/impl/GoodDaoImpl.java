@@ -194,7 +194,7 @@ public class GoodDaoImpl implements GoodDao {
 
             Connection conn = DriverManager.getConnection(URL);
             String sql = "update drugs "
-                    + "set inventory = 0 "
+                    + "set inventory = inventory-1 "
                     + "where product_id = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);

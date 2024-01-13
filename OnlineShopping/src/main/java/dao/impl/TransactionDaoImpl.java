@@ -140,17 +140,17 @@ public class TransactionDaoImpl implements TransactionDao {
 
             Connection conn = DriverManager.getConnection(URL);
 
-            String sql = "update transactions "
-                    + "set transaction_status = ? "
-                    + "where product_id = ?";
+//            String sql = "update transactions "
+//                    + "set transaction_status = ? "
+//                    + "where product_id = ?";
+//
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setString(1, "end");
+//            ps.setInt(2, product_id);
+//            ps.executeUpdate();
 
+            String sql = "update transactions set transaction_status = ? where transaction_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "end");
-            ps.setInt(2, product_id);
-            ps.executeUpdate();
-
-            sql = "update transactions set transaction_status = ? where transaction_id = ?";
-            ps = conn.prepareStatement(sql);
             ps.setString(1, "success");
             ps.setInt(2, transaction_id);
             ps.executeUpdate();

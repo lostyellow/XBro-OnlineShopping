@@ -53,7 +53,7 @@ public class AgreeServlet extends HttpServlet {
             GoodDao gd = new GoodDaoImpl();
             TransactionDao td = new TransactionDaoImpl();
             td.updateTrans(transaction_id, "ing");
-            gd.frozenGood(product_id);
+            //gd.frozenGood(product_id);
             response.sendRedirect("back_stage.jsp");
         } catch (Exception e) {
             // TODO: handle exception
