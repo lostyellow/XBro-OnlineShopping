@@ -19,6 +19,7 @@
 ./java/dao/impl/OrderDaoImpl.java
 ./java/dao/impl/TransactionDaoImpl.java
 ./java/dao/impl/UserDaoImpl.java
+./java/listener/AppContextListener.java
 ./java/servlet/AddGoodServlet.java
 ./java/servlet/AddPictureServlet.java
 ./java/servlet/AgreeServlet.java
